@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/notesListFragment">
 
+    <fragment
+        android:id="@+id/notesListFragment"
+        android:name="ru.boringowl.parapp.presentation.view.NotesListFragment"
+        android:label="notes_list_fragment"
+        tools:layout="@layout/notes_list_fragment" >
+        <action
+            android:id="@+id/action_notesListFragment_to_addNoteFragment"
+            app:destination="@id/addNoteFragment" />
+        <action
+            android:id="@+id/action_notesListFragment_to_addRoadmapFragment"
+            app:destination="@id/addRoadmapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNoteFragment"
+        android:name="ru.boringowl.parapp.presentation.view.AddNoteFragment"
+        android:label="add_note_fragment"
+        tools:layout="@layout/add_note_fragment" />
+    <fragment
+        android:id="@+id/addRoadmapFragment"
+        android:name="ru.boringowl.parapp.presentation.view.AddRoadmapFragment"
+        android:label="add_roadmap_fragment"
+        tools:layout="@layout/add_roadmap_fragment" />
 </navigation>

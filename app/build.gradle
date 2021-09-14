@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "ru.boringowl.parapp"
-        minSdk 23
+        minSdk 25
         targetSdk 30
         versionCode 1
         versionName "1.0"
@@ -26,7 +26,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -60,6 +60,7 @@ dependencies {
 
     //Room lib
     implementation "androidx.room:room-runtime:2.3.0"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor "androidx.room:room-compiler:2.3.0"
 
     //Libs for testing

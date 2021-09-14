@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">PatternsAndRoadmapsApp</string>
+    <string name="dateMock">date</string>
+    <string name="descriptionMock">description</string>
+    <string name="bookmarkImageDescription">bookmark</string>
+    <string name="categoryIconImageDescription">categoryIcon</string>
+    <string name="categoryMock">Category</string>
+    <string name="titleMock">Long Long Long Title</string>
+    <string name="notesAddButtonDescription">add Note</string>
 </resources>
