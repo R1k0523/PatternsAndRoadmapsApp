@@ -7,4 +7,7 @@
     <string name="categoryMock">Category</string>
     <string name="titleMock">Long Long Long Title</string>
     <string name="notesAddButtonDescription">add Note</string>
+    <string name="postsPageName">Посты</string>
+    <string name="patternsPageName">Паттерны</string>
+    <string name="page_profile">Профиль</string>
 </resources>

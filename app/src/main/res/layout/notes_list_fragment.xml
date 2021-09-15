@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.view.NotesListFragment"
     android:id="@+id/frameLayout">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottonNav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:backgroundTint="@color/green_200"
-        tools:layout_conversion_absoluteHeight="133dp"
-        tools:layout_conversion_absoluteWidth="411dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" >
-
-
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
@@ -27,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
         android:contentDescription="@string/notesAddButtonDescription"
         android:focusable="true"
@@ -36,7 +22,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="?actionBarSize"
         tools:layout_conversion_absoluteHeight="731dp"
         tools:layout_conversion_absoluteWidth="411dp"
         tools:layout_editor_absoluteX="0dp"

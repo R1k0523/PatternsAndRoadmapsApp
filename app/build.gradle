@@ -63,6 +63,9 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor "androidx.room:room-compiler:2.3.0"
 
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+
     //Libs for testing
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
