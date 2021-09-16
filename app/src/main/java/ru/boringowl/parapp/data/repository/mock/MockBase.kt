@@ -2,11 +2,11 @@ package ru.boringowl.parapp.data.repository.mock
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.boringowl.parapp.data.repository.RepositoryPatterns
+import ru.boringowl.parapp.data.repository.PatternsRepository
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
 import ru.boringowl.parapp.domain.model.patterns.PatternInfo
 
-class MockBase : RepositoryPatterns {
+class MockBase : PatternsRepository {
     var data: MutableLiveData<List<PatternInfo>>
     var list: List<PatternInfo>
 

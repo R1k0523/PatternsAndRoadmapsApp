@@ -3,12 +3,12 @@ package ru.boringowl.parapp.data.repository.room
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.boringowl.parapp.data.repository.RepositoryPatterns
+import ru.boringowl.parapp.data.repository.PatternsRepository
 import ru.boringowl.parapp.data.repository.room.dao.PatternsDAO
 import ru.boringowl.parapp.domain.model.patterns.PatternInfo
 import ru.boringowl.parapp.domain.model.patterns.PatternInfoDTO
 
-class PatternsRepository(application: Application) : RepositoryPatterns {
+class PatternsRepositoryImpl(application: Application) : PatternsRepository {
     private var patternsDAO: PatternsDAO
     private var allPatterns: LiveData<List<PatternInfoDTO>> = MutableLiveData()
 
