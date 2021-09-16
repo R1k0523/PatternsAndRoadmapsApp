@@ -8,10 +8,7 @@ import androidx.room.PrimaryKey
 class RoadmapNodeDTO(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    @ColumnInfo
     val title: String,
-    @ColumnInfo
     val description: String,
-    @ColumnInfo
     val childrenNodes: List<RoadmapNodeDTO>,
 ) {}

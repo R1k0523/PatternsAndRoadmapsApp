@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/notesListFragment">
+    app:startDestination="@id/patternsFragment">
 
     <fragment
         android:id="@+id/notesListFragment"
@@ -27,4 +27,9 @@
         android:name="ru.boringowl.parapp.presentation.view.AddRoadmapFragment"
         android:label="add_roadmap_fragment"
         tools:layout="@layout/add_roadmap_fragment" />
+    <fragment
+        android:id="@+id/patternsFragment"
+        android:name="ru.boringowl.parapp.presentation.view.PatternsFragment"
+        android:label="patterns_fragment"
+        tools:layout="@layout/patterns_fragment" />
 </navigation>

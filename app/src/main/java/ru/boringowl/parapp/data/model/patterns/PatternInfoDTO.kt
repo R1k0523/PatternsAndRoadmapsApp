@@ -1,6 +1,5 @@
 package ru.boringowl.parapp.domain.model.patterns
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,25 +8,43 @@ import androidx.room.PrimaryKey
 data class PatternInfoDTO(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    @ColumnInfo
     val title: String,
-    @ColumnInfo
     val description: String,
-    @ColumnInfo
     val problem: String,
-    @ColumnInfo
     val solution: String,
-    @ColumnInfo
     val solutionInCode: String, //псевдокод решения
-    @ColumnInfo
     val useCase: String,
-    @ColumnInfo
-    val feature: String, // TODO serialize pattern features
-    val type: PatternType,
+    val feature: List<PatternFeature>, // TODO serialize pattern features
+    val type: PatternInfo.PatternType,
     val difficulty: Int,
 
     ) {
-    enum class PatternType {
-        CREATIONAL, STRUCTURAL, BEHAVIORAL
-    }
+
+    constructor(patternInfo: PatternInfo) : this(
+        0,
+        patternInfo.title,
+        patternInfo.description,
+        patternInfo.problem,
+        patternInfo.solution,
+        patternInfo.solutionInCode,
+        patternInfo.useCase,
+        patternInfo.feature,
+        patternInfo.type,
+        patternInfo.difficulty,
+    ) {}
+
+
+    fun toPatternInfo() = PatternInfo(
+        title,
+        description,
+        problem,
+        solution,
+        solutionInCode,
+        useCase,
+        feature,
+        type,
+        difficulty,
+
+    )
+
 }

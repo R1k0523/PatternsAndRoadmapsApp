@@ -9,14 +9,9 @@ import java.time.LocalDateTime
 data class NoteRoadmapDTO(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    @ColumnInfo
     val title: String,
-    @ColumnInfo
     val publicationDateTime: LocalDateTime,
-    @ColumnInfo
     val noteCategoriesDTO: String,
-    @ColumnInfo
     val noteDescription: String,
-    @ColumnInfo
     val root: RoadmapNodeDTO,
 )

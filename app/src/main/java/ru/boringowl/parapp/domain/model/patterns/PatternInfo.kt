@@ -7,12 +7,12 @@ data class PatternInfo(
     val solution: String,
     val solutionInCode: String, //псевдокод решения
     val useCase: String,
-    val feature: PatternFeature,
+    val feature: List<PatternFeature>,
     val type: PatternType,
     val difficulty: Int,
 
     ) {
-    enum class PatternType {
-        CREATIONAL, STRUCTURAL, BEHAVIORAL
+    enum class PatternType(val title: String) {
+        CREATIONAL("Порождающий"), STRUCTURAL("Структурный"), BEHAVIORAL("Поведенческий")
     }
 }

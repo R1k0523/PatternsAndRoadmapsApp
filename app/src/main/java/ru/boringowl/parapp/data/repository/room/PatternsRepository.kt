@@ -9,25 +9,29 @@ import ru.boringowl.parapp.domain.model.patterns.PatternInfo
 import ru.boringowl.parapp.domain.model.patterns.PatternInfoDTO
 
 class PatternsRepository(application: Application) : RepositoryPatterns {
-    private var patternsDAO: PatternsDAO? = null
+    private var patternsDAO: PatternsDAO
     private var allPatterns: LiveData<List<PatternInfoDTO>> = MutableLiveData()
 
     init {
-        val db: PatternsRoomDatabase = PatternsRoomDatabase.getInstance(application)
+        val db: MyDatabase = MyDatabase.getInstance(application)
         patternsDAO = db.patternsDAO()
-        allPatterns = patternsDAO?.getAllPatternInfo() ?: MutableLiveData()
+        allPatterns = patternsDAO.getAllPatternInfo() ?: MutableLiveData()
     }
 
-    override fun getAllPatternInfo(): LiveData<List<PatternInfo>?>? {
-        TODO("Not yet implemented")
+    override fun getAllPatternInfos(): LiveData<List<PatternInfo>?> {
+        val patterns = arrayListOf<PatternInfo>()
+        allPatterns.value!!.forEach {
+            patterns.add(it.toPatternInfo())
+        }
+        return MutableLiveData(patterns)
     }
 
-    override fun addPatternInfo(party: PatternInfo) {
-        TODO("Not yet implemented")
+    override fun addPatternInfo(pattern: PatternInfo) {
+        MyDatabase.databaseWriteExecutor.execute { patternsDAO.addPatternInfo(PatternInfoDTO(pattern)) }
     }
 
-    override fun deletePatternInfo(party: PatternInfo) {
-        TODO("Not yet implemented")
+    override fun deletePatternInfo(pattern: PatternInfo) {
+        MyDatabase.databaseWriteExecutor.execute { patternsDAO.deletePatternInfo(PatternInfoDTO(pattern)) }
     }
 
 }

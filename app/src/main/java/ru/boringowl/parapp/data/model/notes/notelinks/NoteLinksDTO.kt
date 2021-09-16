@@ -7,14 +7,9 @@ import java.time.LocalDateTime
 data class NoteLinksDTO(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    @ColumnInfo
     val title: String,
-    @ColumnInfo
     val publicationDateTime: LocalDateTime,
-    @ColumnInfo
     val noteCategoriesDTO: String, // TODO serialize categories
-    @ColumnInfo
     val noteDescription: String,
-    @ColumnInfo
     val sections: List<NoteLinksSectionDTO>,
 )
