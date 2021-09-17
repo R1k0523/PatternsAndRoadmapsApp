@@ -16,5 +16,6 @@ class PatternsViewModel : ViewModel() {
 
     fun addPatternInfo(patternInfo: PatternInfo) {
         Repository.repository!!.addPatternInfo(patternInfo)
+
     }
 }

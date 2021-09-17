@@ -28,8 +28,9 @@ abstract class MyDatabase : RoomDatabase() {
             return Room.databaseBuilder(
                 context.applicationContext,
                 MyDatabase::class.java,
-                "parapp_db"
+                "parapp_db1"
             )
+                .fallbackToDestructiveMigration()
                 .allowMainThreadQueries()
                 .build()
         }

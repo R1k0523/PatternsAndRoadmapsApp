@@ -26,7 +26,7 @@ object DataTypeConverter {
         return gson.toJson(someObjects)
     }
     @TypeConverter
-    fun stringToPatternFeature(data: String?): List<PatternFeature> {
+    fun stringToPatternFeature(data: String): List<PatternFeature> {
         if (data == null) {
             return Collections.emptyList()
         }
@@ -35,7 +35,7 @@ object DataTypeConverter {
     }
 
     @TypeConverter
-    fun patternFeatureToString(someObjects: List<PatternFeature>?): String {
+    fun patternFeatureToString(someObjects: List<PatternFeature>): String {
         return gson.toJson(someObjects)
     }
 }

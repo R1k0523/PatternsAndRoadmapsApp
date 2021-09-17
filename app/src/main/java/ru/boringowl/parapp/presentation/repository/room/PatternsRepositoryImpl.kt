@@ -1,6 +1,7 @@
 package ru.boringowl.parapp.presentation.repository.room
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.boringowl.parapp.presentation.repository.PatternsRepository
@@ -20,13 +21,14 @@ class PatternsRepositoryImpl(application: Application) : PatternsRepository {
 
     override fun getAllPatternInfos(): LiveData<List<PatternInfo>?> {
         val patterns = arrayListOf<PatternInfo>()
-        allPatterns.value!!.forEach {
+        allPatterns.value?.forEach {
             patterns.add(it.toPatternInfo())
         }
         return MutableLiveData(patterns)
     }
 
     override fun addPatternInfo(pattern: PatternInfo) {
+
         MyDatabase.databaseWriteExecutor.execute { patternsDAO.addPatternInfo(PatternInfoDTO(pattern)) }
     }
 

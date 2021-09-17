@@ -62,9 +62,9 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.8'
 
     //Room lib
-    implementation "androidx.room:room-runtime:2.3.0"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    annotationProcessor "androidx.room:room-compiler:2.3.0"
+    implementation "androidx.room:room-runtime:2.3.0"
+    kapt "androidx.room:room-compiler:2.3.0"
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
