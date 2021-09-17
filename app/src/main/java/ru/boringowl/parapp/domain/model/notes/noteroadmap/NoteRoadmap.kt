@@ -1,6 +1,6 @@
 package ru.boringowl.parapp.domain.model.notes.noteroadmap
 
-import ru.boringowl.parapp.data.model.notes.noteroadmap.RoadmapNodeDTO
+import ru.boringowl.parapp.presentation.repository.model.notes.noteroadmap.RoadmapNodeDTO
 import ru.boringowl.parapp.domain.model.notes.Note
 import ru.boringowl.parapp.domain.model.notes.NoteCategory
 import java.time.LocalDateTime

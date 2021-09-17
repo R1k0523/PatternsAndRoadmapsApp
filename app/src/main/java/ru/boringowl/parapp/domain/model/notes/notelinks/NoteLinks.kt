@@ -1,6 +1,6 @@
 package ru.boringowl.parapp.domain.model.notes.notelinks
 
-import ru.boringowl.parapp.data.model.notes.notelinks.NoteLinksSectionDTO
+import ru.boringowl.parapp.presentation.repository.model.notes.notelinks.NoteLinksSectionDTO
 import ru.boringowl.parapp.domain.model.notes.Note
 import ru.boringowl.parapp.domain.model.notes.NoteCategory
 import java.time.LocalDateTime

@@ -1,8 +1,8 @@
-package ru.boringowl.parapp.data.repository
+package ru.boringowl.parapp.presentation.repository
 
 import android.app.Application
-import ru.boringowl.parapp.data.repository.mock.MockBase
-import ru.boringowl.parapp.data.repository.room.PatternsRepositoryImpl
+import ru.boringowl.parapp.presentation.repository.mock.MockBase
+import ru.boringowl.parapp.presentation.repository.room.PatternsRepositoryImpl
 
 class Repository {
     companion object {

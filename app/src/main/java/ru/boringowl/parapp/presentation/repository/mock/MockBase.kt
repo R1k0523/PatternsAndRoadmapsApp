@@ -1,8 +1,8 @@
-package ru.boringowl.parapp.data.repository.mock
+package ru.boringowl.parapp.presentation.repository.mock
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.boringowl.parapp.data.repository.PatternsRepository
+import ru.boringowl.parapp.presentation.repository.PatternsRepository
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
 import ru.boringowl.parapp.domain.model.patterns.PatternInfo
 

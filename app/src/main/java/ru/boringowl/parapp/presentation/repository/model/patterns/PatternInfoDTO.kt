@@ -6,8 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "patterns")
 data class PatternInfoDTO(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
     val title: String,
     val description: String,
     val problem: String,
@@ -17,11 +15,12 @@ data class PatternInfoDTO(
     val feature: List<PatternFeature>, // TODO serialize pattern features
     val type: PatternInfo.PatternType,
     val difficulty: Int,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
 
     ) {
 
     constructor(patternInfo: PatternInfo) : this(
-        0,
         patternInfo.title,
         patternInfo.description,
         patternInfo.problem,
@@ -31,7 +30,7 @@ data class PatternInfoDTO(
         patternInfo.feature,
         patternInfo.type,
         patternInfo.difficulty,
-    ) {}
+    )
 
 
     fun toPatternInfo() = PatternInfo(

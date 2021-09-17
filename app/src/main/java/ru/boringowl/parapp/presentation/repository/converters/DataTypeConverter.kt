@@ -1,10 +1,10 @@
-package ru.boringowl.parapp.data.converters
+package ru.boringowl.parapp.presentation.repository.converters
 
 import androidx.room.TypeConverter
 import com.google.gson.reflect.TypeToken
 
 import com.google.gson.Gson
-import ru.boringowl.parapp.data.model.notes.notelinks.NoteLinksSectionDTO
+import ru.boringowl.parapp.presentation.repository.model.notes.notelinks.NoteLinksSectionDTO
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
 import java.lang.reflect.Type
 import java.util.*

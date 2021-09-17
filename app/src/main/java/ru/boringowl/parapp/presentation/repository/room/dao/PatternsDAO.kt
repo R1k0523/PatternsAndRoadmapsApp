@@ -1,4 +1,4 @@
-package ru.boringowl.parapp.data.repository.room.dao
+package ru.boringowl.parapp.presentation.repository.room.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

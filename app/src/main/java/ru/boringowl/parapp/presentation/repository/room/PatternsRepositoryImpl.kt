@@ -1,10 +1,10 @@
-package ru.boringowl.parapp.data.repository.room
+package ru.boringowl.parapp.presentation.repository.room
 
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.boringowl.parapp.data.repository.PatternsRepository
-import ru.boringowl.parapp.data.repository.room.dao.PatternsDAO
+import ru.boringowl.parapp.presentation.repository.PatternsRepository
+import ru.boringowl.parapp.presentation.repository.room.dao.PatternsDAO
 import ru.boringowl.parapp.domain.model.patterns.PatternInfo
 import ru.boringowl.parapp.domain.model.patterns.PatternInfoDTO
 

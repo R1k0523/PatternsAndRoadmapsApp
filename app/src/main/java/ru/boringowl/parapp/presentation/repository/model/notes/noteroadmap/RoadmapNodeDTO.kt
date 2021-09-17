@@ -1,6 +1,5 @@
-package ru.boringowl.parapp.data.model.notes.noteroadmap
+package ru.boringowl.parapp.presentation.repository.model.notes.noteroadmap
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

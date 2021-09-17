@@ -1,9 +1,9 @@
-package ru.boringowl.parapp.data.repository.room
+package ru.boringowl.parapp.presentation.repository.room
 
 import android.content.Context
 import androidx.room.*
-import ru.boringowl.parapp.data.converters.DataTypeConverter
-import ru.boringowl.parapp.data.repository.room.dao.PatternsDAO
+import ru.boringowl.parapp.presentation.repository.converters.DataTypeConverter
+import ru.boringowl.parapp.presentation.repository.room.dao.PatternsDAO
 import ru.boringowl.parapp.domain.model.patterns.PatternInfoDTO
 import java.util.concurrent.Executors
 

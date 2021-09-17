@@ -1,8 +1,7 @@
-package ru.boringowl.parapp.data.repository
+package ru.boringowl.parapp.presentation.repository
 
 import androidx.lifecycle.LiveData
 import ru.boringowl.parapp.domain.model.patterns.PatternInfo
-import ru.boringowl.parapp.domain.model.patterns.PatternInfoDTO
 
 interface PatternsRepository {
     fun getAllPatternInfos(): LiveData<List<PatternInfo>?>?

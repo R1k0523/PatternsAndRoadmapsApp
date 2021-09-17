@@ -1,6 +1,5 @@
-package ru.boringowl.parapp.data.model.notes.notelinks
+package ru.boringowl.parapp.presentation.repository.model.notes.notelinks
 
-import androidx.room.ColumnInfo
 import androidx.room.PrimaryKey
 
 data class NoteLinksSectionDTO(
