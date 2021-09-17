@@ -18,4 +18,7 @@ interface PatternsDAO {
 
     @Query("SELECT * FROM patterns")
     fun getAllPatternInfo(): LiveData<List<PatternInfoDTO>>
+
+    @Query("SELECT * FROM patterns WHERE id = :patternId LIMIT 1")
+    fun getPatternInfo(patternId: Int): PatternInfoDTO
 }

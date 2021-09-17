@@ -11,10 +11,6 @@ import ru.boringowl.parapp.presentation.viewmodel.AddRoadmapViewModel
 
 class AddRoadmapFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = AddRoadmapFragment()
-    }
-
     private lateinit var viewModel: AddRoadmapViewModel
 
     override fun onCreateView(

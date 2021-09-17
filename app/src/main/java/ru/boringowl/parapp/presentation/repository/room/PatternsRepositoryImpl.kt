@@ -15,7 +15,7 @@ class PatternsRepositoryImpl(application: Application) : PatternsRepository {
     init {
         val db: MyDatabase = MyDatabase.getInstance(application)
         patternsDAO = db.patternsDAO()
-        allPatterns = patternsDAO.getAllPatternInfo() ?: MutableLiveData()
+        allPatterns = patternsDAO.getAllPatternInfo()
     }
 
     override fun getAllPatternInfos(): LiveData<List<PatternInfo>?> {
@@ -28,6 +28,10 @@ class PatternsRepositoryImpl(application: Application) : PatternsRepository {
 
     override fun addPatternInfo(pattern: PatternInfo) {
         MyDatabase.databaseWriteExecutor.execute { patternsDAO.addPatternInfo(PatternInfoDTO(pattern)) }
+    }
+
+    override fun getPatternInfo(patternId: Int): PatternInfo {
+        return patternsDAO.getPatternInfo(patternId).toPatternInfo()
     }
 
     override fun deletePatternInfo(pattern: PatternInfo) {

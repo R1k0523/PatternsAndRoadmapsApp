@@ -11,10 +11,6 @@ import ru.boringowl.parapp.presentation.viewmodel.NotesListViewModel
 
 class NotesListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = NotesListFragment()
-    }
-
     private lateinit var viewModel: NotesListViewModel
 
     override fun onCreateView(

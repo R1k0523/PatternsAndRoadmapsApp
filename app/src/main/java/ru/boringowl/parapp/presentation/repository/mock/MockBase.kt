@@ -11,8 +11,8 @@ class MockBase : PatternsRepository {
     var list: List<PatternInfo>
 
     init {
-        list = arrayListOf()
         val pattern1 = PatternInfo(
+            id = 0,
             title = "Абстрактная фабрика",
             description = "Позволяет создавать семейства связанных объектов, не привязываясь к конкретным классам создаваемых объектов.",
             problem = "Представьте, что вы пишете симулятор мебельного магазина. Ваш код содержит:\n" +
@@ -112,23 +112,23 @@ class MockBase : PatternsRepository {
             feature = listOf(
                 PatternFeature(
                     title = "Гарантирует сочетаемость создаваемых продуктов.",
-                    featureType = PatternFeature.FeatureType.GOOD,
+                    isAdvantage = true,
                 ),
                 PatternFeature(
                     title = "Избавляет клиентский код от привязки к конкретным классам продуктов.",
-                    featureType = PatternFeature.FeatureType.GOOD,
+                    isAdvantage = true,
                 ),
                 PatternFeature(
                     title = "Выделяет код производства продуктов в одно место, упрощая поддержку кода.",
-                    featureType = PatternFeature.FeatureType.GOOD,
+                    isAdvantage = true,
                 ),
                 PatternFeature(
                     title = "Усложняет код программы из-за введения множества дополнительных классов.",
-                    featureType = PatternFeature.FeatureType.BAD,
+                    isAdvantage = false,
                 ),
                 PatternFeature(
                     title = "Требует наличия всех типов продуктов в каждой вариации.",
-                    featureType = PatternFeature.FeatureType.BAD,
+                    isAdvantage = false,
                 ),
             ),
             type = PatternInfo.PatternType.CREATIONAL,
@@ -136,6 +136,7 @@ class MockBase : PatternsRepository {
 
         )
         val pattern2 = PatternInfo(
+            id = 1,
             title = "Адаптер",
             description = "Адаптер — это структурный паттерн проектирования, который позволяет объектам с несовместимыми интерфейсами работать вместе.",
             problem = "Представьте, что вы делаете приложение для торговли на бирже. Ваше приложение скачивает биржевые котировки из нескольких источников в XML, а затем рисует красивые графики.\n" +
@@ -205,18 +206,18 @@ class MockBase : PatternsRepository {
             feature = listOf(
                 PatternFeature(
                     title = "Отделяет и скрывает от клиента подробности преобразования различных интерфейсов.",
-                    featureType = PatternFeature.FeatureType.GOOD,
+                    isAdvantage = true,
                 ),
                 PatternFeature(
                     title = "Усложняет код программы из-за введения дополнительных классов.",
-                    featureType = PatternFeature.FeatureType.BAD,
+                    isAdvantage = false,
                 ),
             ),
             type = PatternInfo.PatternType.STRUCTURAL,
             difficulty = 0,
 
             )
-
+        list = listOf(pattern1, pattern2)
         data = MutableLiveData(list)
     }
 
@@ -227,6 +228,15 @@ class MockBase : PatternsRepository {
     override fun addPatternInfo(pattern: PatternInfo) {
         list = list + pattern
         data.value = list
+    }
+
+    override fun getPatternInfo(patternId: Int): PatternInfo {
+        list.forEach {
+            if (it.id == patternId)
+                return it
+        }
+        return PatternInfo(0, "", "", "", "", "", "",
+            listOf(), PatternInfo.PatternType.STRUCTURAL, 0)
     }
 
     override fun deletePatternInfo(pattern: PatternInfo) {

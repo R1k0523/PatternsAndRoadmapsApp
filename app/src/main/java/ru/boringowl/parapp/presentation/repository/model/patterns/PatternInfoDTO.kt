@@ -34,6 +34,7 @@ data class PatternInfoDTO(
 
 
     fun toPatternInfo() = PatternInfo(
+        id!!,
         title,
         description,
         problem,

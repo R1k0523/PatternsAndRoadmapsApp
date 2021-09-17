@@ -31,5 +31,18 @@
         android:id="@+id/patternsFragment"
         android:name="ru.boringowl.parapp.presentation.view.PatternsFragment"
         android:label="patterns_fragment"
-        tools:layout="@layout/patterns_fragment" />
+        tools:layout="@layout/patterns_fragment" >
+        <action
+            android:id="@+id/action_patternsFragment_to_patternFragment"
+            app:destination="@id/patternFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/patternFragment"
+        android:name="ru.boringowl.parapp.presentation.view.PatternFragment"
+        android:label="PatternFragment">
+        <argument
+            android:name="patternId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
