@@ -4,8 +4,8 @@
     <string name="descriptionMock">description</string>
     <string name="bookmarkImageDescription">bookmark</string>
     <string name="categoryIconImageDescription">categoryIcon</string>
-    <string name="categoryMock">Category</string>
-    <string name="titleMock">Long Long Long Title</string>
+    <string name="category">Категории (отделять пробелом)</string>
+    <string name="title">Название</string>
     <string name="notesAddButtonDescription">add Note</string>
     <string name="postsPageName">Посты</string>
     <string name="patternsPageName">Паттерны</string>
@@ -19,4 +19,8 @@
     <string name="useCase">Применимость</string>
     <string name="prosCons">Плюсы и минусы</string>
     <string name="addPattern">addPattern</string>
+    <string name="titleNewNote">Создание новой заметки</string>
+    <string name="titleNewRoadmap">Создание нового roadmap</string>
+    <string name="description">Описание</string>
+    <string name="save">Сохранить</string>
 </resources>

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,12 +55,22 @@ class PostsListFragment : Fragment() {
         viewModel.getPostsList().observe(viewLifecycleOwner, {
             binding.recyclerView.adapter = PostsListAdapter(it)
         })
-        binding.fabNote.setOnClickListener {
+        binding.fabNote.setOnLongClickListener {
             viewModel.addNote(PostsMockBase().notes[Random().nextInt(3)])
+            true
         }
-        binding.fabRoadmap.setOnClickListener {
+        binding.fabRoadmap.setOnLongClickListener {
             viewModel.addRoadmap(PostsMockBase().roadmaps[Random().nextInt(1)])
+            true
         }
+        binding.fabNote.setOnClickListener {
+            findNavController().navigate(PostsListFragmentDirections.actionNotesListFragmentToAddNoteFragment())
+        }
+
+        binding.fabRoadmap.setOnClickListener {
+            findNavController().navigate(PostsListFragmentDirections.actionNotesListFragmentToAddRoadmapFragment())
+        }
+
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder
             ): Boolean {

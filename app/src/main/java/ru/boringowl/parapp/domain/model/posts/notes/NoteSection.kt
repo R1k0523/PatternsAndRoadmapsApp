@@ -1,5 +1,5 @@
 package ru.boringowl.parapp.domain.model.posts.notes
 
 data class NoteSection(
-    val description: String,
-    val linkItems: List<String>,)
+    var description: String,
+    var linkItems: List<String>,)
