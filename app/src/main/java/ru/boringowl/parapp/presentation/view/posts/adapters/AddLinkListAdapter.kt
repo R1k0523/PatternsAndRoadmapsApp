@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import ru.boringowl.parapp.databinding.AddLinkListItemBinding
 
-class AddLinkListAdapter() :
+class AddLinkListAdapter :
     RecyclerView.Adapter<AddLinkListAdapter.AddLinkViewHolder>() {
     private val _data = MutableLiveData<ArrayList<String>>()
     val data: LiveData<ArrayList<String>>
