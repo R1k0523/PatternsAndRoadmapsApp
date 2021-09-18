@@ -2,7 +2,7 @@ package ru.boringowl.parapp.presentation.repository.room
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import ru.boringowl.parapp.domain.model.notes.noteroadmap.Roadmap
+import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
 import ru.boringowl.parapp.presentation.repository.room.dao.RoadmapsDAO
 import ru.boringowl.parapp.presentation.repository.RoadmapsRepository
 import ru.boringowl.parapp.presentation.repository.model.notes.RoadmapDTO

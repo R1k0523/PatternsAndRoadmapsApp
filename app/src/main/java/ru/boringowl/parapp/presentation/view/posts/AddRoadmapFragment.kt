@@ -1,4 +1,4 @@
-package ru.boringowl.parapp.presentation.view.notes
+package ru.boringowl.parapp.presentation.view.posts
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import ru.boringowl.parapp.R
-import ru.boringowl.parapp.presentation.viewmodel.notes.AddRoadmapViewModel
+import ru.boringowl.parapp.presentation.viewmodel.posts.AddRoadmapViewModel
 
 class AddRoadmapFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package ru.boringowl.parapp.presentation.viewmodel.notes
+package ru.boringowl.parapp.presentation.viewmodel.posts
 
 import androidx.lifecycle.ViewModel
 

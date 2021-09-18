@@ -1,11 +1,11 @@
 package ru.boringowl.parapp.presentation.repository.room
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
-import ru.boringowl.parapp.domain.model.notes.notelinks.Note
+import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.presentation.repository.NotesRepository
 import ru.boringowl.parapp.presentation.repository.model.notes.NoteDTO
-import ru.boringowl.parapp.presentation.repository.model.patterns.PatternDTO
 import ru.boringowl.parapp.presentation.repository.room.dao.NotesDAO
 
 class NotesRepositoryImpl(application: Application) : NotesRepository {
@@ -19,10 +19,13 @@ class NotesRepositoryImpl(application: Application) : NotesRepository {
     }
 
     override fun <T : Note> getAllNotes(): LiveData<List<T>> {
+        Log.d("Notes", "got")
+
         return allPatterns as LiveData<List<T>>
     }
 
     override fun <T : Note> addNote(note: T) {
+        Log.d("Notes", "added")
         MyDatabase.databaseWriteExecutor.execute { notesDAO.addNote(NoteDTO(note)) }
     }
 

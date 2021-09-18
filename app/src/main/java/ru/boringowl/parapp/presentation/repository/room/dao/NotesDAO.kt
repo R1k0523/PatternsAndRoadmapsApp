@@ -5,8 +5,6 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import ru.boringowl.parapp.domain.model.notes.notelinks.Note
-import ru.boringowl.parapp.domain.model.notes.noteroadmap.Roadmap
 import ru.boringowl.parapp.presentation.repository.model.notes.NoteDTO
 
 @Dao

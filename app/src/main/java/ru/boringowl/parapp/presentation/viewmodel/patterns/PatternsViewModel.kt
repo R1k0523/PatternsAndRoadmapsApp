@@ -16,6 +16,5 @@ class PatternsViewModel : ViewModel() {
 
     fun addPatternInfo(pattern: Pattern) {
         Repository.patternsRep!!.addPattern(pattern)
-
     }
 }

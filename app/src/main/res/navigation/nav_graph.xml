@@ -7,24 +7,32 @@
 
     <fragment
         android:id="@+id/notesListFragment"
-        android:name="ru.boringowl.parapp.presentation.view.notes.NotesListFragment"
+        android:name="ru.boringowl.parapp.presentation.view.posts.PostsListFragment"
         android:label="notes_list_fragment"
-        tools:layout="@layout/notes_list_fragment" >
+        tools:layout="@layout/posts_list_fragment" >
         <action
             android:id="@+id/action_notesListFragment_to_addNoteFragment"
             app:destination="@id/addNoteFragment" />
         <action
             android:id="@+id/action_notesListFragment_to_addRoadmapFragment"
             app:destination="@id/addRoadmapFragment" />
+        <action
+            android:id="@+id/action_notesListFragment_to_roadmapFragment"
+            app:destination="@id/roadmapFragment">
+        </action>
+        <action
+            android:id="@+id/action_notesListFragment_to_noteFragment"
+            app:destination="@id/noteFragment">
+        </action>
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="ru.boringowl.parapp.presentation.view.notes.AddNoteFragment"
+        android:name="ru.boringowl.parapp.presentation.view.posts.AddNoteFragment"
         android:label="add_note_fragment"
         tools:layout="@layout/add_note_fragment" />
     <fragment
         android:id="@+id/addRoadmapFragment"
-        android:name="ru.boringowl.parapp.presentation.view.notes.AddRoadmapFragment"
+        android:name="ru.boringowl.parapp.presentation.view.posts.AddRoadmapFragment"
         android:label="add_roadmap_fragment"
         tools:layout="@layout/add_roadmap_fragment" />
     <fragment
@@ -42,6 +50,24 @@
         android:label="PatternFragment">
         <argument
             android:name="patternId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="ru.boringowl.parapp.presentation.view.posts.NoteFragment"
+        android:label="NoteFragment">
+        <argument
+            android:name="noteId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/roadmapFragment"
+        android:name="ru.boringowl.parapp.presentation.view.posts.RoadmapFragment"
+        android:label="RoadmapFragment">
+        <argument
+            android:name="roadmapId"
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>

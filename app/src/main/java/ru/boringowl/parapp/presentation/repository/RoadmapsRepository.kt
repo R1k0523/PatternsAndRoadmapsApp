@@ -1,7 +1,7 @@
 package ru.boringowl.parapp.presentation.repository
 
 import androidx.lifecycle.LiveData
-import ru.boringowl.parapp.domain.model.notes.noteroadmap.Roadmap
+import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
 
 interface RoadmapsRepository {
     fun <T : Roadmap> getAllRoadmaps(): LiveData<List<T>>

@@ -1,4 +1,4 @@
-package ru.boringowl.parapp.domain.model.notes.noteroadmap
+package ru.boringowl.parapp.domain.model.posts.roadmaps
 
 class RoadmapNode(
     val title: String,

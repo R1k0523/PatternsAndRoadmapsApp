@@ -4,8 +4,8 @@ import androidx.room.TypeConverter
 import com.google.gson.reflect.TypeToken
 
 import com.google.gson.Gson
-import ru.boringowl.parapp.domain.model.notes.notelinks.NoteSection
-import ru.boringowl.parapp.domain.model.notes.noteroadmap.RoadmapNode
+import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
+import ru.boringowl.parapp.domain.model.posts.roadmaps.RoadmapNode
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
 import ru.boringowl.parapp.domain.model.patterns.Pattern
 import java.lang.reflect.Type

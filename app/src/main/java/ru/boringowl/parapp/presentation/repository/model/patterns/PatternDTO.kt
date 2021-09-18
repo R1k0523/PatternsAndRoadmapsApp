@@ -28,7 +28,7 @@ data class PatternDTO(
     @ColumnInfo(name = "difficulty")
     override val difficulty: Int,
     @PrimaryKey(autoGenerate = true)
-    override val id: Int = 0,
+    override val id: Int? = null,
 
     ) : Pattern(
     id,
