@@ -1,26 +1,32 @@
 package ru.boringowl.parapp.presentation.repository
 
 import android.app.Application
-import android.util.Log
-import ru.boringowl.parapp.presentation.repository.mock.MockBase
+import ru.boringowl.parapp.presentation.repository.mock.PatternsMockBase
+import ru.boringowl.parapp.presentation.repository.room.NotesRepositoryImpl
 import ru.boringowl.parapp.presentation.repository.room.PatternsRepositoryImpl
+import ru.boringowl.parapp.presentation.repository.room.RoadmapsRepositoryImpl
 
 class Repository {
     companion object {
-        var repository: PatternsRepository? = null
+        var patternsRep: PatternsRepository? = null
+        var notesRep: NotesRepository? = null
+        var roadmapsRep: RoadmapsRepository? = null
 
         fun initRepository() {
-            if (repository == null) {
-                Log.d("rep", "mock")
-                repository = MockBase()
+            if (patternsRep == null) {
+                patternsRep = PatternsMockBase()
             }
         }
         fun initRepository(application: Application) {
-            if (repository == null) {
-                Log.d("rep", "impl")
-                repository = PatternsRepositoryImpl(application)
+            if (patternsRep == null) {
+                patternsRep = PatternsRepositoryImpl(application)
+            }
+            if (notesRep == null) {
+                notesRep = NotesRepositoryImpl(application)
+            }
+            if (roadmapsRep == null) {
+                roadmapsRep = RoadmapsRepositoryImpl(application)
             }
         }
     }
-
 }

@@ -1,6 +1,6 @@
 package ru.boringowl.parapp.domain.model.patterns
 
-open class PatternInfo(
+open class Pattern(
     open val id: Int,
     open val title: String,
     open val description: String,

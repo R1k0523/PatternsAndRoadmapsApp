@@ -1,7 +1,6 @@
-package ru.boringowl.parapp.presentation.view
+package ru.boringowl.parapp.presentation.view.patterns
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.PatternFragmentBinding
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
-import ru.boringowl.parapp.domain.model.patterns.PatternInfo
-import ru.boringowl.parapp.presentation.view.adapters.PatternFeaturesListAdapter
-import ru.boringowl.parapp.presentation.viewmodel.PatternViewModel
+import ru.boringowl.parapp.domain.model.patterns.Pattern
+import ru.boringowl.parapp.presentation.view.patterns.adapters.PatternFeaturesListAdapter
+import ru.boringowl.parapp.presentation.viewmodel.patterns.PatternViewModel
 import ru.boringowl.parapp.presentation.viewmodel.factory.PatternViewModelFactory
 
 class PatternFragment : Fragment() {
@@ -34,11 +33,11 @@ class PatternFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = PatternFragmentBinding.inflate(layoutInflater, container, false)
-        viewModel.patternInfo.observe(viewLifecycleOwner, {
+        viewModel.pattern.observe(viewLifecycleOwner, {
             binding.pattern = it
             val patternRes = when(it.type) {
-                PatternInfo.PatternType.STRUCTURAL -> R.drawable.ic_round_table_rows_24
-                PatternInfo.PatternType.CREATIONAL -> R.drawable.ic_round_add_box_24
+                Pattern.PatternType.STRUCTURAL -> R.drawable.ic_round_table_rows_24
+                Pattern.PatternType.CREATIONAL -> R.drawable.ic_round_add_box_24
                 else -> R.drawable.ic_round_swap_calls_24
             }
             binding.patternTypeImage.setImageResource(patternRes)

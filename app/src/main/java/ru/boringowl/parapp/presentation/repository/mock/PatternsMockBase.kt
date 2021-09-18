@@ -4,14 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ru.boringowl.parapp.presentation.repository.PatternsRepository
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
-import ru.boringowl.parapp.domain.model.patterns.PatternInfo
+import ru.boringowl.parapp.domain.model.patterns.Pattern
 
-class MockBase : PatternsRepository {
-    var data: MutableLiveData<List<PatternInfo>>
-    var list: List<PatternInfo>
+class PatternsMockBase : PatternsRepository {
+    var data: MutableLiveData<List<Pattern>>
+    var list: List<Pattern>
 
     init {
-        val pattern1 = PatternInfo(
+        val pattern1 = Pattern(
             id = 0,
             title = "Абстрактная фабрика",
             description = "Позволяет создавать семейства связанных объектов, не привязываясь к конкретным классам создаваемых объектов.",
@@ -131,11 +131,11 @@ class MockBase : PatternsRepository {
                     isAdvantage = false,
                 ),
             ),
-            type = PatternInfo.PatternType.CREATIONAL,
+            type = Pattern.PatternType.CREATIONAL,
             difficulty = 1,
 
         )
-        val pattern2 = PatternInfo(
+        val pattern2 = Pattern(
             id = 1,
             title = "Адаптер",
             description = "Адаптер — это структурный паттерн проектирования, который позволяет объектам с несовместимыми интерфейсами работать вместе.",
@@ -213,7 +213,7 @@ class MockBase : PatternsRepository {
                     isAdvantage = false,
                 ),
             ),
-            type = PatternInfo.PatternType.STRUCTURAL,
+            type = Pattern.PatternType.STRUCTURAL,
             difficulty = 0,
 
             )
@@ -221,25 +221,25 @@ class MockBase : PatternsRepository {
         data = MutableLiveData(list)
     }
 
-    override fun <T : PatternInfo> getAllPatternInfos(): LiveData<List<T>> {
+    override fun <T : Pattern> getAllPatterns(): LiveData<List<T>> {
         return data as LiveData<List<T>>
     }
 
-    override fun <T : PatternInfo> addPatternInfo(pattern: T) {
+    override fun <T : Pattern> addPattern(pattern: T) {
         list = list + pattern
         data.value = list
     }
 
-    override fun <T : PatternInfo> getPatternInfo(patternId: Int): T {
+    override fun <T : Pattern> getPattern(patternId: Int): T {
         list.forEach {
             if (it.id == patternId)
                 return it as T
         }
-        return PatternInfo(0, "", "", "", "", "", "",
-            listOf(), PatternInfo.PatternType.STRUCTURAL, 0) as T
+        return Pattern(0, "", "", "", "", "", "",
+            listOf(), Pattern.PatternType.UNKNOWN, 0) as T
     }
 
-    override fun <T : PatternInfo> deletePatternInfo(pattern: T) {
+    override fun <T : Pattern> deletePattern(pattern: T) {
         list = list - pattern
         data.value = list
     }

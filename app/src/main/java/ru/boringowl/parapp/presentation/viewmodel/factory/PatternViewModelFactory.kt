@@ -2,7 +2,7 @@ package ru.boringowl.parapp.presentation.viewmodel.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ru.boringowl.parapp.presentation.viewmodel.PatternViewModel
+import ru.boringowl.parapp.presentation.viewmodel.patterns.PatternViewModel
 
 class PatternViewModelFactory(private val patternId: Int): ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")

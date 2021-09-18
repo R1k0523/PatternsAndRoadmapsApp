@@ -5,7 +5,7 @@
     <data>
         <variable
             name="pattern"
-            type="ru.boringowl.parapp.domain.model.patterns.PatternInfo"
+            type="ru.boringowl.parapp.domain.model.patterns.Pattern"
             />
     </data>
 

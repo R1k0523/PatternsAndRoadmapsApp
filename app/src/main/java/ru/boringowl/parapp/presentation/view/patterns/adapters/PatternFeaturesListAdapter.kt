@@ -1,15 +1,11 @@
-package ru.boringowl.parapp.presentation.view.adapters
+package ru.boringowl.parapp.presentation.view.patterns.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.PatternFeatureListItemBinding
-import ru.boringowl.parapp.databinding.PatternsListItemBinding
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
-import ru.boringowl.parapp.domain.model.patterns.PatternInfo
 
 class PatternFeaturesListAdapter(var data : List<PatternFeature>) :
     RecyclerView.Adapter<PatternFeaturesListAdapter.PatternFeatureViewHolder>() {

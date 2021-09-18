@@ -5,20 +5,20 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import ru.boringowl.parapp.presentation.repository.model.patterns.PatternInfoDTO
+import ru.boringowl.parapp.presentation.repository.model.patterns.PatternDTO
 
 @Dao
 interface PatternsDAO {
 
     @Insert
-    fun addPatternInfo(party: PatternInfoDTO?)
+    fun addPattern(pattern: PatternDTO?)
 
     @Delete
-    fun deletePatternInfo(party: PatternInfoDTO?)
+    fun deletePattern(pattern: PatternDTO?)
 
     @Query("SELECT * FROM patterns")
-    fun getAllPatternInfo(): LiveData<List<PatternInfoDTO>>
+    fun getAllPatterns(): LiveData<List<PatternDTO>>
 
     @Query("SELECT * FROM patterns WHERE id = :patternId LIMIT 1")
-    fun getPatternInfo(patternId: Int): PatternInfoDTO
+    fun getPattern(patternId: Int): PatternDTO
 }

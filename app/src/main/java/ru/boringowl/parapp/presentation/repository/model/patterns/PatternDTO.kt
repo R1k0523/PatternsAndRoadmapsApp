@@ -4,11 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
-import ru.boringowl.parapp.domain.model.patterns.PatternInfo
+import ru.boringowl.parapp.domain.model.patterns.Pattern
 
 
 @Entity(tableName = "patterns")
-data class PatternInfoDTO(
+data class PatternDTO(
     @ColumnInfo(name = "title")
     override val title: String,
     @ColumnInfo(name = "description")
@@ -30,7 +30,7 @@ data class PatternInfoDTO(
     @PrimaryKey(autoGenerate = true)
     override val id: Int = 0,
 
-    ) : PatternInfo(
+    ) : Pattern(
     id,
     title,
     description,
@@ -43,16 +43,16 @@ data class PatternInfoDTO(
     difficulty,
 ) {
 
-    constructor(patternInfo: PatternInfo) : this(
-        patternInfo.title,
-        patternInfo.description,
-        patternInfo.problem,
-        patternInfo.solution,
-        patternInfo.solutionInCode,
-        patternInfo.useCase,
-        patternInfo.feature,
-        patternInfo.type,
-        patternInfo.difficulty,
+    constructor(pattern: Pattern) : this(
+        pattern.title,
+        pattern.description,
+        pattern.problem,
+        pattern.solution,
+        pattern.solutionInCode,
+        pattern.useCase,
+        pattern.feature,
+        pattern.type,
+        pattern.difficulty,
     )
 
 }

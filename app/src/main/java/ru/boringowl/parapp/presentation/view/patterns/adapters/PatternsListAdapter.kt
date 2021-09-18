@@ -1,18 +1,15 @@
-package ru.boringowl.parapp.presentation.view.adapters
+package ru.boringowl.parapp.presentation.view.patterns.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.databinding.BindingAdapter
-import androidx.navigation.NavGraphNavigator
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.PatternsListItemBinding
-import ru.boringowl.parapp.domain.model.patterns.PatternInfo
-import ru.boringowl.parapp.presentation.view.PatternsFragmentDirections
+import ru.boringowl.parapp.domain.model.patterns.Pattern
+import ru.boringowl.parapp.presentation.view.patterns.PatternsFragmentDirections
 
-class PatternsListAdapter(var data : List<PatternInfo>) :
+class PatternsListAdapter(var data : List<Pattern>) :
     RecyclerView.Adapter<PatternsListAdapter.PatternsViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -32,8 +29,8 @@ class PatternsListAdapter(var data : List<PatternInfo>) :
         val pattern = data[position]
         holder.binding.pattern = pattern
         val patternRes = when(pattern.type) {
-            PatternInfo.PatternType.STRUCTURAL -> R.drawable.ic_round_table_rows_24
-            PatternInfo.PatternType.CREATIONAL -> R.drawable.ic_round_add_box_24
+            Pattern.PatternType.STRUCTURAL -> R.drawable.ic_round_table_rows_24
+            Pattern.PatternType.CREATIONAL -> R.drawable.ic_round_add_box_24
             else -> R.drawable.ic_round_swap_calls_24
         }
         holder.binding.patternTypeImage.setImageResource(patternRes)
