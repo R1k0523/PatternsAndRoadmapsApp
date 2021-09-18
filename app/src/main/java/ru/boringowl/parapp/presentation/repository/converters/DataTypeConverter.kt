@@ -55,4 +55,14 @@ object DataTypeConverter {
     fun nodeTreeToString(node: RoadmapNode): String {
         return gson.toJson(node)
     }
+
+    @TypeConverter
+    fun stringToList(listOfStrings: String): List<String> {
+        val listType: Type = object : TypeToken<List<String?>?>() {}.type
+        return gson.fromJson(listOfStrings, listType)
+    }
+    @TypeConverter
+    fun listToString(listOfStrings: List<String>): String {
+        return gson.toJson(listOfStrings)
+    }
 }
