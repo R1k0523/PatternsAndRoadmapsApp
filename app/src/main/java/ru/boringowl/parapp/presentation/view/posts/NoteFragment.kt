@@ -24,9 +24,7 @@ import ru.boringowl.parapp.presentation.viewmodel.posts.NoteViewModel
 
 class NoteFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = NoteFragment()
-    }
+    companion object;
 
     private val args: NoteFragmentArgs by navArgs()
     private val viewModel: NoteViewModel by viewModels {NoteViewModelFactory(args.noteId)}

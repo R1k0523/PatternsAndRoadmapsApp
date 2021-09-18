@@ -87,7 +87,8 @@
                         app:layout_constraintBottom_toBottomOf="@+id/patternTypeImage"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/patternTypeImage"
-                        app:srcCompat="@drawable/ic_round_sentiment_neutral_24" />
+                        app:srcCompat="@drawable/ic_round_sentiment_neutral_24"
+                        android:contentDescription="@string/difficultyImage" />
 
                     <TextView
                         android:id="@+id/description"
@@ -107,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="16dp"
-                    android:text="Проблема"
+                    android:text="@string/problem"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -126,7 +127,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="16dp"
-                    android:text="Решение"
+                    android:text="@string/solution"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -145,7 +146,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="16dp"
-                    android:text="Псевдокод"
+                    android:text="@string/pseudocode"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -164,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="16dp"
-                    android:text="Применимость"
+                    android:text="@string/useCase"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -183,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="16dp"
-                    android:text="Плюсы и минусы"
+                    android:text="@string/prosCons"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 

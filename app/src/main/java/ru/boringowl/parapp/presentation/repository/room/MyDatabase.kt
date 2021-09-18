@@ -9,6 +9,7 @@ import ru.boringowl.parapp.presentation.repository.room.dao.PatternsDAO
 import ru.boringowl.parapp.presentation.repository.model.patterns.PatternDTO
 import ru.boringowl.parapp.presentation.repository.room.dao.NotesDAO
 import ru.boringowl.parapp.presentation.repository.room.dao.RoadmapsDAO
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 @Database(entities = [PatternDTO::class, NoteDTO::class, RoadmapDTO::class], version = 1, exportSchema = false)
@@ -23,7 +24,7 @@ abstract class MyDatabase : RoomDatabase() {
         private var instance: MyDatabase? = null
 
         private const val NUMBER_OF_THREADS = 4
-        val databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS)
+        val databaseWriteExecutor: ExecutorService = Executors.newFixedThreadPool(NUMBER_OF_THREADS)
 
         fun getInstance(context: Context): MyDatabase {
             return instance ?: synchronized(this) {

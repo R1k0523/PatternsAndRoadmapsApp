@@ -59,7 +59,5 @@ class RoadmapTreeAdapter(val parent: RoadmapNode) : AbstractGraphAdapter<Roadmap
             submitGraph(nodesGraph)
         }
 
-        class NodeViewHolder(val binding: RoadmapTreeItemBinding, var isOpened: Boolean = false) : RecyclerView.ViewHolder(binding.root) {
-
-        }
+        class NodeViewHolder(val binding: RoadmapTreeItemBinding, var isOpened: Boolean = false) : RecyclerView.ViewHolder(binding.root)
 }

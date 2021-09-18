@@ -2,7 +2,6 @@ package ru.boringowl.parapp.presentation.viewmodel.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ru.boringowl.parapp.presentation.viewmodel.patterns.PatternViewModel
 import ru.boringowl.parapp.presentation.viewmodel.posts.RoadmapViewModel
 
 class RoadmapViewModelFactory(private val roadmapId: Int): ViewModelProvider.NewInstanceFactory() {

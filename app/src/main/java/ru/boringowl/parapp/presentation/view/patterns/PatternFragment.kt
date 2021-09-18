@@ -21,9 +21,7 @@ import ru.boringowl.parapp.presentation.viewmodel.factory.PatternViewModelFactor
 
 class PatternFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = PatternFragment()
-    }
+    companion object;
     private val args: PatternFragmentArgs by navArgs()
     private val viewModel: PatternViewModel by viewModels { PatternViewModelFactory(args.patternId) }
     private lateinit var binding : PatternFragmentBinding

@@ -10,4 +10,13 @@
     <string name="postsPageName">Посты</string>
     <string name="patternsPageName">Паттерны</string>
     <string name="page_profile">Профиль</string>
+    <string name="dot">dot</string>
+    <string name="featuretype">featureType</string>
+    <string name="difficultyImage">difficultyImage</string>
+    <string name="problem">Проблема</string>
+    <string name="solution">Решение</string>
+    <string name="pseudocode">Псевдокод</string>
+    <string name="useCase">Применимость</string>
+    <string name="prosCons">Плюсы и минусы</string>
+    <string name="addPattern">addPattern</string>
 </resources>

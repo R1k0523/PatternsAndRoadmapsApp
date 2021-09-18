@@ -5,4 +5,4 @@ data class RoadmapNode(
     val description: String,
     val childrenNodes: List<RoadmapNode>,
     val isMainWay: Boolean = false
-) {}
+)
