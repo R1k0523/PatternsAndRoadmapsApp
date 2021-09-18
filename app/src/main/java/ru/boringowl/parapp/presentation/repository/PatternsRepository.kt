@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import ru.boringowl.parapp.domain.model.patterns.PatternInfo
 
 interface PatternsRepository {
-    fun getAllPatternInfos(): LiveData<List<PatternInfo>?>?
-    fun addPatternInfo(pattern: PatternInfo)
-    fun getPatternInfo(patternId: Int): PatternInfo
-    fun deletePatternInfo(pattern: PatternInfo)
+    fun <T : PatternInfo> getAllPatternInfos(): LiveData<List<T>>
+    fun <T : PatternInfo> addPatternInfo(pattern: T)
+    fun <T : PatternInfo> getPatternInfo(patternId: Int): T
+    fun <T : PatternInfo> deletePatternInfo(pattern: T)
 }

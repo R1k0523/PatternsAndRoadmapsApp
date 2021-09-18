@@ -6,7 +6,7 @@ import ru.boringowl.parapp.presentation.repository.Repository
 import ru.boringowl.parapp.domain.model.patterns.PatternInfo
 
 class PatternsViewModel : ViewModel() {
-    fun getPatternsList(): LiveData<List<PatternInfo>?>? {
+    fun getPatternsList(): LiveData<List<PatternInfo>> {
         return Repository.repository!!.getAllPatternInfos()
     }
 

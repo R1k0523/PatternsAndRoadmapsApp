@@ -1,19 +1,31 @@
 package ru.boringowl.parapp.domain.model.patterns
 
-data class PatternInfo(
-    val id: Int,
-    val title: String,
-    val description: String,
-    val problem: String,
-    val solution: String,
-    val solutionInCode: String, //псевдокод решения
-    val useCase: String,
-    val feature: List<PatternFeature>,
-    val type: PatternType,
-    val difficulty: Int,
+open class PatternInfo(
+    open val id: Int,
+    open val title: String,
+    open val description: String,
+    open val problem: String,
+    open val solution: String,
+    open val solutionInCode: String, //псевдокод решения
+    open val useCase: String,
+    open val feature: List<PatternFeature>,
+    open val type: PatternType,
+    open val difficulty: Int,
 
     ) {
     enum class PatternType(val title: String) {
-        CREATIONAL("Порождающий"), STRUCTURAL("Структурный"), BEHAVIORAL("Поведенческий")
+        CREATIONAL("Порождающий"), STRUCTURAL("Структурный"), BEHAVIORAL("Поведенческий"), UNKNOWN("Неизвестный")
+
+    }
+
+    companion object {
+        fun getType(title: String): PatternType {
+            return when (title) {
+                PatternType.STRUCTURAL.title -> PatternType.STRUCTURAL
+                PatternType.CREATIONAL.title -> PatternType.CREATIONAL
+                PatternType.BEHAVIORAL.title -> PatternType.BEHAVIORAL
+                else -> PatternType.UNKNOWN
+            }
+        }
     }
 }

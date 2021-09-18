@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken
 import com.google.gson.Gson
 import ru.boringowl.parapp.presentation.repository.model.notes.notelinks.NoteLinksSectionDTO
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
+import ru.boringowl.parapp.domain.model.patterns.PatternInfo
 import java.lang.reflect.Type
 import java.util.*
 
@@ -37,5 +38,15 @@ object DataTypeConverter {
     @TypeConverter
     fun patternFeatureToString(someObjects: List<PatternFeature>): String {
         return gson.toJson(someObjects)
+    }
+
+    @TypeConverter
+    fun patternTypeToString(patternType: PatternInfo.PatternType): String {
+        return patternType.title
+    }
+
+    @TypeConverter
+    fun StringTopatternType(patternType: String): PatternInfo.PatternType {
+        return PatternInfo.getType(patternType)
     }
 }

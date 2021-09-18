@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.*
 import ru.boringowl.parapp.presentation.repository.converters.DataTypeConverter
 import ru.boringowl.parapp.presentation.repository.room.dao.PatternsDAO
-import ru.boringowl.parapp.domain.model.patterns.PatternInfoDTO
+import ru.boringowl.parapp.presentation.repository.model.patterns.PatternInfoDTO
 import java.util.concurrent.Executors
 
 @Database(entities = [PatternInfoDTO::class /* другие таблички*/], version = 1, exportSchema = false)

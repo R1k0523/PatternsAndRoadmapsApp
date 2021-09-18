@@ -1,24 +1,47 @@
-package ru.boringowl.parapp.domain.model.patterns
+package ru.boringowl.parapp.presentation.repository.model.patterns
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import ru.boringowl.parapp.domain.model.patterns.PatternFeature
+import ru.boringowl.parapp.domain.model.patterns.PatternInfo
 
 
 @Entity(tableName = "patterns")
 data class PatternInfoDTO(
-    val title: String,
-    val description: String,
-    val problem: String,
-    val solution: String,
-    val solutionInCode: String, //псевдокод решения
-    val useCase: String,
-    val feature: List<PatternFeature>, // TODO serialize pattern features
-    val type: PatternInfo.PatternType,
-    val difficulty: Int,
+    @ColumnInfo(name = "title")
+    override val title: String,
+    @ColumnInfo(name = "description")
+    override val description: String,
+    @ColumnInfo(name = "problem")
+    override val problem: String,
+    @ColumnInfo(name = "solution")
+    override val solution: String,
+    @ColumnInfo(name = "solution_in_code")
+    override val solutionInCode: String, //псевдокод решения
+    @ColumnInfo(name = "use_case")
+    override val useCase: String,
+    @ColumnInfo(name = "feature")
+    override val feature: List<PatternFeature>,
+    @ColumnInfo(name = "type")
+    override val type: PatternType,
+    @ColumnInfo(name = "difficulty")
+    override val difficulty: Int,
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    override val id: Int = 0,
 
-    ) {
+    ) : PatternInfo(
+    id,
+    title,
+    description,
+    problem,
+    solution,
+    solutionInCode,
+    useCase,
+    feature,
+    type,
+    difficulty,
+) {
 
     constructor(patternInfo: PatternInfo) : this(
         patternInfo.title,
@@ -30,21 +53,6 @@ data class PatternInfoDTO(
         patternInfo.feature,
         patternInfo.type,
         patternInfo.difficulty,
-    )
-
-
-    fun toPatternInfo() = PatternInfo(
-        id!!,
-        title,
-        description,
-        problem,
-        solution,
-        solutionInCode,
-        useCase,
-        feature,
-        type,
-        difficulty,
-
     )
 
 }

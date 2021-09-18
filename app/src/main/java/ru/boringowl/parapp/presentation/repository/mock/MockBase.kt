@@ -221,25 +221,25 @@ class MockBase : PatternsRepository {
         data = MutableLiveData(list)
     }
 
-    override fun getAllPatternInfos(): LiveData<List<PatternInfo>?> {
-        return data
+    override fun <T : PatternInfo> getAllPatternInfos(): LiveData<List<T>> {
+        return data as LiveData<List<T>>
     }
 
-    override fun addPatternInfo(pattern: PatternInfo) {
+    override fun <T : PatternInfo> addPatternInfo(pattern: T) {
         list = list + pattern
         data.value = list
     }
 
-    override fun getPatternInfo(patternId: Int): PatternInfo {
+    override fun <T : PatternInfo> getPatternInfo(patternId: Int): T {
         list.forEach {
             if (it.id == patternId)
-                return it
+                return it as T
         }
         return PatternInfo(0, "", "", "", "", "", "",
-            listOf(), PatternInfo.PatternType.STRUCTURAL, 0)
+            listOf(), PatternInfo.PatternType.STRUCTURAL, 0) as T
     }
 
-    override fun deletePatternInfo(pattern: PatternInfo) {
+    override fun <T : PatternInfo> deletePatternInfo(pattern: T) {
         list = list - pattern
         data.value = list
     }

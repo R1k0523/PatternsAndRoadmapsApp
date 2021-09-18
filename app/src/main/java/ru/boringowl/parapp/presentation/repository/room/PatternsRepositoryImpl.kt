@@ -7,37 +7,32 @@ import androidx.lifecycle.MutableLiveData
 import ru.boringowl.parapp.presentation.repository.PatternsRepository
 import ru.boringowl.parapp.presentation.repository.room.dao.PatternsDAO
 import ru.boringowl.parapp.domain.model.patterns.PatternInfo
-import ru.boringowl.parapp.domain.model.patterns.PatternInfoDTO
+import ru.boringowl.parapp.presentation.repository.model.patterns.PatternInfoDTO
 
 class PatternsRepositoryImpl(application: Application) : PatternsRepository {
     private var patternsDAO: PatternsDAO
-    private var allPatterns: LiveData<List<PatternInfoDTO>> = MutableLiveData()
+    private var allPatterns: LiveData<List<PatternInfoDTO>>
 
     init {
         val db: MyDatabase = MyDatabase.getInstance(application)
         patternsDAO = db.patternsDAO()
-        allPatterns = patternsDAO.getAllPatternInfo()
+        allPatterns =  patternsDAO.getAllPatternInfo()
     }
 
-    override fun getAllPatternInfos(): LiveData<List<PatternInfo>?> {
-        val patterns = arrayListOf<PatternInfo>()
-        allPatterns.value?.forEach {
-            patterns.add(it.toPatternInfo())
-        }
-        return MutableLiveData(patterns)
+    override fun <T : PatternInfo> getAllPatternInfos(): LiveData<List<T>> {
+        return allPatterns as LiveData<List<T>>
     }
 
-    override fun addPatternInfo(pattern: PatternInfo) {
-
+    override fun <T : PatternInfo> addPatternInfo(pattern: T) {
         MyDatabase.databaseWriteExecutor.execute { patternsDAO.addPatternInfo(PatternInfoDTO(pattern)) }
     }
 
-    override fun getPatternInfo(patternId: Int): PatternInfo {
-        return patternsDAO.getPatternInfo(patternId).toPatternInfo()
+    override fun <T : PatternInfo> getPatternInfo(patternId: Int): T {
+        return patternsDAO.getPatternInfo(patternId) as T
     }
 
-    override fun deletePatternInfo(pattern: PatternInfo) {
-        MyDatabase.databaseWriteExecutor.execute { patternsDAO.deletePatternInfo(PatternInfoDTO(pattern)) }
+    override fun <T : PatternInfo> deletePatternInfo(pattern: T) {
+        MyDatabase.databaseWriteExecutor.execute { patternsDAO.deletePatternInfo(pattern as PatternInfoDTO) }
     }
 
 }

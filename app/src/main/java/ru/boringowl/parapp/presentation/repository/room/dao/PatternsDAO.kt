@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import ru.boringowl.parapp.domain.model.patterns.PatternInfoDTO
+import ru.boringowl.parapp.presentation.repository.model.patterns.PatternInfoDTO
 
 @Dao
 interface PatternsDAO {
