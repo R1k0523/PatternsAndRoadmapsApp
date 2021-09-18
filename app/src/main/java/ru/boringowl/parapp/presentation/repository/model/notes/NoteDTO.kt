@@ -3,7 +3,6 @@ package ru.boringowl.parapp.presentation.repository.model.notes
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ru.boringowl.parapp.domain.model.posts.Post
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
 

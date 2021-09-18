@@ -76,7 +76,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/patternTypeImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/patternTypeImage"
-            app:srcCompat="@drawable/ic_round_sentiment_neutral_24" />
+            app:srcCompat="@drawable/ic_round_sentiment_neutral_24"
+            android:contentDescription="@string/difficultyImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
