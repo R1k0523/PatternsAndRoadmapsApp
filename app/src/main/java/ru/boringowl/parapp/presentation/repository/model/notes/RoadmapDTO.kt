@@ -19,7 +19,7 @@ data class RoadmapDTO(
     @ColumnInfo(name="root")
     override val root: RoadmapNode,
     @PrimaryKey(autoGenerate = true)
-    override val id: Int = 0,
+    override val id: Int? = null,
 ) : Roadmap (
     id,
     title,

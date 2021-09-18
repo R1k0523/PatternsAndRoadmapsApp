@@ -17,9 +17,11 @@
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/pattern_fragment.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/patterns_fragment.xml" value="0.23854166666666668" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/patterns_list_item.xml" value="0.4" />
-        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/post_list_item.xml" value="0.21693840579710144" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/post_list_item.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/posts_list_fragment.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/roadmap_fragment.xml" value="0.21693840579710144" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/roadmap_tree_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/roadmap_tree_item_item.xml" value="0.6" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/section_list_item.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/sector_list_item.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/menu/app_bar_menu.xml" value="0.22447916666666667" />

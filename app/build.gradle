@@ -70,6 +70,10 @@ dependencies {
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
 
+    //Trees and Graphs
+    implementation 'com.otaliastudios:zoomlayout:1.8.0'
+    implementation 'dev.bandb.graphview:graphview:0.8.1'
+
 
     //Libs for testing
     testImplementation 'junit:junit:4.13.2'

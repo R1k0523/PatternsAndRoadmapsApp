@@ -32,14 +32,14 @@ class PatternsFragment : Fragment() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
+                val position = viewHolder.absoluteAdapterPosition
                 viewModel.deletePatternInfo(
                     (binding.patternsRecyclerView.adapter as PatternsListAdapter).data[position]
                 )
             }
         }).attachToRecyclerView(binding.patternsRecyclerView)
         binding.floatingActionButton2.setOnClickListener {
-            viewModel.addPatternInfo(PatternsMockBase().list[kotlin.math.abs(Random.nextInt() % 2)])
+            viewModel.addPatternInfo(PatternsMockBase().list[Random.nextInt(0, 2)])
 
         }
         return binding.root

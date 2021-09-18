@@ -53,7 +53,7 @@ class PostsListViewModel : ViewModel() {
     fun addNote(note: Note) {
         Repository.notesRep!!.addNote(note)
     }
-    fun addNote(roadmap: Roadmap) {
+    fun addRoadmap(roadmap: Roadmap) {
         Repository.roadmapsRep!!.addRoadmap(roadmap)
     }
 

@@ -2,11 +2,13 @@ package ru.boringowl.parapp.presentation.repository.mock
 
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
+import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
+import ru.boringowl.parapp.domain.model.posts.roadmaps.RoadmapNode
 import java.text.SimpleDateFormat
 import java.util.*
 
 class PostsMockBase {
-    var list = listOf(
+    var notes = listOf(
         Note(
             null,
             "Название",
@@ -50,6 +52,96 @@ class PostsMockBase {
                     listOf("Скастовать еще 24 часа в сутки", "Сделать практику по мобилкам",)
                 )
             )
+        )
+    )
+    val roadmaps = listOf(
+        Roadmap(
+            null,
+            "Дорожка 3",
+            SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
+            listOf("Категория 11","Категория 12","Категория 13"),
+            "Описание поста. Описание поста. Описание поста. Описание поста Наверное",
+            RoadmapNode(
+                "Начать",
+                "Встать с кровати",
+                listOf(
+                    RoadmapNode(
+                        "Глянуть вк",
+                        "Еще и курс алго можно",
+                        listOf()
+                    ),
+                    RoadmapNode(
+                        "Потянуться",
+                        "Встать с кровати",
+                        listOf(
+                            RoadmapNode(
+                                "Сделать зарядку",
+                                "15 минут никому не помешают",
+                                listOf(
+                                    RoadmapNode(
+                                        "Поесть",
+                                        "Что ты сегодня выберешь",
+                                        listOf(
+                                            RoadmapNode(
+                                                "Багет",
+                                                "123",
+                                                listOf(),
+                                            ),
+                                            RoadmapNode(
+                                                "Яичница",
+                                                "456",
+                                                listOf(),
+                                            ),
+                                            RoadmapNode(
+                                                "Йогурт",
+                                                "789",
+                                                listOf(),
+                                            ),
+                                            RoadmapNode(
+                                                "Умыться",
+                                                "Чисти чисти",
+                                                listOf(
+
+                                                    RoadmapNode(
+                                                        "Одеться",
+                                                        "Желательно потеплее",
+                                                        listOf(
+                                                            RoadmapNode(
+                                                            "Погладить одежду",
+                                                            "А зачем?",
+                                                                listOf(),
+                                                            ),
+                                                            RoadmapNode(
+                                                                "Готов к выходу",
+                                                                "А может прогулять?",
+                                                                listOf(),
+                                                                true
+                                                            ),
+                                                        ),
+                                                        true,
+                                                    ),
+                                                ),
+                                                true
+                                            ),
+
+                                        ),
+                                        true
+                                    ),
+                                ),
+                                true
+                            ),
+                        ),
+                        true
+                    ),
+                    RoadmapNode(
+                        "Накрытья одеялом",
+                        "И еще поспать",
+                        listOf()
+                    ),
+                ),
+                true
+            )
+
         )
     )
 }

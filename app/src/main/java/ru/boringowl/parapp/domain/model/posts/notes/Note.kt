@@ -3,11 +3,11 @@ package ru.boringowl.parapp.domain.model.posts.notes
 import ru.boringowl.parapp.domain.model.posts.Post
 
 open class Note(
-    open override val id: Int?,
-    open override val title: String,
-    open override val publicationDateTime: String,
-    open override val postCategories: List<String>,
-    open override val postDescription: String,
+    override val id: Int?,
+    override val title: String,
+    override val publicationDateTime: String,
+    override val postCategories: List<String>,
+    override val postDescription: String,
     open val sections: List<NoteSection>,
 ) : Post(
     id,
@@ -15,4 +15,4 @@ open class Note(
     publicationDateTime,
     postCategories,
     postDescription,
-) {}
+)

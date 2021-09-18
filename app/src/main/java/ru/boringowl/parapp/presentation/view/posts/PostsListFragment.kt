@@ -11,13 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.PostsListFragmentBinding
-import ru.boringowl.parapp.domain.model.posts.notes.Note
-import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
 import ru.boringowl.parapp.presentation.repository.mock.PostsMockBase
-import ru.boringowl.parapp.presentation.view.patterns.adapters.PatternsListAdapter
 import ru.boringowl.parapp.presentation.view.posts.adapters.PostsListAdapter
 import ru.boringowl.parapp.presentation.viewmodel.posts.PostsListViewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -59,7 +55,10 @@ class PostsListFragment : Fragment() {
             binding.recyclerView.adapter = PostsListAdapter(it)
         })
         binding.fabNote.setOnClickListener {
-            viewModel.addNote(PostsMockBase().list[Random().nextInt(3)])
+            viewModel.addNote(PostsMockBase().notes[Random().nextInt(3)])
+        }
+        binding.fabRoadmap.setOnClickListener {
+            viewModel.addRoadmap(PostsMockBase().roadmaps[Random().nextInt(1)])
         }
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder
@@ -86,7 +85,4 @@ class PostsListFragment : Fragment() {
         binding.fabRoadmap.animate().translationY(0F)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }
