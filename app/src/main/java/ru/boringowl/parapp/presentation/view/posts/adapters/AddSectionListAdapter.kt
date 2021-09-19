@@ -32,7 +32,7 @@ class AddSectionListAdapter(private val viewLifecycleOwner: LifecycleOwner) :
         holder.binding.section = section
         holder.binding.sectionsRecyclerView.also {
             it.layoutManager = LinearLayoutManager(holder.binding.root.context)
-            it.setHasFixedSize(true)
+            it.setHasFixedSize(false)
             it.adapter = AddLinkListAdapter()
             (it.adapter as AddLinkListAdapter).data.observe(viewLifecycleOwner,{links ->
                 data[position].linkItems = links

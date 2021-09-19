@@ -30,11 +30,12 @@ class AddNoteFragment : Fragment() {
         binding = AddNoteFragmentBinding.inflate(layoutInflater, container, false)
         binding.recyclerView.also {
             it.layoutManager = LinearLayoutManager(context)
-            it.setHasFixedSize(true)
+            it.setHasFixedSize(false)
             it.adapter =  AddSectionListAdapter(viewLifecycleOwner)
         }
         binding.button.setOnClickListener {
             (binding.recyclerView.adapter as AddSectionListAdapter).addSection()
+
         }
         binding.saveButton.setOnClickListener {
             val currentDateTime = SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date())

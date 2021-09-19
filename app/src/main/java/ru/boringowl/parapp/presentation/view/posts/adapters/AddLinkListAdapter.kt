@@ -41,7 +41,7 @@ class AddLinkListAdapter :
 
     fun addField() {
         _data.value!!.add("")
-        notifyItemInserted(_data.value!!.size-1)
+        notifyItemInserted(_data.value!!.size)
     }
 
 
