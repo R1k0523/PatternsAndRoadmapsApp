@@ -11,7 +11,7 @@ import ru.boringowl.parapp.presentation.repository.RoadmapsRepository
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RoadmapsMockBase : RoadmapsRepository {
+class RoadmapsMockRepository : RoadmapsRepository {
     var data: MutableLiveData<List<Roadmap>>
     var list: List<Roadmap>
 

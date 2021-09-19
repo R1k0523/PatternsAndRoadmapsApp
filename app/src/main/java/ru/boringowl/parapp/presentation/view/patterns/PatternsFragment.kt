@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.boringowl.parapp.databinding.PatternsFragmentBinding
-import ru.boringowl.parapp.presentation.repository.mock.PatternsMockBase
+import ru.boringowl.parapp.presentation.repository.mock.PatternsMockRepository
 import ru.boringowl.parapp.presentation.view.patterns.adapters.PatternsListAdapter
 import ru.boringowl.parapp.presentation.viewmodel.patterns.PatternsViewModel
 import kotlin.random.Random
@@ -39,7 +39,7 @@ class PatternsFragment : Fragment() {
             }
         }).attachToRecyclerView(binding.patternsRecyclerView)
         binding.floatingActionButton2.setOnClickListener {
-            viewModel.addPatternInfo(PatternsMockBase().list[Random.nextInt(0, 2)])
+            viewModel.addPatternInfo(PatternsMockRepository().list[Random.nextInt(0, 2)])
 
         }
         return binding.root

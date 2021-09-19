@@ -6,7 +6,7 @@ import ru.boringowl.parapp.presentation.repository.PatternsRepository
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
 import ru.boringowl.parapp.domain.model.patterns.Pattern
 
-class PatternsMockBase : PatternsRepository {
+class PatternsMockRepository : PatternsRepository {
     var data: MutableLiveData<List<Pattern>>
     var list: List<Pattern>
 

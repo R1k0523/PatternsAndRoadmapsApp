@@ -1,9 +1,9 @@
 package ru.boringowl.parapp.presentation.repository
 
 import android.app.Application
-import ru.boringowl.parapp.presentation.repository.mock.NotesMockBase
-import ru.boringowl.parapp.presentation.repository.mock.PatternsMockBase
-import ru.boringowl.parapp.presentation.repository.mock.RoadmapsMockBase
+import ru.boringowl.parapp.presentation.repository.mock.NotesMockRepository
+import ru.boringowl.parapp.presentation.repository.mock.PatternsMockRepository
+import ru.boringowl.parapp.presentation.repository.mock.RoadmapsMockRepository
 import ru.boringowl.parapp.presentation.repository.room.NotesRepositoryImpl
 import ru.boringowl.parapp.presentation.repository.room.PatternsRepositoryImpl
 import ru.boringowl.parapp.presentation.repository.room.RoadmapsRepositoryImpl
@@ -16,13 +16,13 @@ class Repository {
 
         fun initRepository() {
             if (patternsRep == null) {
-                patternsRep = PatternsMockBase()
+                patternsRep = PatternsMockRepository()
             }
             if (notesRep == null) {
-                notesRep = NotesMockBase()
+                notesRep = NotesMockRepository()
             }
             if (roadmapsRep == null) {
-                roadmapsRep = RoadmapsMockBase()
+                roadmapsRep = RoadmapsMockRepository()
             }
         }
         fun initRepository(application: Application) {

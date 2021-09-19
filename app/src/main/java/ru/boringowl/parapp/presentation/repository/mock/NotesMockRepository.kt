@@ -9,7 +9,7 @@ import ru.boringowl.parapp.presentation.repository.NotesRepository
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NotesMockBase : NotesRepository {
+class NotesMockRepository : NotesRepository {
     var data: MutableLiveData<List<Note>>
     var list: List<Note>
 

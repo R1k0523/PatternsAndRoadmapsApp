@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.PostsListFragmentBinding
-import ru.boringowl.parapp.presentation.repository.mock.NotesMockBase
-import ru.boringowl.parapp.presentation.repository.mock.RoadmapsMockBase
+import ru.boringowl.parapp.presentation.repository.mock.NotesMockRepository
+import ru.boringowl.parapp.presentation.repository.mock.RoadmapsMockRepository
 import ru.boringowl.parapp.presentation.view.posts.adapters.PostsListAdapter
 import ru.boringowl.parapp.presentation.viewmodel.posts.PostsListViewModel
 import java.util.*
@@ -57,11 +57,11 @@ class PostsListFragment : Fragment() {
             binding.recyclerView.adapter = PostsListAdapter(it)
         })
         binding.fabNote.setOnLongClickListener {
-            viewModel.addNote(NotesMockBase().list[Random().nextInt(3)])
+            viewModel.addNote(NotesMockRepository().list[Random().nextInt(3)])
             true
         }
         binding.fabRoadmap.setOnLongClickListener {
-            viewModel.addRoadmap(RoadmapsMockBase().list[Random().nextInt(1)])
+            viewModel.addRoadmap(RoadmapsMockRepository().list[Random().nextInt(1)])
             true
         }
         binding.fabNote.setOnClickListener {
