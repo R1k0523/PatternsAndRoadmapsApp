@@ -19,13 +19,10 @@ class NotesRepositoryImpl(application: Application) : NotesRepository {
     }
 
     override fun <T : Note> getAllNotes(): LiveData<List<T>> {
-        Log.d("Notes", "got")
-
         return allPatterns as LiveData<List<T>>
     }
 
     override fun <T : Note> addNote(note: T) {
-        Log.d("Notes", "added")
         MyDatabase.databaseWriteExecutor.execute { notesDAO.addNote(NoteDTO(note)) }
     }
 
