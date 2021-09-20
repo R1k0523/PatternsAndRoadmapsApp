@@ -39,7 +39,7 @@ class PatternsFragment : Fragment() {
             }
         }).attachToRecyclerView(binding.patternsRecyclerView)
         binding.floatingActionButton2.setOnClickListener {
-            viewModel.addPatternInfo(PatternsMockRepository().list[Random.nextInt(0, 2)])
+            viewModel.addPatternInfo(PatternsMockRepository().listMock[Random.nextInt(0, 2)])
 
         }
         return binding.root

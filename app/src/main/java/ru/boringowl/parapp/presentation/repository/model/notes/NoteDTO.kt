@@ -19,7 +19,7 @@ data class NoteDTO(
     @ColumnInfo(name="sections")
     override val sections: List<NoteSection>,
     @PrimaryKey(autoGenerate = true)
-    override val id: Int? = null,
+    override var id: Int? = null,
 ) : Note(
     id,
     title,

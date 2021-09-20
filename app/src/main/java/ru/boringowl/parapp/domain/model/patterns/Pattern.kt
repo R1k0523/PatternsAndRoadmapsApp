@@ -1,7 +1,7 @@
 package ru.boringowl.parapp.domain.model.patterns
 
 open class Pattern(
-    open val id: Int?,
+    open var id: Int?,
     open val title: String,
     open val description: String,
     open val problem: String,

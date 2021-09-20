@@ -9,10 +9,11 @@ import ru.boringowl.parapp.domain.model.patterns.Pattern
 class PatternsMockRepository : PatternsRepository {
     var data: MutableLiveData<List<Pattern>>
     var list: List<Pattern>
+    var listMock: List<Pattern>
 
     init {
         val pattern1 = Pattern(
-            id = 0,
+            id = null,
             title = "Абстрактная фабрика",
             description = "Позволяет создавать семейства связанных объектов, не привязываясь к конкретным классам создаваемых объектов.",
             problem = "Представьте, что вы пишете симулятор мебельного магазина. Ваш код содержит:\n" +
@@ -136,7 +137,7 @@ class PatternsMockRepository : PatternsRepository {
 
         )
         val pattern2 = Pattern(
-            id = 1,
+            id = null,
             title = "Адаптер",
             description = "Адаптер — это структурный паттерн проектирования, который позволяет объектам с несовместимыми интерфейсами работать вместе.",
             problem = "Представьте, что вы делаете приложение для торговли на бирже. Ваше приложение скачивает биржевые котировки из нескольких источников в XML, а затем рисует красивые графики.\n" +
@@ -217,7 +218,8 @@ class PatternsMockRepository : PatternsRepository {
             difficulty = 0,
 
             )
-        list = listOf(pattern1, pattern2)
+        list = listOf()
+        listMock = listOf(pattern1, pattern2)
         data = MutableLiveData(list)
     }
 
@@ -226,6 +228,7 @@ class PatternsMockRepository : PatternsRepository {
     }
 
     override fun <T : Pattern> addPattern(pattern: T) {
+        pattern.id = list.size
         list = list + pattern
         data.value = list
     }

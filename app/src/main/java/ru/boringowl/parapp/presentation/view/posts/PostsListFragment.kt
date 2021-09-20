@@ -57,11 +57,11 @@ class PostsListFragment : Fragment() {
             binding.recyclerView.adapter = PostsListAdapter(it)
         })
         binding.fabNote.setOnLongClickListener {
-            viewModel.addNote(NotesMockRepository().list[Random().nextInt(3)])
+            viewModel.addNote(NotesMockRepository().listMock[Random().nextInt(3)])
             true
         }
         binding.fabRoadmap.setOnLongClickListener {
-            viewModel.addRoadmap(RoadmapsMockRepository().list[Random().nextInt(1)])
+            viewModel.addRoadmap(RoadmapsMockRepository().listMock[Random().nextInt(1)])
             true
         }
         binding.fabNote.setOnClickListener {

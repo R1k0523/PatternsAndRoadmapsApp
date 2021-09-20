@@ -12,11 +12,12 @@ import java.util.*
 class NotesMockRepository : NotesRepository {
     var data: MutableLiveData<List<Note>>
     var list: List<Note>
+    var listMock: List<Note>
 
     init {
         var notes = listOf(
             Note(
-                0,
+                null,
                 "Название",
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 1","Категория 2","Категория 3"),
@@ -29,7 +30,7 @@ class NotesMockRepository : NotesRepository {
                 )
             ),
             Note(
-                1,
+                null,
                 "Название 2",
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 10","Категория 20","Категория 30"),
@@ -47,7 +48,7 @@ class NotesMockRepository : NotesRepository {
                 )
             ),
             Note(
-                2,
+                null,
                 "Название 3",
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 11","Категория 12","Категория 13"),
@@ -60,7 +61,8 @@ class NotesMockRepository : NotesRepository {
                 )
             )
         )
-        list = notes
+        list = listOf()
+        listMock = notes
         data = MutableLiveData(list)
     }
 
@@ -69,6 +71,7 @@ class NotesMockRepository : NotesRepository {
     }
 
     override fun <T : Note> addNote(note: T) {
+        note.id = list.size
         list = list + note
         data.value = list
     }

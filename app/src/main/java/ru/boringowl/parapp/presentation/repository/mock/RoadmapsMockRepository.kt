@@ -14,11 +14,12 @@ import java.util.*
 class RoadmapsMockRepository : RoadmapsRepository {
     var data: MutableLiveData<List<Roadmap>>
     var list: List<Roadmap>
+    var listMock: List<Roadmap>
 
     init {
         val roadmaps = listOf (
             Roadmap(
-                0,
+                null,
                 "Дорожка 3",
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 11","Категория 12","Категория 13"),
@@ -106,7 +107,8 @@ class RoadmapsMockRepository : RoadmapsRepository {
 
             )
         )
-        list = roadmaps
+        list = listOf()
+        listMock = roadmaps
         data = MutableLiveData(list)
     }
 
@@ -115,6 +117,7 @@ class RoadmapsMockRepository : RoadmapsRepository {
     }
 
     override fun <T : Roadmap> addRoadmap(roadmap: T) {
+        roadmap.id = list.size
         list = list + roadmap
         data.value = list
     }
