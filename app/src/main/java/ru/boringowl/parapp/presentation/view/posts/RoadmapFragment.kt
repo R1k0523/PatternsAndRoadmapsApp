@@ -1,11 +1,13 @@
 package ru.boringowl.parapp.presentation.view.posts
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dev.bandb.graphview.layouts.tree.BuchheimWalkerConfiguration
 import dev.bandb.graphview.layouts.tree.BuchheimWalkerLayoutManager
@@ -44,11 +46,27 @@ class RoadmapFragment : Fragment() {
 
         binding.recycler.addItemDecoration(TreeEdgeDecoration())
         viewModel.roadmap.observe(viewLifecycleOwner, {
-            binding.roadmap = it
-            val adapter = RoadmapTreeAdapter(it.root)
-            adapter.drawTree()
-            binding.recycler.adapter = adapter
+            if (it != null) {
+                binding.roadmap = it
+                val adapter = RoadmapTreeAdapter(it.root)
+                adapter.drawTree()
+                binding.recycler.adapter = adapter
+            } else {
+                findNavController().navigate(RoadmapFragmentDirections.actionRoadmapFragmentToNotesListFragment())
+            }
         })
+        binding.shareImage.setOnClickListener {
+            if (viewModel.roadmap.value != null) {
+                val sendIntent = Intent()
+                sendIntent.action = Intent.ACTION_SEND
+                sendIntent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    "https://parapp.jun/roadmap/${viewModel.roadmap.value!!.id}"
+                )
+                sendIntent.type = "text/plain"
+                val shareIntent: Intent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
+            }
+        }
     }
-
 }
