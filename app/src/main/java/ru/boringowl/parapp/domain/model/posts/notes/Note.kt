@@ -10,6 +10,7 @@ open class Note(
     override val postCategories: List<String>,
     override val postDescription: String,
     open val sections: List<NoteSection>,
+    open val docs: List<String>? = null,
 ) : Post(
     id,
     title,

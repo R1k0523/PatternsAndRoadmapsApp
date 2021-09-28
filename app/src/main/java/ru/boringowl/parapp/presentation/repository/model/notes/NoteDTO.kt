@@ -20,6 +20,8 @@ data class NoteDTO(
     override val postDescription: String,
     @ColumnInfo(name="sections")
     override val sections: List<NoteSection>,
+    @ColumnInfo(name="docs")
+    override val docs: List<String>?,
     @PrimaryKey(autoGenerate = true)
     override var id: Int? = null,
 ) : Note(
@@ -30,6 +32,7 @@ data class NoteDTO(
     postCategories,
     postDescription,
     sections,
+    docs,
 ) {
 
     constructor(note: Note) : this (
@@ -39,5 +42,6 @@ data class NoteDTO(
         note.postCategories,
         note.postDescription,
         note.sections,
+        note.docs,
     )
 }

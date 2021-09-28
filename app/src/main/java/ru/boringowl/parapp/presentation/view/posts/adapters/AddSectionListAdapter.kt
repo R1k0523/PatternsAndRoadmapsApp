@@ -1,7 +1,6 @@
 package ru.boringowl.parapp.presentation.view.posts.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.LifecycleOwner
@@ -45,9 +44,8 @@ class AddSectionListAdapter(private val viewLifecycleOwner: LifecycleOwner) :
         }
     }
 
-
     fun addSection() {
-        data.add(NoteSection("", listOf(), arrayListOf()))
+        data.add(NoteSection("", arrayListOf()))
         notifyItemInserted(data.size-1)
     }
 

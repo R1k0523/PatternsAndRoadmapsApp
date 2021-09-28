@@ -44,7 +44,6 @@ class PostsListFragment : Fragment() {
             binding.fabNote.isClickable = it
             binding.fabRoadmap.isClickable = it
         })
-
         binding.floatingActionButton.setOnClickListener {
             if (viewModel.isFABOpen.value == true)
                 viewModel.setFABClosed()

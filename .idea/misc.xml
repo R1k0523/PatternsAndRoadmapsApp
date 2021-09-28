@@ -10,7 +10,7 @@
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/drawable/ic_round_share_24.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/add_link_list_item.xml" value="0.751458576429405" />
-        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/add_note_fragment.xml" value="0.39323126510878326" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/add_note_fragment.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/add_pattern_fragment.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/add_roadmap_fragment.xml" value="0.44509232264334303" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/add_roadmap_section_list_item.xml" value="0.23854166666666668" />
@@ -19,7 +19,7 @@
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/doc_item.xml" value="0.6" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/er.xml" value="0.6" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/link_list_item.xml" value="0.4" />
-        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/note_fragment.xml" value="0.3498233215547703" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/note_fragment.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/note_list_item.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/notes_list_fragment.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/pattern_feature_list_item.xml" value="0.4169381107491857" />

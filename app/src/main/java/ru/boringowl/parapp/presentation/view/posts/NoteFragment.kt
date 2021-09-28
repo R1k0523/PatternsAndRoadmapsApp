@@ -43,6 +43,9 @@ class NoteFragment : Fragment() {
             } else {
                 findNavController().navigate(NoteFragmentDirections.actionNoteFragmentToNotesListFragment())
             }
+            if (it.docs!!.isEmpty()) {
+                binding.files.visibility = View.GONE
+            }
             it.postCategories.forEach { text ->
                 val textview = TextView(context).also {tv ->
                     tv.text = text
@@ -75,6 +78,23 @@ class NoteFragment : Fragment() {
                 }
             }
         })
+        binding.titleSection.setOnClickListener {
+            if (binding.isSectionOpened == null) {
+                binding.isSectionOpened = false
+            }
+            var isSectionOpened: Boolean?  = binding.isSectionOpened
+            isSectionOpened = !isSectionOpened!!
+            binding.isSectionOpened = isSectionOpened
+            binding.sectionArrow.setImageResource(arrow(isSectionOpened))
+        }
+        binding.titleFiles.setOnClickListener {
+            if (binding.isFileOpened == null)
+                binding.isFileOpened = false
+            var isFileOpened: Boolean? = binding.isFileOpened
+            isFileOpened = !isFileOpened!!
+            binding.isFileOpened = isFileOpened
+            binding.fileArrow.setImageResource(arrow(isFileOpened))
+        }
         binding.shareImage.setOnClickListener {
             if (viewModel.note.value != null) {
                 val sendIntent = Intent()
@@ -89,6 +109,13 @@ class NoteFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun arrow(isOpened: Boolean): Int {
+        return if (isOpened)
+            R.drawable.ic_round_keyboard_arrow_up_24
+        else
+            R.drawable.ic_round_keyboard_arrow_down_24
     }
 }
 
