@@ -21,6 +21,7 @@ class RoadmapsMockRepository : RoadmapsRepository {
             Roadmap(
                 null,
                 "Дорожка 3",
+                null,
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 11","Категория 12","Категория 13"),
                 "Описание поста. Описание поста. Описание поста. Описание поста Наверное",
@@ -127,7 +128,7 @@ class RoadmapsMockRepository : RoadmapsRepository {
             if (it.id == roadmapId)
                 return it as T
         }
-        return Roadmap(0, "", "", listOf(""), "", RoadmapNode("", "", listOf())) as T
+        return Roadmap(0, "", null, "", listOf(""), "", RoadmapNode("", "", listOf())) as T
     }
 
     override fun <T : Roadmap> deleteRoadmap(roadmap: T) {

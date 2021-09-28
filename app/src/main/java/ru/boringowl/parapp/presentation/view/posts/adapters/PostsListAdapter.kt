@@ -1,5 +1,8 @@
 package ru.boringowl.parapp.presentation.view.posts.adapters
 
+import android.content.Intent
+import android.graphics.Color
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -9,8 +12,15 @@ import ru.boringowl.parapp.domain.model.posts.Post
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
 import ru.boringowl.parapp.presentation.view.posts.PostsListFragmentDirections
+import android.widget.TextView
+import ru.boringowl.parapp.R
+import android.widget.RelativeLayout
+import android.graphics.BitmapFactory
+import android.net.Uri
+import java.lang.Exception
 
-class PostsListAdapter(var data : List<Post>) :
+
+class PostsListAdapter(var data: List<Post>) :
     RecyclerView.Adapter<PostsListAdapter.PostsViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -38,6 +48,49 @@ class PostsListAdapter(var data : List<Post>) :
                 else -> null
             }
             action?.let { act -> it.findNavController().navigate(act) }
+        }
+        post.postCategories.forEach { text ->
+            val textview = TextView(holder.binding.root.context).also {
+                it.text = text
+                it.textSize = 12f
+                it.minEms = 5
+                it.gravity = Gravity.CENTER
+                it.setPadding(8, 8, 8, 8)
+                it.setBackgroundResource(R.drawable.category_shape)
+                it.setTextColor(Color.BLACK)
+                val params = RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT,
+                    RelativeLayout.LayoutParams.WRAP_CONTENT
+                )
+                params.setMargins(4, 0, 4, 0)
+                it.layoutParams = params
+            }
+            holder.binding.categories.addView(textview)
+        }
+        if (post.image != null) {
+            try {
+                holder.binding.mainImage.setImageBitmap(
+                    BitmapFactory.decodeFileDescriptor(
+                        holder.binding.root.context.contentResolver.openFileDescriptor(
+                            Uri.parse(post.image), "r"
+                        )?.fileDescriptor
+                    )
+                )
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        val postType = if (post is Note) "notes" else "roadmaps"
+        holder.binding.shareImage.setOnClickListener {
+            val sendIntent = Intent()
+            sendIntent.action = Intent.ACTION_SEND
+            sendIntent.putExtra(
+                Intent.EXTRA_TEXT,
+                "https://parapp.jun/$postType/${post.id}"
+            )
+            sendIntent.type = "text/plain"
+            val shareIntent: Intent = Intent.createChooser(sendIntent, null)
+            holder.binding.root.context.startActivity(shareIntent)
         }
     }
 
