@@ -1,6 +1,9 @@
 package ru.boringowl.parapp.presentation.view.posts
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.CornerPathEffect
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,8 +46,14 @@ class RoadmapFragment : Fragment() {
             .setOrientation(BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM)
             .build()
         binding.recycler.layoutManager = BuchheimWalkerLayoutManager(requireContext(), configuration)
-
-        binding.recycler.addItemDecoration(TreeEdgeDecoration())
+        val edgeStyle = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            strokeWidth = 5f
+            color = Color.GRAY
+            style = Paint.Style.STROKE
+            strokeJoin = Paint.Join.ROUND
+            pathEffect = CornerPathEffect(10f)
+        }
+        binding.recycler.addItemDecoration(TreeEdgeDecoration(edgeStyle))
         viewModel.roadmap.observe(viewLifecycleOwner, {
             if (it != null) {
                 binding.roadmap = it

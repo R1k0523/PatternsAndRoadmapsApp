@@ -1,13 +1,14 @@
 package ru.boringowl.parapp.presentation.view.posts.adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import dev.bandb.graphview.AbstractGraphAdapter
 import dev.bandb.graphview.graph.Graph
 import dev.bandb.graphview.graph.Node
+import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.RoadmapTreeItemBinding
 import ru.boringowl.parapp.domain.model.posts.roadmaps.RoadmapNode
 
@@ -25,8 +26,9 @@ class RoadmapTreeAdapter(val parent: RoadmapNode) : AbstractGraphAdapter<Roadmap
             val node = (getNodeData(position) as RoadmapNode)
             holder.binding.description.text = node.description
             holder.binding.title.text = node.title
-            val hexColor = if(node.isMainWay) "#75e900" else "#c6f68d"
-            holder.binding.root.setBackgroundColor(Color.parseColor(hexColor))
+            var darkColor = ContextCompat.getColor(holder.binding.root.context, R.color.orange_700)
+            var lightColor = ContextCompat.getColor(holder.binding.root.context, R.color.grey_500)
+            holder.binding.root.setBackgroundColor(if(node.isMainWay) darkColor else lightColor)
             holder.binding.title.setOnClickListener{
                 holder.binding.title.visibility =
                     if (holder.isOpened)
