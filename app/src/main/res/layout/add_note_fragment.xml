@@ -18,8 +18,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <androidx.coordinatorlayout.widget.CoordinatorLayout
                     android:layout_width="match_parent"
@@ -47,7 +47,6 @@
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:text="@string/title"
@@ -57,8 +56,6 @@
                     android:id="@+id/title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
                     android:importantForAutofill="no"
                     android:inputType="text"
                     android:minHeight="48dp"
@@ -68,7 +65,6 @@
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:text="@string/category" />
@@ -77,8 +73,6 @@
                     android:id="@+id/category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
                     android:importantForAutofill="no"
                     android:inputType="textCapWords"
                     android:minHeight="48dp" />
@@ -97,6 +91,20 @@
                     android:importantForAutofill="no"
                     android:inputType="textMultiLine"
                     android:minHeight="48dp" />
+
+                <Button
+                    android:id="@+id/add_photo_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Добавить фото" />
+
+                <ImageView
+                    android:id="@+id/mainImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/button"

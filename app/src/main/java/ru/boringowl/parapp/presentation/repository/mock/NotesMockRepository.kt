@@ -26,7 +26,6 @@ class NotesMockRepository : NotesRepository {
                     NoteSection(
                         "Описание секции №1 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
                         listOf(),
-                        listOf(),
                         listOf("Купить чебупели", "Скастовать еще 24 часа в сутки", "Сделать практику по мобилкам", "Хочу есть")
                     )
                 )
@@ -42,13 +41,11 @@ class NotesMockRepository : NotesRepository {
                     NoteSection(
                         "Описание секции №1 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
                         listOf(),
-                        listOf(),
                         listOf("Купить чебупели", "Скастовать еще 24 часа в сутки", "Сделать практику по мобилкам", "Хочу есть")
                     ),
 
                     NoteSection(
                         "Описание секции №2 Ну тут тоже будет какой то текст, который говорит о том, что будет в recyclerView ниже",
-                        listOf(),
                         listOf(),
                         listOf("Купить чебупели", "Хочу есть")
                     )
@@ -64,7 +61,6 @@ class NotesMockRepository : NotesRepository {
                 listOf(
                     NoteSection(
                         "Описание секции №2 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
-                        listOf(),
                         listOf(),
                         listOf("Скастовать еще 24 часа в сутки", "Сделать практику по мобилкам",)
                     )

@@ -47,7 +47,7 @@ class AddSectionListAdapter(private val viewLifecycleOwner: LifecycleOwner) :
 
 
     fun addSection() {
-        data.add(NoteSection("", listOf(), listOf(), arrayListOf()))
+        data.add(NoteSection("", listOf(), arrayListOf()))
         notifyItemInserted(data.size-1)
     }
 

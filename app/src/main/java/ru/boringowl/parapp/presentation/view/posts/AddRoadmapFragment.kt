@@ -8,14 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.AddRoadmapFragmentBinding
 import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
 import ru.boringowl.parapp.domain.model.posts.roadmaps.RoadmapNode
 import ru.boringowl.parapp.presentation.viewmodel.posts.AddRoadmapViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.util.Log
+
+import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
+
 
 class AddRoadmapFragment : Fragment() {
 
@@ -32,6 +37,7 @@ class AddRoadmapFragment : Fragment() {
                 viewModel.save(
                     Roadmap(
                         title = binding.title.text.toString(),
+                        image = viewModel.image.value,
                         postDescription = binding.description.text.toString(),
                         publicationDateTime = currentDateTime,
                         postCategories = binding.category.text.split(" "),
@@ -43,12 +49,52 @@ class AddRoadmapFragment : Fragment() {
                 Toast.makeText(context, "Вы ввели не все данные", Toast.LENGTH_SHORT).show()
             }
         }
+        binding.addPhotoButton.setOnClickListener {
+            renewPhoto()
+        }
+        binding.mainImage.setOnLongClickListener {
+            viewModel.setImage(null)
+            true
+        }
+        binding.mainImage.setOnClickListener {
+            renewPhoto()
+        }
         return binding.root
+    }
+
+    private fun setPhoto() {
+        val uri = Uri.parse(viewModel.image.value)
+        binding.mainImage.setImageBitmap(
+            BitmapFactory.decodeFileDescriptor(
+                requireContext().contentResolver.openFileDescriptor(
+                    uri, "r")?.fileDescriptor
+            )
+        )
+        binding.mainImage.visibility = View.VISIBLE
+    }
+
+    private fun renewPhoto() {
+        requireActivity().activityResultRegistry.register("key", OpenDocument()) { result ->
+            if (result != null) {
+                requireActivity().applicationContext.contentResolver
+                    .takePersistableUriPermission(result, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                binding.addPhotoButton.visibility = View.GONE
+                viewModel.setImage(result.toString())
+            }
+        }.launch(arrayOf("image/*"))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(AddRoadmapViewModel::class.java)
+        viewModel.image.observe(viewLifecycleOwner, {
+            if (it == null) {
+                binding.mainImage.setImageDrawable(null)
+                binding.addPhotoButton.visibility = View.VISIBLE
+                binding.mainImage.visibility = View.GONE
+            } else
+                setPhoto()
+        })
     }
 
 }

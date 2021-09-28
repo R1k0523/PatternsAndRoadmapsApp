@@ -17,6 +17,7 @@ import ru.boringowl.parapp.R
 import android.widget.RelativeLayout
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.view.View
 import java.lang.Exception
 
 
@@ -62,7 +63,7 @@ class PostsListAdapter(var data: List<Post>) :
                     RelativeLayout.LayoutParams.WRAP_CONTENT,
                     RelativeLayout.LayoutParams.WRAP_CONTENT
                 )
-                params.setMargins(4, 0, 4, 0)
+                params.setMargins(8, 0, 8, 0)
                 it.layoutParams = params
             }
             holder.binding.categories.addView(textview)
@@ -76,6 +77,7 @@ class PostsListAdapter(var data: List<Post>) :
                         )?.fileDescriptor
                     )
                 )
+                holder.binding.mainImage.visibility = View.VISIBLE
             } catch (e: Exception) {
                 e.printStackTrace()
             }

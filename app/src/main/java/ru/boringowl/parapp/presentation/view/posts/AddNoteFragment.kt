@@ -1,12 +1,17 @@
 package ru.boringowl.parapp.presentation.view.posts
 
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +21,7 @@ import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.presentation.view.posts.adapters.AddLinkListAdapter
 import ru.boringowl.parapp.presentation.view.posts.adapters.AddSectionListAdapter
 import ru.boringowl.parapp.presentation.viewmodel.posts.AddNoteViewModel
+import java.lang.NullPointerException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,6 +49,7 @@ class AddNoteFragment : Fragment() {
                 viewModel.save(
                     Note(
                         title = binding.title.text.toString(),
+                        image = viewModel.image.value,
                         postDescription = binding.description.text.toString(),
                         publicationDateTime = currentDateTime,
                         postCategories = binding.category.text.split(" "),
@@ -54,12 +61,55 @@ class AddNoteFragment : Fragment() {
                 Toast.makeText(context, "Вы ввели не все данные", Toast.LENGTH_SHORT).show()
             }
         }
+        binding.addPhotoButton.setOnClickListener {
+            renewPhoto()
+        }
+        binding.mainImage.setOnLongClickListener {
+            viewModel.setImage(null)
+            true
+        }
+        binding.mainImage.setOnClickListener {
+            renewPhoto()
+        }
         return binding.root
+    }
+
+    private fun setPhoto() {
+        val uri = Uri.parse(viewModel.image.value)
+        binding.mainImage.setImageBitmap(
+            BitmapFactory.decodeFileDescriptor(
+                requireContext().contentResolver.openFileDescriptor(
+                    uri, "r")?.fileDescriptor
+            )
+        )
+        binding.mainImage.visibility = View.VISIBLE
+    }
+
+    private fun renewPhoto() {
+        requireActivity().activityResultRegistry.register(
+            "key",
+            ActivityResultContracts.OpenDocument()
+        ) { result ->
+            if (result != null) {
+                requireActivity().applicationContext.contentResolver
+                    .takePersistableUriPermission(result, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                binding.addPhotoButton.visibility = View.GONE
+                viewModel.setImage(result.toString())
+            }
+        }.launch(arrayOf("image/*"))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(AddNoteViewModel::class.java)
+        viewModel.image.observe(viewLifecycleOwner, {
+            if (it == null) {
+                binding.mainImage.setImageDrawable(null)
+                binding.addPhotoButton.visibility = View.VISIBLE
+                binding.mainImage.visibility = View.GONE
+            } else
+                setPhoto()
+        })
     }
 
 }
