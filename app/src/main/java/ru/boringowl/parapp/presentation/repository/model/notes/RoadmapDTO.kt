@@ -10,6 +10,8 @@ import ru.boringowl.parapp.domain.model.posts.roadmaps.RoadmapNode
 data class RoadmapDTO(
     @ColumnInfo(name="title")
     override val title: String,
+    @ColumnInfo(name="image")
+    override val image: String?,
     @ColumnInfo(name="publication_date_time")
     override val publicationDateTime: String,
     @ColumnInfo(name="note_categories")
@@ -23,6 +25,7 @@ data class RoadmapDTO(
 ) : Roadmap (
     id,
     title,
+    image,
     publicationDateTime,
     postCategories,
     postDescription,
@@ -30,6 +33,7 @@ data class RoadmapDTO(
 ) {
     constructor(roadmap: Roadmap): this (
         roadmap.title,
+        roadmap.image,
         roadmap.publicationDateTime,
         roadmap.postCategories,
         roadmap.postDescription,

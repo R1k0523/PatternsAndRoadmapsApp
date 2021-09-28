@@ -2,7 +2,6 @@ package ru.boringowl.parapp.presentation.repository.mock
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.boringowl.parapp.domain.model.posts.Post
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
 import ru.boringowl.parapp.presentation.repository.NotesRepository
@@ -15,16 +14,19 @@ class NotesMockRepository : NotesRepository {
     var listMock: List<Note>
 
     init {
-        var notes = listOf(
+        val notes = listOf(
             Note(
                 null,
                 "Название",
+                null,
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 1","Категория 2","Категория 3"),
                 "Описание поста. Описание поста. Описание поста. Описание поста",
                 listOf(
                     NoteSection(
                         "Описание секции №1 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
+                        listOf(),
+                        listOf(),
                         listOf("Купить чебупели", "Скастовать еще 24 часа в сутки", "Сделать практику по мобилкам", "Хочу есть")
                     )
                 )
@@ -32,17 +34,22 @@ class NotesMockRepository : NotesRepository {
             Note(
                 null,
                 "Название 2",
+                null,
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 10","Категория 20","Категория 30"),
                 "Описание поста. Описание поста. Описание поста. Описание поста",
                 listOf(
                     NoteSection(
                         "Описание секции №1 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
+                        listOf(),
+                        listOf(),
                         listOf("Купить чебупели", "Скастовать еще 24 часа в сутки", "Сделать практику по мобилкам", "Хочу есть")
                     ),
 
                     NoteSection(
                         "Описание секции №2 Ну тут тоже будет какой то текст, который говорит о том, что будет в recyclerView ниже",
+                        listOf(),
+                        listOf(),
                         listOf("Купить чебупели", "Хочу есть")
                     )
                 )
@@ -50,12 +57,15 @@ class NotesMockRepository : NotesRepository {
             Note(
                 null,
                 "Название 3",
+                null,
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 11","Категория 12","Категория 13"),
                 "Описание поста. Описание поста. Описание поста. Описание поста Наверное",
                 listOf(
                     NoteSection(
                         "Описание секции №2 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
+                        listOf(),
+                        listOf(),
                         listOf("Скастовать еще 24 часа в сутки", "Сделать практику по мобилкам",)
                     )
                 )
@@ -81,7 +91,7 @@ class NotesMockRepository : NotesRepository {
             if (it.id == noteId)
                 return it as T
         }
-        return Note(0, "", "", listOf(""), "", listOf()) as T
+        return Note(0, "", null,"", listOf(""), "", listOf()) as T
     }
 
     override fun <T : Note> deleteNote(note: T) {

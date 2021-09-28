@@ -8,8 +8,10 @@ import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
 
 @Entity(tableName = "notes")
 data class NoteDTO(
-    @ColumnInfo(name="description")
+    @ColumnInfo(name="title")
     override val title: String,
+    @ColumnInfo(name="image")
+    override val image: String?,
     @ColumnInfo(name="publication_date_time")
     override val publicationDateTime: String,
     @ColumnInfo(name="note_categories")
@@ -23,6 +25,7 @@ data class NoteDTO(
 ) : Note(
     id,
     title,
+    image,
     publicationDateTime,
     postCategories,
     postDescription,
@@ -31,6 +34,7 @@ data class NoteDTO(
 
     constructor(note: Note) : this (
         note.title,
+        note.image,
         note.publicationDateTime,
         note.postCategories,
         note.postDescription,

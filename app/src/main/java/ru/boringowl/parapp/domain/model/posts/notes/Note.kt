@@ -5,6 +5,7 @@ import ru.boringowl.parapp.domain.model.posts.Post
 open class Note(
     override var id: Int? = null,
     override val title: String,
+    override val image: String?,
     override val publicationDateTime: String,
     override val postCategories: List<String>,
     override val postDescription: String,
@@ -12,6 +13,7 @@ open class Note(
 ) : Post(
     id,
     title,
+    image,
     publicationDateTime,
     postCategories,
     postDescription,

@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/drawable/ic_round_book_24.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/drawable/ic_round_bookmark_24.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/drawable/ic_round_circle_24.xml" value="0.1" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/drawable/ic_round_share_24.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/add_link_list_item.xml" value="0.2586050724637681" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/add_note_fragment.xml" value="0.39323126510878326" />
@@ -23,12 +25,13 @@
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/patterns_list_item.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/post_list_item.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/posts_list_fragment.xml" value="0.21693840579710144" />
-        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/roadmap_fragment.xml" value="0.21693840579710144" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/roadmap_fragment.xml" value="0.264" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/roadmap_tree_item.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/roadmap_tree_item_item.xml" value="0.6" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/section_list_item.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/sector_list_item.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/menu/app_bar_menu.xml" value="0.22447916666666667" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/xml/shortcuts.xml" value="0.19429347826086957" />
       </map>
     </option>
   </component>
