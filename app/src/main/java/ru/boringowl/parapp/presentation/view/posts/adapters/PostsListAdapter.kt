@@ -97,5 +97,12 @@ class PostsListAdapter(var data: List<Post>) :
     }
 
 
+    override fun onViewRecycled(holder: PostsViewHolder) {
+        super.onViewRecycled(holder)
+        holder.binding.mainImage.visibility = View.GONE
+        holder.binding.mainImage.setImageBitmap(null)
+        holder.binding.categories.removeAllViews()
+    }
+
     class PostsViewHolder(val binding: PostListItemBinding) : RecyclerView.ViewHolder(binding.root)
 }
