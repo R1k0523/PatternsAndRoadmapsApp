@@ -22,7 +22,6 @@ class FileUtils {
                 null
             }
         }
-
         fun stringsToUriList(stringUris: List<String>?, context: Context) : ArrayList<Uri> {
             val uris = arrayListOf<Uri>()
             stringUris?.forEach {
@@ -32,11 +31,9 @@ class FileUtils {
             }
             return uris
         }
-
         fun getFile(activity: FragmentActivity, fileTypes: Array<String>, toDo: (result: Uri) -> Unit) {
             activity.activityResultRegistry.register(
-                "key",
-                ActivityResultContracts.OpenDocument()
+                "key", ActivityResultContracts.OpenDocument()
             ) { result ->
                 if (result != null) {
                     activity.applicationContext.contentResolver
@@ -45,7 +42,6 @@ class FileUtils {
                 }
             }.launch(fileTypes)
         }
-
     }
 }
 

@@ -18,6 +18,7 @@ import android.widget.RelativeLayout
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.view.View
+import ru.boringowl.parapp.presentation.utils.ImageUtils
 import java.lang.Exception
 
 
@@ -71,11 +72,7 @@ class PostsListAdapter(var data: List<Post>) :
         if (post.image != null) {
             try {
                 holder.binding.mainImage.setImageBitmap(
-                    BitmapFactory.decodeFileDescriptor(
-                        holder.binding.root.context.contentResolver.openFileDescriptor(
-                            Uri.parse(post.image), "r"
-                        )?.fileDescriptor
-                    )
+                    ImageUtils.uriToBitmap(holder.binding.root.context, Uri.parse(post.image))
                 )
                 holder.binding.mainImage.visibility = View.VISIBLE
             } catch (e: Exception) {

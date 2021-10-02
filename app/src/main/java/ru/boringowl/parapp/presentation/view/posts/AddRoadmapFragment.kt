@@ -18,6 +18,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 
 import ru.boringowl.parapp.presentation.utils.FileUtils
+import ru.boringowl.parapp.presentation.utils.ImageUtils
 
 
 class AddRoadmapFragment : Fragment() {
@@ -63,10 +64,7 @@ class AddRoadmapFragment : Fragment() {
     private fun renewImage() {
         val uri = Uri.parse(viewModel.image.value)
         binding.mainImage.setImageBitmap(
-            BitmapFactory.decodeFileDescriptor(
-                requireContext().contentResolver.openFileDescriptor(
-                    uri, "r")?.fileDescriptor
-            )
+            ImageUtils.uriToBitmap(requireContext(), uri)
         )
         binding.mainImage.visibility = View.VISIBLE
     }

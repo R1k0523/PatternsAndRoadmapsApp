@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.NoteFragmentBinding
+import ru.boringowl.parapp.presentation.utils.ImageUtils
 import ru.boringowl.parapp.presentation.viewmodel.factory.NoteViewModelFactory
 import ru.boringowl.parapp.presentation.viewmodel.posts.NoteViewModel
 import java.lang.Exception
@@ -67,12 +68,9 @@ class NoteFragment : Fragment() {
                 if (it.image != null) {
                     try {
                         binding.mainImage.setImageBitmap(
-                            BitmapFactory.decodeFileDescriptor(
-                                binding.root.context.contentResolver.openFileDescriptor(
-                                    Uri.parse(it.image), "r"
-                                )?.fileDescriptor
-                            )
+                            ImageUtils.uriToBitmap(binding.root.context, Uri.parse(it.image))
                         )
+                        binding.mainImage.visibility = View.VISIBLE
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }

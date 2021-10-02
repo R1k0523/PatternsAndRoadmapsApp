@@ -24,6 +24,7 @@ import dev.bandb.graphview.layouts.tree.BuchheimWalkerLayoutManager
 import dev.bandb.graphview.layouts.tree.TreeEdgeDecoration
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.RoadmapFragmentBinding
+import ru.boringowl.parapp.presentation.utils.ImageUtils
 import ru.boringowl.parapp.presentation.view.posts.adapters.RoadmapTreeAdapter
 import ru.boringowl.parapp.presentation.viewmodel.factory.RoadmapViewModelFactory
 import ru.boringowl.parapp.presentation.viewmodel.posts.RoadmapViewModel
@@ -87,13 +88,11 @@ class RoadmapFragment : Fragment() {
                 }
                 if (it.image != null) {
                     try {
+
                         binding.mainImage.setImageBitmap(
-                            BitmapFactory.decodeFileDescriptor(
-                                binding.root.context.contentResolver.openFileDescriptor(
-                                    Uri.parse(it.image), "r"
-                                )?.fileDescriptor
-                            )
+                            ImageUtils.uriToBitmap(requireContext(), Uri.parse(it.image))
                         )
+                        binding.mainImage.visibility = View.VISIBLE
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }

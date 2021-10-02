@@ -17,6 +17,7 @@ import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.AddNoteFragmentBinding
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.presentation.utils.FileUtils
+import ru.boringowl.parapp.presentation.utils.ImageUtils
 import ru.boringowl.parapp.presentation.view.posts.adapters.AddSectionListAdapter
 import ru.boringowl.parapp.presentation.view.posts.adapters.DocsListAdapter
 import ru.boringowl.parapp.presentation.viewmodel.posts.AddNoteViewModel
@@ -108,11 +109,9 @@ class AddNoteFragment : Fragment() {
 
     private fun renewImage() {
         val uri = Uri.parse(viewModel.image.value)
+
         binding.mainImage.setImageBitmap(
-            BitmapFactory.decodeFileDescriptor(
-                requireContext().contentResolver.openFileDescriptor(
-                    uri, "r")?.fileDescriptor
-            )
+            ImageUtils.uriToBitmap(requireContext(), uri)
         )
         binding.mainImage.visibility = View.VISIBLE
     }
