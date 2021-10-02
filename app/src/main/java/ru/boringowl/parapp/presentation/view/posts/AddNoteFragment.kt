@@ -86,7 +86,7 @@ class AddNoteFragment : Fragment() {
         binding.recyclerViewFiles.apply {
             this.layoutManager = LinearLayoutManager(context)
             this.setHasFixedSize(false)
-            this.adapter =  DocsListAdapter(true)
+            this.adapter =  DocsListAdapter(true, null, context)
         }
         binding.buttonFile.setOnClickListener {
             openFile()

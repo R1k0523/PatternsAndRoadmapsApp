@@ -15,7 +15,7 @@ class FileUtils {
                 cursor?.close()
                 return fileName
             } catch (e: Exception) {
-                throw e
+                return null
             }
         }
     }

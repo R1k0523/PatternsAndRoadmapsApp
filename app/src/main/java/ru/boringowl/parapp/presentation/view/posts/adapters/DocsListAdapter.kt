@@ -16,13 +16,15 @@ import ru.boringowl.parapp.databinding.DocItemBinding
 import ru.boringowl.parapp.presentation.utils.FileUtils
 
 
-class DocsListAdapter(var isEditable: Boolean, var uriStrings : List<String>? = null) :
+class DocsListAdapter(var isEditable: Boolean, var uriStrings : List<String>? = null, context: Context) :
     RecyclerView.Adapter<DocsListAdapter.DocViewHolder>() {
     var data : ArrayList<Uri> = arrayListOf()
 
     init {
         uriStrings?.forEach {
-            data.add(Uri.parse(it))
+            val uri = Uri.parse(it)
+            if (FileUtils.getFileName(context, uri) != null)
+                data.add(uri)
         }
     }
 
@@ -78,7 +80,7 @@ fun setRecyclerDocs(recyclerView: RecyclerView, docItems: List<String>?, context
         recyclerView.also {
             it.layoutManager = LinearLayoutManager(context)
             it.setHasFixedSize(true)
-            it.adapter = DocsListAdapter(false, docItems)
+            it.adapter = DocsListAdapter(false, docItems, context)
         }
     }
 }
