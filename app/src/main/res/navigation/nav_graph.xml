@@ -25,6 +25,7 @@
             app:destination="@id/noteFragment">
         </action>
         <deepLink app:uri="https://parapp.jun/notes" />
+        <deepLink app:uri="app://parapp.jun/notes" />
     </fragment>
     <fragment
         android:id="@+id/addNoteFragment"
@@ -45,6 +46,7 @@
             android:id="@+id/action_patternsFragment_to_patternFragment"
             app:destination="@id/patternFragment" />
         <deepLink app:uri="https://parapp.jun/patterns" />
+        <deepLink app:uri="app://parapp.jun/patterns" />
     </fragment>
     <fragment
         android:id="@+id/patternFragment"

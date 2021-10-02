@@ -40,43 +40,47 @@ class NoteFragment : Fragment() {
         viewModel.note.observe(viewLifecycleOwner, {
             if (it != null) {
                 binding.note = it
+                if (it.docs == null) {
+                    binding.files.visibility = View.GONE
+                } else if (it.docs != null) {
+                    if (it.docs!!.isEmpty())
+                        binding.files.visibility = View.GONE
+                }
+                it.postCategories.forEach { text ->
+                    val textview = TextView(context).also {tv ->
+                        tv.text = text
+                        tv.textSize = 12f
+                        tv.minEms = 5
+                        tv.gravity = Gravity.CENTER
+                        tv.setPadding(8, 8, 8, 8)
+                        tv.setBackgroundResource(R.drawable.category_shape)
+                        tv.setTextColor(Color.BLACK)
+                        val params = RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.WRAP_CONTENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT
+                        )
+                        params.setMargins(4, 0, 4, 0)
+                        tv.layoutParams = params
+                    }
+                    binding.categories.addView(textview)
+                }
+                if (it.image != null) {
+                    try {
+                        binding.mainImage.setImageBitmap(
+                            BitmapFactory.decodeFileDescriptor(
+                                binding.root.context.contentResolver.openFileDescriptor(
+                                    Uri.parse(it.image), "r"
+                                )?.fileDescriptor
+                            )
+                        )
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
             } else {
                 findNavController().navigate(NoteFragmentDirections.actionNoteFragmentToNotesListFragment())
             }
-            if (it.docs!!.isEmpty()) {
-                binding.files.visibility = View.GONE
-            }
-            it.postCategories.forEach { text ->
-                val textview = TextView(context).also {tv ->
-                    tv.text = text
-                    tv.textSize = 12f
-                    tv.minEms = 5
-                    tv.gravity = Gravity.CENTER
-                    tv.setPadding(8, 8, 8, 8)
-                    tv.setBackgroundResource(R.drawable.category_shape)
-                    tv.setTextColor(Color.BLACK)
-                    val params = RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT
-                    )
-                    params.setMargins(4, 0, 4, 0)
-                    tv.layoutParams = params
-                }
-                binding.categories.addView(textview)
-            }
-            if (it.image != null) {
-                try {
-                    binding.mainImage.setImageBitmap(
-                        BitmapFactory.decodeFileDescriptor(
-                            binding.root.context.contentResolver.openFileDescriptor(
-                                Uri.parse(it.image), "r"
-                            )?.fileDescriptor
-                        )
-                    )
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
+
         })
         binding.titleSection.setOnClickListener {
             if (binding.isSectionOpened == null) {
@@ -117,5 +121,6 @@ class NoteFragment : Fragment() {
         else
             R.drawable.ic_round_keyboard_arrow_down_24
     }
+
 }
 

@@ -7,6 +7,7 @@ import android.graphics.CornerPathEffect
 import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.gson.Gson
 import dev.bandb.graphview.layouts.tree.BuchheimWalkerConfiguration
 import dev.bandb.graphview.layouts.tree.BuchheimWalkerLayoutManager
 import dev.bandb.graphview.layouts.tree.TreeEdgeDecoration
@@ -65,40 +67,41 @@ class RoadmapFragment : Fragment() {
                 val adapter = RoadmapTreeAdapter(it.root)
                 adapter.drawTree()
                 binding.recycler.adapter = adapter
+                it.postCategories.forEach { text ->
+                    val textview = TextView(context).also { tv ->
+                        tv.text = text
+                        tv.textSize = 12f
+                        tv.minEms = 5
+                        tv.gravity = Gravity.CENTER
+                        tv.setPadding(8, 8, 8, 8)
+                        tv.setBackgroundResource(R.drawable.category_shape)
+                        tv.setTextColor(Color.BLACK)
+                        val params = RelativeLayout.LayoutParams(
+                            RelativeLayout.LayoutParams.WRAP_CONTENT,
+                            RelativeLayout.LayoutParams.WRAP_CONTENT
+                        )
+                        params.setMargins(4, 0, 4, 0)
+                        tv.layoutParams = params
+                    }
+                    binding.categories.addView(textview)
+                }
+                if (it.image != null) {
+                    try {
+                        binding.mainImage.setImageBitmap(
+                            BitmapFactory.decodeFileDescriptor(
+                                binding.root.context.contentResolver.openFileDescriptor(
+                                    Uri.parse(it.image), "r"
+                                )?.fileDescriptor
+                            )
+                        )
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
             } else {
                 findNavController().navigate(RoadmapFragmentDirections.actionRoadmapFragmentToNotesListFragment())
             }
-            it.postCategories.forEach { text ->
-                val textview = TextView(context).also { tv ->
-                    tv.text = text
-                    tv.textSize = 12f
-                    tv.minEms = 5
-                    tv.gravity = Gravity.CENTER
-                    tv.setPadding(8, 8, 8, 8)
-                    tv.setBackgroundResource(R.drawable.category_shape)
-                    tv.setTextColor(Color.BLACK)
-                    val params = RelativeLayout.LayoutParams(
-                        RelativeLayout.LayoutParams.WRAP_CONTENT,
-                        RelativeLayout.LayoutParams.WRAP_CONTENT
-                    )
-                    params.setMargins(4, 0, 4, 0)
-                    tv.layoutParams = params
-                }
-                binding.categories.addView(textview)
-            }
-            if (it.image != null) {
-                try {
-                    binding.mainImage.setImageBitmap(
-                        BitmapFactory.decodeFileDescriptor(
-                            binding.root.context.contentResolver.openFileDescriptor(
-                                Uri.parse(it.image), "r"
-                            )?.fileDescriptor
-                        )
-                    )
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
+
         })
         binding.shareImage.setOnClickListener {
             if (viewModel.roadmap.value != null) {
