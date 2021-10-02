@@ -2,11 +2,7 @@ package ru.boringowl.parapp.presentation.view.posts.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.database.Cursor
 import android.net.Uri
-import android.os.Build
-import android.provider.OpenableColumns
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
@@ -21,11 +17,7 @@ class DocsListAdapter(var isEditable: Boolean, var uriStrings : List<String>? = 
     var data : ArrayList<Uri> = arrayListOf()
 
     init {
-        uriStrings?.forEach {
-            val uri = Uri.parse(it)
-            if (FileUtils.getFileName(context, uri) != null)
-                data.add(uri)
-        }
+        data = FileUtils.stringsToUriList(uriStrings, context)
     }
 
     override fun getItemCount(): Int {

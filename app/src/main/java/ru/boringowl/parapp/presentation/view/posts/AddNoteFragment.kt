@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.provider.DocumentsContract
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,16 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.AddNoteFragmentBinding
 import ru.boringowl.parapp.domain.model.posts.notes.Note
+import ru.boringowl.parapp.presentation.utils.FileUtils
 import ru.boringowl.parapp.presentation.view.posts.adapters.AddSectionListAdapter
 import ru.boringowl.parapp.presentation.view.posts.adapters.DocsListAdapter
 import ru.boringowl.parapp.presentation.viewmodel.posts.AddNoteViewModel
 import java.text.SimpleDateFormat
 import java.util.*
-import android.app.Activity
-import android.util.Log
-
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 
 
 class AddNoteFragment : Fragment() {
@@ -92,14 +87,14 @@ class AddNoteFragment : Fragment() {
             openFile()
         }
         binding.addPhotoButton.setOnClickListener {
-            renewPhoto()
+            setImage()
         }
         binding.mainImage.setOnLongClickListener {
             viewModel.setImage(null)
             true
         }
         binding.mainImage.setOnClickListener {
-            renewPhoto()
+            setImage()
         }
         return binding.root
     }
@@ -111,7 +106,7 @@ class AddNoteFragment : Fragment() {
             R.drawable.ic_round_keyboard_arrow_down_24
     }
 
-    private fun setPhoto() {
+    private fun renewImage() {
         val uri = Uri.parse(viewModel.image.value)
         binding.mainImage.setImageBitmap(
             BitmapFactory.decodeFileDescriptor(
@@ -122,49 +117,22 @@ class AddNoteFragment : Fragment() {
         binding.mainImage.visibility = View.VISIBLE
     }
 
-    private fun renewPhoto() {
-        requireActivity().activityResultRegistry.register(
-            "key",
-            ActivityResultContracts.OpenDocument()
-        ) { result ->
-            if (result != null) {
-                requireActivity().applicationContext.contentResolver
-                    .takePersistableUriPermission(result, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                binding.addPhotoButton.visibility = View.GONE
-                viewModel.setImage(result.toString())
-            }
-        }.launch(arrayOf("image/*"))
+    private fun setImage() {
+        FileUtils.getFile(requireActivity(), arrayOf("image/*")) { result ->
+            binding.addPhotoButton.visibility = View.GONE
+            viewModel.setImage(result.toString())
+        }
     }
 
-    private fun addFile() {
-        requireActivity().activityResultRegistry.register(
-            "key",
-            ActivityResultContracts.OpenDocument()
-        ) { result ->
-            if (result != null) {
-                requireActivity().applicationContext.contentResolver
-                    .takePersistableUriPermission(result, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                (binding.recyclerViewFiles.adapter as DocsListAdapter).data.add(result)
-                (binding.recyclerViewFiles.adapter as DocsListAdapter).notifyDataSetChanged()
+    private fun openFile() {
+        FileUtils.getFile(requireActivity(), arrayOf("application/pdf", "text/*", "image/*")) { result ->
+            (binding.recyclerViewFiles.adapter as DocsListAdapter).apply {
+                this.data.add(result)
+                this.notifyDataSetChanged()
             }
-        }.launch(arrayOf("*/*"))
+        }
     }
-    fun openFile() {
-        requireActivity().activityResultRegistry.register(
-            "key",
-            ActivityResultContracts.OpenDocument()
-        ) { result ->
-            if (result != null) {
-                requireActivity().applicationContext.contentResolver
-                    .takePersistableUriPermission(result, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                (binding.recyclerViewFiles.adapter as DocsListAdapter).data.add(result)
-                (binding.recyclerViewFiles.adapter as DocsListAdapter).notifyDataSetChanged()
-            }
-        }.launch(arrayOf("application/pdf", "text/*", "image/*"))
 
-
-
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(AddNoteViewModel::class.java)
@@ -174,7 +142,7 @@ class AddNoteFragment : Fragment() {
                 binding.addPhotoButton.visibility = View.VISIBLE
                 binding.mainImage.visibility = View.GONE
             } else
-                setPhoto()
+                renewImage()
         })
     }
 

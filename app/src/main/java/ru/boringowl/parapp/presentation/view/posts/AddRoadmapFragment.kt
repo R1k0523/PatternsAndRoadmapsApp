@@ -14,12 +14,10 @@ import ru.boringowl.parapp.domain.model.posts.roadmaps.RoadmapNode
 import ru.boringowl.parapp.presentation.viewmodel.posts.AddRoadmapViewModel
 import java.text.SimpleDateFormat
 import java.util.*
-import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
-import android.util.Log
 
-import androidx.activity.result.contract.ActivityResultContracts.OpenDocument
+import ru.boringowl.parapp.presentation.utils.FileUtils
 
 
 class AddRoadmapFragment : Fragment() {
@@ -50,19 +48,19 @@ class AddRoadmapFragment : Fragment() {
             }
         }
         binding.addPhotoButton.setOnClickListener {
-            renewPhoto()
+            setImage()
         }
         binding.mainImage.setOnLongClickListener {
             viewModel.setImage(null)
             true
         }
         binding.mainImage.setOnClickListener {
-            renewPhoto()
+            setImage()
         }
         return binding.root
     }
 
-    private fun setPhoto() {
+    private fun renewImage() {
         val uri = Uri.parse(viewModel.image.value)
         binding.mainImage.setImageBitmap(
             BitmapFactory.decodeFileDescriptor(
@@ -73,15 +71,11 @@ class AddRoadmapFragment : Fragment() {
         binding.mainImage.visibility = View.VISIBLE
     }
 
-    private fun renewPhoto() {
-        requireActivity().activityResultRegistry.register("key", OpenDocument()) { result ->
-            if (result != null) {
-                requireActivity().applicationContext.contentResolver
-                    .takePersistableUriPermission(result, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                binding.addPhotoButton.visibility = View.GONE
-                viewModel.setImage(result.toString())
-            }
-        }.launch(arrayOf("image/*"))
+    private fun setImage() {
+        FileUtils.getFile(requireActivity(), arrayOf("image/*")) { result ->
+            binding.addPhotoButton.visibility = View.GONE
+            viewModel.setImage(result.toString())
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,7 +87,7 @@ class AddRoadmapFragment : Fragment() {
                 binding.addPhotoButton.visibility = View.VISIBLE
                 binding.mainImage.visibility = View.GONE
             } else
-                setPhoto()
+                renewImage()
         })
     }
 
