@@ -49,7 +49,9 @@ class DocsListAdapter(var isEditable: Boolean, var uriStrings : List<String>? = 
                 putExtra(Intent.EXTRA_STREAM, uri)
                 type = "*/*"
             }
-            holder.binding.root.context.startActivity(Intent.createChooser(shareIntent, "Поделиться"))
+            holder.binding.root.context.startActivity(
+                Intent.createChooser(shareIntent, "Поделиться")
+            )
         }
     }
 

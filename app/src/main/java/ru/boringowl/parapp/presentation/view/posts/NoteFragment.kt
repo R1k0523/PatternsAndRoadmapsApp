@@ -97,6 +97,7 @@ class NoteFragment : Fragment() {
             binding.isFileOpened = isFileOpened
             binding.fileArrow.setImageResource(arrow(isFileOpened))
         }
+
         binding.shareImage.setOnClickListener {
             if (viewModel.note.value != null) {
                 val sendIntent = Intent()

@@ -57,6 +57,7 @@
             app:argType="integer"
             android:defaultValue="0" />
         <deepLink app:uri="https://parapp.jun/pattern/{patternId}" />
+        <deepLink app:uri="app://parapp.jun/pattern/{patternId}" />
     </fragment>
     <fragment
         android:id="@+id/noteFragment"
