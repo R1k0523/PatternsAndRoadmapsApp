@@ -5,6 +5,7 @@ import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.boringowl.parapp.databinding.DocItemBinding
+import ru.boringowl.parapp.presentation.utils.FileUtils
 
 
 class DocsListAdapter(var isEditable: Boolean, var uriStrings : List<String>? = null) :
@@ -39,8 +41,7 @@ class DocsListAdapter(var isEditable: Boolean, var uriStrings : List<String>? = 
 
     override fun onBindViewHolder(holder: DocViewHolder, position: Int) {
         val uri = data[position]
-        Log.d("Uri name", uri.toString())
-        holder.binding.text.text = "Файл $position"
+        holder.binding.text.text = FileUtils.getFileName(holder.binding.root.context, uri)
         if (isEditable) {
             holder.binding.root.setOnLongClickListener {
                 data -= data[position]
@@ -49,12 +50,17 @@ class DocsListAdapter(var isEditable: Boolean, var uriStrings : List<String>? = 
             }
         }
         holder.binding.root.setOnClickListener {
-            val fd = holder.binding.root.context.contentResolver.openOutputStream(uri, "r")
-            val fileIntent = Intent(Intent.ACTION_VIEW, uri)
-            //TODO ContentResolverUriToFileUri
-            holder.binding.root.context.startActivity(fileIntent)
+            val shareIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_STREAM, uri)
+                type = "*/*"
+            }
+            holder.binding.root.context.startActivity(Intent.createChooser(shareIntent, "Поделиться"))
         }
     }
+
+
+
     fun dataToString(): List<String> {
         val lists = arrayListOf<String>()
         data.forEach {

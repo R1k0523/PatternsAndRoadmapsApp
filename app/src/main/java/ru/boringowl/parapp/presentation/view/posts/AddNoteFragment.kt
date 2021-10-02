@@ -147,7 +147,7 @@ class AddNoteFragment : Fragment() {
                 (binding.recyclerViewFiles.adapter as DocsListAdapter).data.add(result)
                 (binding.recyclerViewFiles.adapter as DocsListAdapter).notifyDataSetChanged()
             }
-        }.launch(arrayOf("application/pdf", "text/*", "image/*"))
+        }.launch(arrayOf("*/*"))
     }
     fun openFile() {
         requireActivity().activityResultRegistry.register(
