@@ -1,6 +1,7 @@
 package ru.boringowl.parapp.presentation.repository
 
 import android.app.Application
+import org.koin.java.KoinJavaComponent.inject
 import ru.boringowl.parapp.presentation.repository.mock.NotesMockRepository
 import ru.boringowl.parapp.presentation.repository.mock.PatternsMockRepository
 import ru.boringowl.parapp.presentation.repository.mock.RoadmapsMockRepository
@@ -10,31 +11,11 @@ import ru.boringowl.parapp.presentation.repository.room.RoadmapsRepositoryImpl
 
 class Repository {
     companion object {
-        var patternsRep: PatternsRepository? = null
-        var notesRep: NotesRepository? = null
-        var roadmapsRep: RoadmapsRepository? = null
+        val patternsRep: PatternsRepository by inject(PatternsRepository::class.java)
+        val notesRep: NotesRepository by inject(NotesRepository::class.java)
+        val roadmapsRep: RoadmapsRepository by inject(RoadmapsRepository::class.java)
+        val newsRepository: NewsRepository by inject(NewsRepository::class.java)
 
-        fun initRepository() {
-            if (patternsRep == null) {
-                patternsRep = PatternsMockRepository()
-            }
-            if (notesRep == null) {
-                notesRep = NotesMockRepository()
-            }
-            if (roadmapsRep == null) {
-                roadmapsRep = RoadmapsMockRepository()
-            }
-        }
-        fun initRepository(application: Application) {
-            if (patternsRep == null) {
-                patternsRep = PatternsRepositoryImpl(application)
-            }
-            if (notesRep == null) {
-                notesRep = NotesRepositoryImpl(application)
-            }
-            if (roadmapsRep == null) {
-                roadmapsRep = RoadmapsRepositoryImpl(application)
-            }
-        }
+
     }
 }

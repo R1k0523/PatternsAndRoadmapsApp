@@ -12,6 +12,6 @@ class PatternViewModel(patternId: Int) : ViewModel() {
         get() = _patternInfo
 
     init {
-        _patternInfo.value = Repository.patternsRep?.getPattern(patternId)
+        _patternInfo.value = Repository.patternsRep.getPattern(patternId)
     }
 }

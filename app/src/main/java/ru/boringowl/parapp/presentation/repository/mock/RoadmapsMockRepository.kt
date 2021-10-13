@@ -117,7 +117,7 @@ class RoadmapsMockRepository : RoadmapsRepository {
         return data as LiveData<List<T>>
     }
 
-    override fun <T : Roadmap> addRoadmap(roadmap: T) {
+    override suspend fun <T : Roadmap> addRoadmap(roadmap: T) {
         roadmap.id = list.size
         list = list + roadmap
         data.value = list
@@ -131,7 +131,7 @@ class RoadmapsMockRepository : RoadmapsRepository {
         return Roadmap(0, "", null, "", listOf(""), "", RoadmapNode("", "", listOf())) as T
     }
 
-    override fun <T : Roadmap> deleteRoadmap(roadmap: T) {
+    override suspend fun <T : Roadmap> deleteRoadmap(roadmap: T) {
         list = list - roadmap
         data.value = list
     }

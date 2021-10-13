@@ -20,27 +20,8 @@ abstract class MyDatabase : RoomDatabase() {
     abstract fun roadmapsDAO(): RoadmapsDAO
 
     companion object {
-        @Volatile
-        private var instance: MyDatabase? = null
-
         private const val NUMBER_OF_THREADS = 4
         val databaseWriteExecutor: ExecutorService = Executors.newFixedThreadPool(NUMBER_OF_THREADS)
-
-        fun getInstance(context: Context): MyDatabase {
-            return instance ?: synchronized(this) {
-                instance ?: buildDatabase(context).also { instance = it }
-            }
-        }
-        private fun buildDatabase(context: Context): MyDatabase {
-            return Room.databaseBuilder(
-                context.applicationContext,
-                MyDatabase::class.java,
-                "parapp_db1"
-            )
-                .fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build()
-        }
     }
 
 }

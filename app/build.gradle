@@ -14,7 +14,6 @@ android {
         targetSdk 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -28,6 +27,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    buildTypes.each {
+        it.buildConfigField "String", "NEWS_API_KEY", "\"\""
+        it.buildConfigField "String", "NEWS_BASE_URL", "\"https://newsapi.org/\""
     }
 
     compileOptions {
@@ -74,6 +77,20 @@ dependencies {
     implementation 'com.otaliastudios:zoomlayout:1.8.0'
     implementation 'dev.bandb.graphview:graphview:0.8.1'
 
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    implementation 'androidx.paging:paging-runtime-ktx:3.0.1'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //koin
+    implementation "org.koin:koin-core:2.1.5"
+    implementation "org.koin:koin-android:2.1.5"
+    implementation "org.koin:koin-androidx-viewmodel:2.1.5"
+    implementation "org.koin:koin-androidx-scope:2.1.5"
 
     //Libs for testing
     testImplementation 'junit:junit:4.13.2'

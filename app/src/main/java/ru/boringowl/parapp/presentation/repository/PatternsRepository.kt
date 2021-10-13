@@ -5,7 +5,7 @@ import ru.boringowl.parapp.domain.model.patterns.Pattern
 
 interface PatternsRepository {
     fun <T : Pattern> getAllPatterns(): LiveData<List<T>>
-    fun <T : Pattern> addPattern(pattern: T)
+    suspend fun <T : Pattern> addPattern(pattern: T)
     fun <T : Pattern> getPattern(patternId: Int): T
-    fun <T : Pattern> deletePattern(pattern: T)
+    suspend fun <T : Pattern> deletePattern(pattern: T)
 }

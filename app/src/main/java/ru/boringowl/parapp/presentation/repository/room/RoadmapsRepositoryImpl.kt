@@ -2,17 +2,18 @@ package ru.boringowl.parapp.presentation.repository.room
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import org.koin.java.KoinJavaComponent.inject
 import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
 import ru.boringowl.parapp.presentation.repository.room.dao.RoadmapsDAO
 import ru.boringowl.parapp.presentation.repository.RoadmapsRepository
 import ru.boringowl.parapp.presentation.repository.model.notes.RoadmapDTO
 
-class RoadmapsRepositoryImpl(application: Application) : RoadmapsRepository {
+class RoadmapsRepositoryImpl : RoadmapsRepository {
     private var roadmapsDAO: RoadmapsDAO
     private var allRoadmaps: LiveData<List<RoadmapDTO>>
 
     init {
-        val db: MyDatabase = MyDatabase.getInstance(application)
+        val db: MyDatabase by inject(MyDatabase::class.java)
         roadmapsDAO = db.roadmapsDAO()
         allRoadmaps =  roadmapsDAO.getAllRoadmaps()
     }
@@ -21,16 +22,16 @@ class RoadmapsRepositoryImpl(application: Application) : RoadmapsRepository {
         return allRoadmaps as LiveData<List<T>>
     }
 
-    override fun <T : Roadmap> addRoadmap(roadmap: T) {
-        MyDatabase.databaseWriteExecutor.execute { roadmapsDAO.addRoadmap(RoadmapDTO(roadmap)) }
+    override suspend fun <T : Roadmap> addRoadmap(roadmap: T) {
+        roadmapsDAO.addRoadmap(RoadmapDTO(roadmap))
     }
 
     override fun <T : Roadmap> getRoadmap(roadmapId: Int): T {
         return roadmapsDAO.getRoadmap(roadmapId) as T
     }
 
-    override fun <T : Roadmap> deleteRoadmap(roadmap: T) {
-        MyDatabase.databaseWriteExecutor.execute { roadmapsDAO.deleteRoadmap(roadmap as RoadmapDTO) }
+    override suspend fun <T : Roadmap> deleteRoadmap(roadmap: T) {
+        roadmapsDAO.deleteRoadmap(roadmap as RoadmapDTO)
     }
 
 }

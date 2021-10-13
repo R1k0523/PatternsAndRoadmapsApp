@@ -3,6 +3,8 @@ package ru.boringowl.parapp.presentation.viewmodel.posts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
 import ru.boringowl.parapp.presentation.repository.Repository
 
@@ -16,6 +18,8 @@ class AddRoadmapViewModel : ViewModel() {
     }
 
     fun save(roadmap: Roadmap) {
-        Repository.roadmapsRep!!.addRoadmap(roadmap)
+        viewModelScope.launch {
+            Repository.roadmapsRep.addRoadmap(roadmap)
+        }
     }
 }

@@ -5,7 +5,7 @@ import ru.boringowl.parapp.domain.model.posts.notes.Note
 
 interface NotesRepository {
     fun <T : Note> getAllNotes(): LiveData<List<T>>
-    fun <T : Note> addNote(note: T)
+    suspend fun <T : Note> addNote(note: T)
     fun <T : Note> getNote(noteId: Int): T
-    fun <T : Note> deleteNote(note: T)
+    suspend fun <T : Note> deleteNote(note: T)
 }

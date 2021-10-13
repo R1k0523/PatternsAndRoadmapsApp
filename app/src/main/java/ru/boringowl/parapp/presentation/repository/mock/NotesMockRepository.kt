@@ -75,7 +75,7 @@ class NotesMockRepository : NotesRepository {
         return data as LiveData<List<T>>
     }
 
-    override fun <T : Note> addNote(note: T) {
+    override suspend fun <T : Note> addNote(note: T) {
         note.id = list.size
         list = list + note
         data.value = list
@@ -89,7 +89,7 @@ class NotesMockRepository : NotesRepository {
         return Note(0, "", null,"", listOf(""), "", listOf()) as T
     }
 
-    override fun <T : Note> deleteNote(note: T) {
+    override suspend fun <T : Note> deleteNote(note: T) {
         list = list - note
         data.value = list
     }

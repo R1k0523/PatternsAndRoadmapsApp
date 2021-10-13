@@ -1,9 +1,7 @@
 package ru.boringowl.parapp.presentation.viewmodel.posts
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import kotlinx.coroutines.launch
 import ru.boringowl.parapp.domain.model.posts.Post
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
@@ -44,17 +42,26 @@ class PostsListViewModel : ViewModel() {
 
     fun deletePost(post: Post) {
         if (post is Roadmap) {
-            Repository.roadmapsRep!!.deleteRoadmap(post)
+            viewModelScope.launch {
+                Repository.roadmapsRep.deleteRoadmap(post)
+            }
+
         } else if (post is Note){
-            Repository.notesRep!!.deleteNote(post)
+            viewModelScope.launch {
+                Repository.notesRep.deleteNote(post)
+            }
         }
     }
 
     fun addNote(note: Note) {
-        Repository.notesRep!!.addNote(note)
+        viewModelScope.launch {
+            Repository.notesRep.addNote(note)
+        }
     }
     fun addRoadmap(roadmap: Roadmap) {
-        Repository.roadmapsRep!!.addRoadmap(roadmap)
+        viewModelScope.launch {
+            Repository.roadmapsRep.addRoadmap(roadmap)
+        }
     }
 
 }

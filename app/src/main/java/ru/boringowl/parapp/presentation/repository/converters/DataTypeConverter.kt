@@ -4,6 +4,7 @@ import androidx.room.TypeConverter
 import com.google.gson.reflect.TypeToken
 
 import com.google.gson.Gson
+import org.koin.java.KoinJavaComponent.inject
 import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
 import ru.boringowl.parapp.domain.model.posts.roadmaps.RoadmapNode
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
@@ -13,7 +14,7 @@ import java.util.*
 
 
 object DataTypeConverter {
-    private val gson = Gson()
+    private val gson by inject(Gson::class.java)
 
     @TypeConverter
     fun stringToNoteLinksSectionDTO(data: String?): List<NoteSection> {

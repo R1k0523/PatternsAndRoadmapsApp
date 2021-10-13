@@ -227,7 +227,7 @@ class PatternsMockRepository : PatternsRepository {
         return data as LiveData<List<T>>
     }
 
-    override fun <T : Pattern> addPattern(pattern: T) {
+    override suspend fun <T : Pattern> addPattern(pattern: T) {
         pattern.id = list.size
         list = list + pattern
         data.value = list
@@ -242,7 +242,7 @@ class PatternsMockRepository : PatternsRepository {
             listOf(), Pattern.PatternType.UNKNOWN, 0) as T
     }
 
-    override fun <T : Pattern> deletePattern(pattern: T) {
+    override suspend fun <T : Pattern> deletePattern(pattern: T) {
         list = list - pattern
         data.value = list
     }

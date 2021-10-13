@@ -1,13 +1,11 @@
 package ru.boringowl.parapp.presentation.view.posts
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.CornerPathEffect
 import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.gson.Gson
 import dev.bandb.graphview.layouts.tree.BuchheimWalkerConfiguration
 import dev.bandb.graphview.layouts.tree.BuchheimWalkerLayoutManager
 import dev.bandb.graphview.layouts.tree.TreeEdgeDecoration
@@ -28,7 +25,6 @@ import ru.boringowl.parapp.presentation.utils.ImageUtils
 import ru.boringowl.parapp.presentation.view.posts.adapters.RoadmapTreeAdapter
 import ru.boringowl.parapp.presentation.viewmodel.factory.RoadmapViewModelFactory
 import ru.boringowl.parapp.presentation.viewmodel.posts.RoadmapViewModel
-import java.lang.Exception
 
 
 class RoadmapFragment : Fragment() {

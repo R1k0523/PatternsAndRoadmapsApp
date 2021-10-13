@@ -3,6 +3,8 @@ package ru.boringowl.parapp.presentation.viewmodel.posts
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
 import ru.boringowl.parapp.presentation.repository.Repository
@@ -23,6 +25,9 @@ class AddNoteViewModel : ViewModel() {
     }
 
     fun save(note: Note) {
-        Repository.notesRep!!.addNote(note)
+        viewModelScope.launch {
+            Repository.notesRep.addNote(note)
+        }
+
     }
 }
