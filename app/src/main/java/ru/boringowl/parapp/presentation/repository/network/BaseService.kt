@@ -1,8 +1,7 @@
-package ru.boringowl.parapp.presentation.repository.network.itnews
+package ru.boringowl.parapp.presentation.repository.network
 
 import retrofit2.HttpException
 import retrofit2.Response
-import ru.boringowl.parapp.domain.model.news.MyResult
 import ru.boringowl.parapp.presentation.repository.network.exceptions.*
 import java.net.HttpURLConnection
 import java.net.SocketTimeoutException

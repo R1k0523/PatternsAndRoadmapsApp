@@ -1,4 +1,4 @@
-package ru.boringowl.parapp.domain.model.news
+package ru.boringowl.parapp.presentation.repository.network.itnews.response
 
 
 

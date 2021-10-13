@@ -111,7 +111,9 @@ class NoteFragment : Fragment() {
                 startActivity(shareIntent)
             }
         }
-
+        viewModel.vacancies.observe(viewLifecycleOwner) {
+            binding.vacancies = it
+        }
     }
 
     private fun arrow(isOpened: Boolean): Int {

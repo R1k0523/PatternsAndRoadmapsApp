@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ru.boringowl.parapp.databinding.NewsListItemBinding
-import ru.boringowl.parapp.domain.model.news.Post
+import ru.boringowl.parapp.presentation.repository.network.itnews.response.Post
 
 
 class NewsAdapter(val context: Context)
     : PagingDataAdapter<Post, NewsAdapter.PostViewHolder>(
-    MovieModelComparator
+    NewsComparator
 ) {
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post: Post? = getItem(position)
@@ -54,7 +54,7 @@ class NewsAdapter(val context: Context)
 
     
     companion object {
-        private val MovieModelComparator = object : DiffUtil.ItemCallback<Post>() {
+        private val NewsComparator = object : DiffUtil.ItemCallback<Post>() {
             override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
                 return (oldItem.url == newItem.url)
             }

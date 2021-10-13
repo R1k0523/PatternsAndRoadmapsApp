@@ -7,6 +7,11 @@
             name="note"
             type="ru.boringowl.parapp.domain.model.posts.notes.Note" />
         <import type="android.view.View"/>
+        <import type="java.util.List"/>
+        <import type="ru.boringowl.parapp.presentation.repository.network.vacancies.response.Vacancy"/>
+        <variable
+            name="vacancies"
+            type="List&lt;Vacancy>" />
         <variable
             name="isSectionOpened"
             type="Boolean" />
@@ -276,6 +281,25 @@
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent" >
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:context="@{context}"
+                            app:vacancies="@{vacancies}"
+                            android:orientation="horizontal"
+                            android:scrollbars="horizontal" />
+                    </LinearLayout>
+                </HorizontalScrollView>
 
             </LinearLayout>
         </ScrollView>

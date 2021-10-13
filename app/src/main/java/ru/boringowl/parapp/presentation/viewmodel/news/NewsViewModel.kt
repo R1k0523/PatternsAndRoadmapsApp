@@ -7,7 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.map
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import ru.boringowl.parapp.domain.model.news.Post
+import ru.boringowl.parapp.presentation.repository.network.itnews.response.Post
 import ru.boringowl.parapp.presentation.repository.Repository
 import ru.boringowl.parapp.presentation.repository.network.itnews.paged.NewsPagingSource
 

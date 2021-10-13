@@ -1,7 +1,6 @@
-package ru.boringowl.parapp.presentation.repository
+package ru.boringowl.parapp.presentation.repository.network.itnews
 
-import ru.boringowl.parapp.domain.model.news.MyResult
-import ru.boringowl.parapp.presentation.repository.network.itnews.NewsService
+import ru.boringowl.parapp.presentation.repository.network.MyResult
 import ru.boringowl.parapp.presentation.repository.network.itnews.response.NewsResponse
 
 class NewsRepository(private val service: NewsService) {

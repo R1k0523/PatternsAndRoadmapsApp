@@ -29,8 +29,9 @@ android {
         }
     }
     buildTypes.each {
-        it.buildConfigField "String", "NEWS_API_KEY", "\"\""
+        it.buildConfigField "String", "NEWS_API_KEY", "\"64f550702883415fa70f8abd057de20c\""
         it.buildConfigField "String", "NEWS_BASE_URL", "\"https://newsapi.org/\""
+        it.buildConfigField "String", "HH_BASE_URL", "\"https://api.hh.ru/\""
     }
 
     compileOptions {

@@ -2,8 +2,8 @@ package ru.boringowl.parapp.presentation.repository.network.itnews.paged
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import ru.boringowl.parapp.domain.model.news.Post
-import ru.boringowl.parapp.presentation.repository.NewsRepository
+import ru.boringowl.parapp.presentation.repository.network.itnews.response.Post
+import ru.boringowl.parapp.presentation.repository.network.itnews.NewsRepository
 
 class NewsPagingSource(
     private val repository: NewsRepository
@@ -13,12 +13,12 @@ class NewsPagingSource(
 
         return try {
             val nextPage = params.key ?: 1
-            val movieListResponse = repository.getPopularNews(nextPage)
+            val newsResponse = repository.getPopularNews(nextPage)
 
             LoadResult.Page(
-                data = movieListResponse.articles,
+                data = newsResponse.articles,
                 prevKey = if (nextPage == 1) null else nextPage -  1 ,
-                nextKey = if (nextPage < movieListResponse.totalResults)
+                nextKey = if (nextPage < newsResponse.totalResults)
                     nextPage.plus(1) else null
             )
         }catch (e: Exception){

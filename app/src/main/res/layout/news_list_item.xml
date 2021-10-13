@@ -6,7 +6,7 @@
         <import type="android.view.View"/>
         <variable
             name="newspost"
-            type="ru.boringowl.parapp.domain.model.news.Post" />
+            type="ru.boringowl.parapp.presentation.repository.network.itnews.response.Post" />
         <variable
             name="isOpened"
             type="Boolean" />
