@@ -19,6 +19,10 @@
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/doc_item.xml" value="0.6" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/er.xml" value="0.6" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/link_list_item.xml" value="0.4" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/load_state_view.xml" value="0.536" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/load_state_views.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/news_fragment.xml" value="0.23854166666666668" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/news_list_item.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/note_fragment.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/note_list_item.xml" value="0.4" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/notes_list_fragment.xml" value="0.264" />
@@ -33,6 +37,7 @@
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/roadmap_tree_item_item.xml" value="0.6" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/section_list_item.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/sector_list_item.xml" value="0.4" />
+        <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/layout/vacancy_list_item.xml" value="0.536" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/menu/app_bar_menu.xml" value="0.22447916666666667" />
         <entry key="..\:/AndroidProjects/PatternsAndRoadmapsApp/app/src/main/res/xml/shortcuts.xml" value="0.19429347826086957" />
       </map>

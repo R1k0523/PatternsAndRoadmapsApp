@@ -1,6 +1,8 @@
 package ru.boringowl.parapp.presentation.view.posts.adapters
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
@@ -9,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.boringowl.parapp.databinding.VacancyListItemBinding
 import ru.boringowl.parapp.presentation.repository.network.vacancies.response.Vacancy
 
-class VacancyAdapter(var data : List<Vacancy>) :
+class VacancyAdapter(var data : List<Vacancy>, val context: Context) :
     RecyclerView.Adapter<VacancyAdapter.VacancyViewHolder>() {
 
     override fun getItemCount(): Int {
@@ -28,6 +30,10 @@ class VacancyAdapter(var data : List<Vacancy>) :
     override fun onBindViewHolder(holder: VacancyViewHolder, position: Int) {
         val vacancy = data[position]
         holder.binding.vacancy = vacancy
+        holder.binding.root.setOnClickListener {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(vacancy.alternateUrl))
+            context.startActivity(browserIntent)
+        }
     }
 
 
@@ -41,6 +47,6 @@ fun setRecyclerVacancies(recyclerView: RecyclerView, vacancies: List<Vacancy>?, 
 
             it.layoutManager= LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             it.setHasFixedSize(true)
-            it.adapter =  VacancyAdapter(vacancies)
+            it.adapter =  VacancyAdapter(vacancies, context)
         }
 }
