@@ -16,11 +16,11 @@ val networkModule = module {
     single { headerInterceptor() }
     single { okhttpClient() }
 
-    single(named("retro1")) { retrofitNews(get(), BuildConfig.NEWS_BASE_URL) }
+    single(named("retro1")) { retrofit(get(), BuildConfig.NEWS_BASE_URL) }
     single { apiNewsService(get(named("retro1"))) }
     single { createNewsService(get()) }
 
-    single(named("retro2")) { retrofitNews(get(), BuildConfig.HH_BASE_URL) }
+    single(named("retro2")) { retrofit(get(), BuildConfig.HH_BASE_URL) }
     single { apiVacancyService(get(named("retro2"))) }
     single { createVacancyService(get()) }
 }
@@ -34,7 +34,7 @@ fun apiNewsService(
 ) : NewsAPI =
     retrofit.create(NewsAPI::class.java)
 
-fun retrofitNews(
+fun retrofit(
     okHttpClient: OkHttpClient,
     url: String
 ) : Retrofit =
