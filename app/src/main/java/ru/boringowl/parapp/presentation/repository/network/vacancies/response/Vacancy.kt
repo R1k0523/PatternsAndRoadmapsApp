@@ -9,7 +9,7 @@ data class Vacancy(@SerializedName("area")
                    @SerializedName("employer")
                    val employer: Employer,
                    @SerializedName("salary")
-                   val salary: Salary,
+                   val salary: Salary?,
                    @SerializedName("alternate_url")
                    val alternateUrl: String = "") {
 
@@ -31,7 +31,7 @@ data class Vacancy(@SerializedName("area")
                       val to: Int? = null)
 
     fun salary() : String {
-        return if (salary.from != null)
+        return if (salary != null) if (salary.from != null)
             if (salary.to != null)
                 "${salary.from}-${salary.to} ${salary.currency}"
             else
@@ -41,6 +41,8 @@ data class Vacancy(@SerializedName("area")
                 "до ${salary.to} ${salary.currency}"
             else
                 "Не указана"
+        else
+            "Не указана"
     }
 }
 

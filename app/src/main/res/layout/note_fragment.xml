@@ -200,7 +200,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="@{isSectionOpened ? View.VISIBLE : View.GONE}">
 
                             <androidx.recyclerview.widget.RecyclerView
                                 android:layout_width="match_parent"
@@ -269,12 +269,13 @@
                                 android:id="@+id/recycler_view_files"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                app:context="@{context}"
-                                app:doc_items="@{note.docs}"
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="16dp"
                                 android:layout_marginEnd="16dp"
                                 android:layout_marginBottom="16dp"
+                                android:visibility="visible"
+                                app:context="@{context}"
+                                app:doc_items="@{note.docs}"
                                 tools:listitem="@layout/doc_item" />
 
                         </LinearLayout>
@@ -285,19 +286,19 @@
                 <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp">
+                    android:layout_marginStart="8dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent" >
+                        android:layout_height="match_parent">
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            app:context="@{context}"
-                            app:vacancies="@{vacancies}"
                             android:orientation="horizontal"
-                            android:scrollbars="horizontal" />
+                            android:scrollbars="horizontal"
+                            app:context="@{context}"
+                            app:vacancies="@{vacancies}" />
                     </LinearLayout>
                 </HorizontalScrollView>
 

@@ -20,14 +20,17 @@ class NoteViewModel(noteId: Int) : ViewModel() {
 
     init {
         _note.value = Repository.notesRep.getNote(noteId)
-        val regex = Regex("[A-Z]{1}[A-z\']{1,}")
-        var text = ""
+        val regex = Regex("[A-Z][A-z]+")
+        val query = arrayListOf<String>()
+        var text = _note.value!!.categories() + " "
         _note.value?.sections?.forEach { it ->
-            it.description.split(" ").forEach { str ->
-                if (str.matches(regex))
-                    text.plus(str).plus(" ")
-            }
+            text += it.description
         }
+        regex.findAll(text).iterator().forEach {
+            if (it.value !in query)
+            query.add(it.value)
+        }
+        text = query.joinToString(" OR ")
         viewModelScope.launch {
             val response = Repository.vacancyRepository.getVacancies(text)
             Log.d("VACA", response.items.toString())

@@ -11,7 +11,7 @@ interface HeadHunterAPI {
     @GET("vacancies")
     suspend fun vacancies(
         @Query("text") text: String,
-        @Query("per_page") perPage: Int = 5,
+        @Query("per_page") perPage: Int = 10,
         @Query("page") page: Int = 1,
         @Query("area") areaId: Int = 1, //Москва
         ): Response<VacancyResponse>
