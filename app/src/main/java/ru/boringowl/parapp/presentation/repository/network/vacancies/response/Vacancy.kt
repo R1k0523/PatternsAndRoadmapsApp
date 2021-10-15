@@ -21,9 +21,7 @@ data class Vacancy(@SerializedName("area")
     data class Employer(@SerializedName("name")
                         val name: String = "")
 
-    data class Salary(@SerializedName("gross")
-                      val gross: Boolean = false,
-                      @SerializedName("from")
+    data class Salary(@SerializedName("from")
                       val from: Int? = null,
                       @SerializedName("currency")
                       val currency: String = "",

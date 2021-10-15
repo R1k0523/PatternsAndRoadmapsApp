@@ -19,10 +19,7 @@ class VacancyAdapter(val data : List<Vacancy>, val context: Context) :
         return data.size
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): VacancyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VacancyViewHolder {
         val binding: VacancyListItemBinding =
             VacancyListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return VacancyViewHolder(binding)
@@ -30,14 +27,12 @@ class VacancyAdapter(val data : List<Vacancy>, val context: Context) :
 
     override fun onBindViewHolder(holder: VacancyViewHolder, position: Int) {
         val vacancy = data[position]
-        Log.d("VACS_POS", data.toString()+"_____________")
         holder.binding.vacancy = vacancy
         holder.binding.root.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(vacancy.alternateUrl))
             context.startActivity(browserIntent)
         }
     }
-
 
     class VacancyViewHolder(val binding: VacancyListItemBinding) : RecyclerView.ViewHolder(binding.root)
 }

@@ -1,6 +1,5 @@
 package ru.boringowl.parapp.presentation.di
 
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -13,63 +12,32 @@ import ru.boringowl.parapp.presentation.repository.network.vacancies.HeadHunterA
 import ru.boringowl.parapp.presentation.repository.network.vacancies.VacancyService
 
 val networkModule = module {
-    single { headerInterceptor() }
     single { okhttpClient() }
 
-    single(named("retro1")) {
-        retrofit(get(), BuildConfig.NEWS_BASE_URL)
-    }
-    single { apiNewsService(get(named("retro1"))) }
-    single { createNewsService(get()) }
+    single(named("retro_news")) { retrofit(get(), BuildConfig.NEWS_BASE_URL) }
+    single { apiNews(get(named("retro_news"))) }
+    single { newsService(get()) }
 
-    single(named("retro2")) {
-        retrofit(get(), BuildConfig.HH_BASE_URL)
-    }
-    single { apiVacancyService(get(named("retro2"))) }
-    single { createVacancyService(get()) }
+    single(named("retro_hh")) { retrofit(get(), BuildConfig.HH_BASE_URL) }
+    single { apiVacancy(get(named("retro_hh"))) }
+    single { vacancyService(get()) }
 }
 
-fun createNewsService(
-    api: NewsAPI
-) : NewsService = NewsService(api)
+fun okhttpClient() : OkHttpClient = OkHttpClient.Builder().build()
 
-fun apiNewsService(
-    retrofit: Retrofit
-) : NewsAPI =
-    retrofit.create(NewsAPI::class.java)
-
-fun retrofit(
-    okHttpClient: OkHttpClient,
-    url: String
-) : Retrofit =
+fun retrofit(okHttpClient: OkHttpClient, url: String) : Retrofit =
     Retrofit.Builder()
         .baseUrl(url)
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-fun createVacancyService(
-    api: HeadHunterAPI
-) : VacancyService = VacancyService(api)
+fun apiNews(retrofit: Retrofit) : NewsAPI = retrofit.create(NewsAPI::class.java)
+fun apiVacancy(retrofit: Retrofit) : HeadHunterAPI = retrofit.create(HeadHunterAPI::class.java)
 
-fun apiVacancyService(
-    retrofit: Retrofit
-) : HeadHunterAPI =
-    retrofit.create(HeadHunterAPI::class.java)
+fun newsService(api: NewsAPI) : NewsService = NewsService(api)
+fun vacancyService(api: HeadHunterAPI) : VacancyService = VacancyService(api)
 
 
-fun okhttpClient() : OkHttpClient =
-    OkHttpClient.Builder()
-        .build()
 
-fun headerInterceptor() : Interceptor =
-    Interceptor { chain ->
-        val request = chain.request()
-        val newUrl = request.url().newBuilder()
-            .build()
 
-        val newRequest = request.newBuilder()
-            .url(newUrl)
-            .build()
-        chain.proceed(newRequest)
-    }

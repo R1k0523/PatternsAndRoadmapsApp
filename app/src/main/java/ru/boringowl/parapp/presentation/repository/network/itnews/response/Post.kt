@@ -4,7 +4,6 @@ package ru.boringowl.parapp.presentation.repository.network.itnews.response
 
 data class Post(
     val source : Source,
-    val author : String,
     val title : String,
     val description : String,
     val url : String,
@@ -15,4 +14,8 @@ data class Post(
         val id : String,
         val name : String,
     )
+
+    fun date() : String {
+        return publishedAt.substringBefore("T")
+    }
 }

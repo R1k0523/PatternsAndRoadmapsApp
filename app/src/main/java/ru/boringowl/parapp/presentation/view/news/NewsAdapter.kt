@@ -14,8 +14,7 @@ import ru.boringowl.parapp.databinding.NewsListItemBinding
 import ru.boringowl.parapp.presentation.repository.network.itnews.response.Post
 
 
-class NewsAdapter(val context: Context)
-    : PagingDataAdapter<Post, NewsAdapter.PostViewHolder>(
+class NewsAdapter(val context: Context) : PagingDataAdapter<Post, NewsAdapter.PostViewHolder>(
     NewsComparator
 ) {
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -36,16 +35,12 @@ class NewsAdapter(val context: Context)
             }
         }
     }
-
     class PostViewHolder(val binding: NewsListItemBinding) : RecyclerView.ViewHolder(binding.root)
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding: NewsListItemBinding =
             NewsListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PostViewHolder(binding)
     }
-
     override fun onViewRecycled(holder: PostViewHolder) {
         super.onViewRecycled(holder)
         holder.binding.mainImage.setImageBitmap(null)

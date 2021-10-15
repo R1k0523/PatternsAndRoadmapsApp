@@ -6,7 +6,6 @@ import ru.boringowl.parapp.presentation.repository.network.itnews.response.NewsR
 import ru.boringowl.parapp.presentation.repository.network.vacancies.response.VacancyResponse
 
 class VacancyService(private val api: HeadHunterAPI) : BaseService() {
-    suspend fun fetchVacancies(text: String, page: Int): MyResult<VacancyResponse> {
-        return createCall { api.vacancies(text = text, page=page) }
-    }
+    suspend fun fetchVacancies(text: String, page: Int): MyResult<VacancyResponse> =
+        createCall { api.vacancies(text = text, page=page) }
 }

@@ -7,7 +7,6 @@ import ru.boringowl.parapp.presentation.repository.network.vacancies.response.Va
 
 
 interface HeadHunterAPI {
-
     @GET("vacancies")
     suspend fun vacancies(
         @Query("text") text: String,
@@ -15,5 +14,4 @@ interface HeadHunterAPI {
         @Query("page") page: Int = 1,
         @Query("area") areaId: Int = 1, //Москва
         ): Response<VacancyResponse>
-
 }
