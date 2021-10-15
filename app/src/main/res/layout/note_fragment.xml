@@ -283,24 +283,15 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:scrollbars="horizontal"
-                            app:context="@{context}"
-                            app:vacancies="@{vacancies}" />
-                    </LinearLayout>
-                </HorizontalScrollView>
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical"
+                    android:scrollbars="horizontal|vertical"
+                    app:context="@{context}"
+                    app:vacancies="@{vacancies}" />
 
             </LinearLayout>
         </ScrollView>

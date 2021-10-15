@@ -18,4 +18,18 @@ open class Note(
     publicationDateTime,
     postCategories,
     postDescription,
-)
+) {
+    fun getKeyWords(): String {
+        val regex = Regex("[A-Z][A-z]+")
+        val query = arrayListOf<String>()
+        var text = categories() + " "
+        sections?.forEach { it ->
+            text += it.description
+        }
+        regex.findAll(text).iterator().forEach {
+            if (it.value !in query)
+                query.add(it.value)
+        }
+        return query.joinToString(" OR ")
+    }
+}
