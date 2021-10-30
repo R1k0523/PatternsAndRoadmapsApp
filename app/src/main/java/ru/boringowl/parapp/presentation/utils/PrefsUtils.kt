@@ -18,6 +18,5 @@ class PrefsUtils(context: Context) {
     fun isTokenStored() : Boolean = prefs.getString("user_token", null) != null
     fun deleteToken() {
         prefs.edit().remove("user_token").apply()
-        Log.d("kekes3", "token="+prefs.getString("user_token", null).toString())
     }
 }

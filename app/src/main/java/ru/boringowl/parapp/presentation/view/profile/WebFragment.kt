@@ -14,18 +14,13 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import org.koin.java.KoinJavaComponent.inject
 import ru.boringowl.parapp.BuildConfig
-import ru.boringowl.parapp.MainActivity
-import ru.boringowl.parapp.presentation.repository.network.github.GHAuth
-import ru.boringowl.parapp.presentation.utils.PrefsUtils
-import ru.boringowl.parapp.presentation.viewmodel.profile.ProfileViewModel
 import ru.boringowl.parapp.presentation.viewmodel.profile.WebViewModel
 
 
 class WebFragment : Fragment() {
-    private var authUrl: String = "${BuildConfig.BASE_LOGIN_URL}?" +
-            "client_id=${BuildConfig.CLIENT_ID}&" +
+    private var authUrl: String = "${BuildConfig.BASE_LOGIN_URL}authorize" +
+            "?client_id=${BuildConfig.CLIENT_ID}&" +
             "redirect_uri=${BuildConfig.CLIENT_REDIRECT}&" +
             "scope=${BuildConfig.GH_SCOPE}"
     private lateinit var binding: WebFragmentBinding
@@ -50,7 +45,7 @@ class WebFragment : Fragment() {
         binding.web.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
-                if (viewModel.saveToken(url, requireActivity(), binding.root))
+                if (viewModel.getAndSaveTokenFromCode(url, requireActivity(), binding.root))
                     findNavController().navigateUp()
             }
         }

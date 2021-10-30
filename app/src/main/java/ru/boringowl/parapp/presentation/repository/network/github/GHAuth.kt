@@ -22,10 +22,9 @@ class GHAuth {
     private val prefs by inject(PrefsUtils::class.java)
     fun checkUserInfo(activity: FragmentActivity, view: View) {
         if (prefs.getToken() != null)
-        api.getUser("e1477fe29307b0f91983").enqueue(object : Callback<UserResponse> {
+        api.getUser(prefs.getToken()!!).enqueue(object : Callback<UserResponse> {
             override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
                 if (response.isSuccessful) {
-                    if (Repository.currentUser.value != null) {
                         val body = response.body()!!
                         Repository.setUser(User(
                             body.bio,
@@ -60,12 +59,6 @@ class GHAuth {
                             }
 
                         }
-                    } else {
-                        Repository.setUser(null)
-                        val prefs: PrefsUtils by inject(PrefsUtils::class.java)
-                        Log.d("kekes41", response.raw().toString())
-                        prefs.deleteToken()
-                    }
                 } else {
                     Repository.setUser(null)
                     val prefs: PrefsUtils by inject(PrefsUtils::class.java)

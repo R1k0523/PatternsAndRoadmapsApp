@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.boringowl.parapp.BuildConfig
 import ru.boringowl.parapp.presentation.repository.network.github.GithubAPI
+import ru.boringowl.parapp.presentation.repository.network.github.GithubAuthAPI
 import ru.boringowl.parapp.presentation.repository.network.itnews.NewsAPI
 import ru.boringowl.parapp.presentation.repository.network.itnews.NewsService
 import ru.boringowl.parapp.presentation.repository.network.vacancies.HeadHunterAPI
@@ -31,6 +32,9 @@ val networkModule = module {
 
     single(named("retro_gh")) { retrofit(get(), BuildConfig.GH_BASE_URL) }
     single { apiGithub(get(named("retro_gh"))) }
+
+    single(named("retro_gh_auth")) { retrofit(get(), BuildConfig.BASE_LOGIN_URL) }
+    single { apiGithubAuth(get(named("retro_gh_auth"))) }
 }
 
 fun okhttpClient() : OkHttpClient {
@@ -48,6 +52,7 @@ fun retrofit(okHttpClient: OkHttpClient, url: String) : Retrofit = Retrofit.Buil
 fun apiNews(retrofit: Retrofit) : NewsAPI = retrofit.create(NewsAPI::class.java)
 fun apiVacancy(retrofit: Retrofit) : HeadHunterAPI = retrofit.create(HeadHunterAPI::class.java)
 fun apiGithub(retrofit: Retrofit): GithubAPI = retrofit.create(GithubAPI::class.java)
+fun apiGithubAuth(retrofit: Retrofit): GithubAuthAPI = retrofit.create(GithubAuthAPI::class.java)
 
 fun newsService(api: NewsAPI) : NewsService = NewsService(api)
 fun vacancyService(api: HeadHunterAPI) : VacancyService = VacancyService(api)

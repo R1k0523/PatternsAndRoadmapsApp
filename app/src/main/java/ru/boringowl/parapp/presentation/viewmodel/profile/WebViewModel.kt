@@ -4,29 +4,34 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
-import org.koin.java.KoinJavaComponent
-import ru.boringowl.parapp.MainActivity
+import org.koin.java.KoinJavaComponent.inject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import ru.boringowl.parapp.presentation.repository.network.github.GHAuth
+import ru.boringowl.parapp.presentation.repository.network.github.GithubAPI
+import ru.boringowl.parapp.presentation.repository.network.github.GithubAuthAPI
+import ru.boringowl.parapp.presentation.repository.network.github.response.AccessToken
+import ru.boringowl.parapp.presentation.repository.network.github.response.UserResponse
 import ru.boringowl.parapp.presentation.utils.PrefsUtils
 
 class WebViewModel : ViewModel() {
-    private val prefs: PrefsUtils by KoinJavaComponent.inject(PrefsUtils::class.java)
-    fun saveToken(url: String, activity: FragmentActivity, view: View) : Boolean {
-        val accessTokenFragment = "access_token="
-        val accessCodeFragment = "code="
-        if (url.contains(accessTokenFragment)) {
-            Log.d("token", "URL = $url")
+    private val prefs: PrefsUtils by inject(PrefsUtils::class.java)
+    private val authApi: GithubAuthAPI by inject(GithubAuthAPI::class.java)
+    private val api: GithubAPI by inject(GithubAPI::class.java)
 
-            val accessToken = url.substring(url.indexOf(accessTokenFragment) + accessTokenFragment.length)
-            Log.d("token", "accessToken = $accessToken")
-            prefs.provideToken(accessToken)
-            return true
-        } else if (url.contains(accessCodeFragment)) {
-            Log.d("token", "URL = $url")
+    fun getAndSaveTokenFromCode(url: String, activity: FragmentActivity, view: View) : Boolean {
+        val accessCodeFragment = "code="
+        if (url.contains(accessCodeFragment)) {
             val accessCode = url.substring(url.indexOf(accessCodeFragment) + accessCodeFragment.length)
-            Log.d("token", "accessCode = $accessCode")
-            prefs.provideToken(accessCode)
-            GHAuth().checkUserInfo(activity, view)
+            authApi.getToken(accessCode).enqueue(object : Callback<AccessToken> {
+                override fun onResponse(call: Call<AccessToken>, response: Response<AccessToken>) {
+                    prefs.provideToken("token "+ response.body()!!.accessToken)
+                    GHAuth().checkUserInfo(activity, view)
+                }
+
+                override fun onFailure(call: Call<AccessToken>, t: Throwable) {}
+            })
             return true
         }
         return false

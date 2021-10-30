@@ -1,29 +1,26 @@
-package ru.boringowl.parapp.presentation.repository.room.dao;
+package ru.boringowl.parapp.presentation.repository.room.dao
 
-import androidx.lifecycle.LiveData;
-import androidx.room.Dao;
-import androidx.room.Insert;
-import androidx.room.Query;
-import androidx.room.Update;
-
-import java.util.List;
-
-import ru.boringowl.parapp.presentation.repository.model.user.UserDTO;
+import androidx.room.Dao
+import ru.boringowl.parapp.presentation.repository.model.user.UserDTO
+import androidx.lifecycle.LiveData
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
 
 @Dao
-public interface UserDAO {
+interface UserDAO {
     @Insert
-    void addUser(UserDTO user);
+    fun addUser(user: UserDTO?)
 
     @Query("SELECT * FROM users_table WHERE email = :email")
-    LiveData<UserDTO> getUserByEmail(String email);
+    fun getUserByEmail(email: String?): LiveData<UserDTO?>?
 
     @Query("SELECT * FROM users_table WHERE email = :email AND password = :password")
-    LiveData<UserDTO> getUserByEmailAndPassword(String email, String password);
+    fun getUserByEmailAndPassword(email: String?, password: String?): LiveData<UserDTO?>?
 
-    @Query("SELECT * FROM users_table")
-    LiveData<List<UserDTO>> getAllPeople();
+    @get:Query("SELECT * FROM users_table")
+    val allPeople: LiveData<List<UserDTO?>?>?
 
     @Update
-    void updateUserInfo(UserDTO user);
+    fun updateUserInfo(user: UserDTO?)
 }

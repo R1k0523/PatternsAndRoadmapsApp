@@ -7,17 +7,20 @@ import ru.boringowl.parapp.presentation.repository.model.notes.NoteDTO
 import ru.boringowl.parapp.presentation.repository.model.notes.RoadmapDTO
 import ru.boringowl.parapp.presentation.repository.room.dao.PatternsDAO
 import ru.boringowl.parapp.presentation.repository.model.patterns.PatternDTO
+import ru.boringowl.parapp.presentation.repository.model.user.UserDTO
 import ru.boringowl.parapp.presentation.repository.room.dao.NotesDAO
 import ru.boringowl.parapp.presentation.repository.room.dao.RoadmapsDAO
+import ru.boringowl.parapp.presentation.repository.room.dao.UserDAO
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-@Database(entities = [PatternDTO::class, NoteDTO::class, RoadmapDTO::class], version = 1, exportSchema = false)
+@Database(entities = [PatternDTO::class, NoteDTO::class, RoadmapDTO::class, UserDTO::class], version = 1, exportSchema = false)
 @TypeConverters(DataTypeConverter::class)
 abstract class MyDatabase : RoomDatabase() {
     abstract fun patternsDAO(): PatternsDAO
     abstract fun notesDAO(): NotesDAO
     abstract fun roadmapsDAO(): RoadmapsDAO
+    abstract fun usersDAO(): UserDAO
 
     companion object {
         private const val NUMBER_OF_THREADS = 4

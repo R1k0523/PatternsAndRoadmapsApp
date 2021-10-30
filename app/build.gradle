@@ -35,7 +35,7 @@ android {
         it.buildConfigField "String", "HH_BASE_URL", "\"https://api.hh.ru/\""
         it.buildConfigField "String", "GH_BASE_URL", "\"https://api.github.com\""
 
-        it.buildConfigField "String", "BASE_LOGIN_URL", "\"https://github.com/login/oauth/authorize\""
+        it.buildConfigField "String", "BASE_LOGIN_URL", "\"https://github.com/login/oauth/\""
         it.buildConfigField "String", "CLIENT_ID", "\"365f63efcef1121f3f98\""
         it.buildConfigField "String", "CLIENT_REDIRECT", "\"https://parapp.jun/auth\""
         it.buildConfigField "String", "CLIENT_SECRET", "\"e6d354a2af13ef123e79b7812e727595db5abecb\""
@@ -101,8 +101,6 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:2.1.5"
     implementation "org.koin:koin-androidx-scope:2.1.5"
 
-    //github contribs
-    implementation 'com.github.javierugarte:githubcontributionsview:1.2.2'
 
     //Libs for testing
     testImplementation 'junit:junit:4.13.2'
