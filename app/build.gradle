@@ -30,8 +30,16 @@ android {
     }
     buildTypes.each {
         it.buildConfigField "String", "NEWS_API_KEY", "\"64f550702883415fa70f8abd057de20c\""
+
         it.buildConfigField "String", "NEWS_BASE_URL", "\"https://newsapi.org/\""
         it.buildConfigField "String", "HH_BASE_URL", "\"https://api.hh.ru/\""
+        it.buildConfigField "String", "GH_BASE_URL", "\"https://api.github.com\""
+
+        it.buildConfigField "String", "BASE_LOGIN_URL", "\"https://github.com/login/oauth/authorize\""
+        it.buildConfigField "String", "CLIENT_ID", "\"365f63efcef1121f3f98\""
+        it.buildConfigField "String", "CLIENT_REDIRECT", "\"https://parapp.jun/auth\""
+        it.buildConfigField "String", "CLIENT_SECRET", "\"e6d354a2af13ef123e79b7812e727595db5abecb\""
+        it.buildConfigField "String", "GH_SCOPE", "\"read:user\""
     }
 
     compileOptions {
@@ -81,7 +89,7 @@ dependencies {
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     implementation 'androidx.paging:paging-runtime-ktx:3.0.1'
 
     //Picasso
@@ -92,6 +100,9 @@ dependencies {
     implementation "org.koin:koin-android:2.1.5"
     implementation "org.koin:koin-androidx-viewmodel:2.1.5"
     implementation "org.koin:koin-androidx-scope:2.1.5"
+
+    //github contribs
+    implementation 'com.github.javierugarte:githubcontributionsview:1.2.2'
 
     //Libs for testing
     testImplementation 'junit:junit:4.13.2'

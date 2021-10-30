@@ -13,7 +13,7 @@ class Parapp : Application() {
 
         startKoin{
             androidContext(this@Parapp)
-            modules(listOf(networkModule, repositoryModule))
+            modules(listOf(repositoryModule, networkModule))
         }
     }
 }

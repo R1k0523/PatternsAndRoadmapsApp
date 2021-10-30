@@ -95,4 +95,31 @@
         android:id="@+id/newsFragment"
         android:name="ru.boringowl.parapp.presentation.view.news.NewsFragment"
         android:label="NewsFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ru.boringowl.parapp.presentation.view.profile.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment">
+        <deepLink app:uri="app://parapp.jun/profile" />
+        <deepLink app:uri="https://parapp.jun/profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/webFragment"
+        android:name="ru.boringowl.parapp.presentation.view.profile.WebFragment"
+        android:label="WebFragment">
+        <action
+            android:id="@+id/action_webFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="ru.boringowl.parapp.presentation.view.profile.AuthFragment"
+        android:label="AuthFragment" >
+        <action
+            android:id="@+id/action_authFragment_to_webFragment"
+            app:destination="@id/webFragment" />
+        <action
+            android:id="@+id/action_authFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

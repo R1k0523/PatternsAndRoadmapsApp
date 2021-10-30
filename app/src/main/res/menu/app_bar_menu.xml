@@ -16,7 +16,7 @@
         android:icon="@drawable/ic_round_public_24"
         android:title="@string/news"/>
     <item
-        android:id="@+id/page_profile"
+        android:id="@+id/authFragment"
         android:enabled="true"
         android:icon="@drawable/ic_round_person_24"
         android:title="@string/page_profile"/>

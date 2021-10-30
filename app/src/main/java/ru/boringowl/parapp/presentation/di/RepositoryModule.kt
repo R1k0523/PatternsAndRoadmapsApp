@@ -9,13 +9,12 @@ import ru.boringowl.parapp.presentation.repository.network.itnews.NewsRepository
 import ru.boringowl.parapp.presentation.repository.NotesRepository
 import ru.boringowl.parapp.presentation.repository.PatternsRepository
 import ru.boringowl.parapp.presentation.repository.RoadmapsRepository
+import ru.boringowl.parapp.presentation.repository.UserRepository
 import ru.boringowl.parapp.presentation.repository.network.itnews.NewsService
 import ru.boringowl.parapp.presentation.repository.network.vacancies.VacancyRepository
 import ru.boringowl.parapp.presentation.repository.network.vacancies.VacancyService
-import ru.boringowl.parapp.presentation.repository.room.MyDatabase
-import ru.boringowl.parapp.presentation.repository.room.NotesRepositoryImpl
-import ru.boringowl.parapp.presentation.repository.room.PatternsRepositoryImpl
-import ru.boringowl.parapp.presentation.repository.room.RoadmapsRepositoryImpl
+import ru.boringowl.parapp.presentation.repository.room.*
+import ru.boringowl.parapp.presentation.utils.PrefsUtils
 
 val repositoryModule = module {
     single { provideNewsRepository(get()) }
@@ -24,7 +23,9 @@ val repositoryModule = module {
     single { providePatternsRepository() }
     single { provideNotesRepository() }
     single { provideRoadmapsRepository() }
+    single { provideUsersRepository() }
     single { provideDatabase(this.androidContext()) }
+    single { providePrefs(this.androidContext()) }
 }
 
 fun provideNewsRepository(
@@ -36,6 +37,7 @@ fun provideVacancyRepository(
 fun providePatternsRepository(): PatternsRepository = PatternsRepositoryImpl()
 fun provideNotesRepository(): NotesRepository = NotesRepositoryImpl()
 fun provideRoadmapsRepository(): RoadmapsRepository = RoadmapsRepositoryImpl()
+fun provideUsersRepository(): UserRepository = UserRepositoryImpl()
 
 fun provideGson(): Gson = Gson()
 
@@ -48,3 +50,5 @@ fun provideDatabase(context: Context): MyDatabase =
     .fallbackToDestructiveMigration()
     .allowMainThreadQueries()
     .build()
+
+fun providePrefs(context: Context) : PrefsUtils = PrefsUtils(context)

@@ -1,0 +1,60 @@
+package ru.boringowl.parapp.presentation.view.profile
+
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import ru.boringowl.parapp.databinding.WebFragmentBinding
+import android.webkit.CookieManager
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import org.koin.java.KoinJavaComponent.inject
+import ru.boringowl.parapp.BuildConfig
+import ru.boringowl.parapp.MainActivity
+import ru.boringowl.parapp.presentation.repository.network.github.GHAuth
+import ru.boringowl.parapp.presentation.utils.PrefsUtils
+import ru.boringowl.parapp.presentation.viewmodel.profile.ProfileViewModel
+import ru.boringowl.parapp.presentation.viewmodel.profile.WebViewModel
+
+
+class WebFragment : Fragment() {
+    private var authUrl: String = "${BuildConfig.BASE_LOGIN_URL}?" +
+            "client_id=${BuildConfig.CLIENT_ID}&" +
+            "redirect_uri=${BuildConfig.CLIENT_REDIRECT}&" +
+            "scope=${BuildConfig.GH_SCOPE}"
+    private lateinit var binding: WebFragmentBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = WebFragmentBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        CookieManager.getInstance().removeAllCookies(null)
+        Log.d("kekes", authUrl)
+        val viewModel = ViewModelProvider(this).get(WebViewModel::class.java)
+        binding.web.clearCache(true)
+        binding.web.loadUrl(authUrl)
+        binding.web.settings.javaScriptEnabled = true
+        binding.web.webViewClient = object : WebViewClient() {
+            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                if (viewModel.saveToken(url, requireActivity(), binding.root))
+                    findNavController().navigateUp()
+            }
+        }
+        binding.web.loadUrl(authUrl)
+        }
+
+}
