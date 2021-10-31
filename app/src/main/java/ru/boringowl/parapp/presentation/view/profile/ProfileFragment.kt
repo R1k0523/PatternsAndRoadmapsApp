@@ -45,13 +45,14 @@ class ProfileFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         viewModel.user.observe(viewLifecycleOwner) {
             if (it != null) {
-                Log.d("kekes123", "123123$it")
+                Log.d("kekes123", "123123${it.avatarUrl}")
                 binding.user = it
                 if (it.avatarUrl != null)
-                    if (it.avatarUrl!!.isNotEmpty())
+                    if (it.avatarUrl!!.isNotEmpty()) {
+                        binding.userImage.isVisible = true
                         Picasso.with(context).load(it.avatarUrl)
                             .into(binding.userImage)
-                    else
+                    } else
                         binding.userImage.isVisible = false
                 if (!it.login.isNullOrEmpty()) {
                     binding.web.clearCache(true)
@@ -60,6 +61,10 @@ class ProfileFragment : Fragment() {
                     binding.web.loadUrl(getUrl(it.login!!))
                 }
             }
+        }
+        binding.button.setOnClickListener {
+            viewModel.logOut()
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToAuthFragment())
         }
     }
     fun getUrl(login: String) = "https://github-readme-stats.vercel.app/api?username=${login}&show_icons=true&theme=dark&count_private=true"

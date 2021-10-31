@@ -3,6 +3,7 @@ package ru.boringowl.parapp.presentation.repository.room
 import android.app.Application
 import androidx.lifecycle.LiveData
 import org.koin.java.KoinJavaComponent.inject
+import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
 import ru.boringowl.parapp.presentation.repository.room.dao.RoadmapsDAO
 import ru.boringowl.parapp.presentation.repository.RoadmapsRepository
@@ -20,6 +21,10 @@ class RoadmapsRepositoryImpl : RoadmapsRepository {
 
     override fun <T : Roadmap> getAllRoadmaps(): LiveData<List<T>> {
         return allRoadmaps as LiveData<List<T>>
+    }
+
+    override fun <T : Roadmap> getAllRoadmaps(topicId: Int): LiveData<List<T>> {
+        return roadmapsDAO.getAllRoadmaps(topicId) as LiveData<List<T>>
     }
 
     override suspend fun <T : Roadmap> addRoadmap(roadmap: T) {

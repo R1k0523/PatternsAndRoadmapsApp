@@ -18,8 +18,8 @@ interface UserDAO {
     @Query("SELECT * FROM users_table WHERE email = :email AND password = :password")
     fun getUserByEmailAndPassword(email: String?, password: String?): LiveData<UserDTO?>?
 
-    @get:Query("SELECT * FROM users_table")
-    val allPeople: LiveData<List<UserDTO?>?>?
+    @Query("SELECT * FROM users_table")
+    fun allPeople(): LiveData<List<UserDTO?>?>?
 
     @Update
     fun updateUserInfo(user: UserDTO?)

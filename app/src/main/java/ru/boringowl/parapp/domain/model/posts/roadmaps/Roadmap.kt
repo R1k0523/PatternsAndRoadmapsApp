@@ -9,6 +9,7 @@ open class Roadmap(
     override val publicationDateTime: String,
     override val postCategories: List<String>,
     override val postDescription: String,
+    override val topic: Int,
     open val root: RoadmapNode,
 ) : Post(
     id,
@@ -17,5 +18,6 @@ open class Roadmap(
     publicationDateTime,
     postCategories,
     postDescription,
+    topic,
 )
 

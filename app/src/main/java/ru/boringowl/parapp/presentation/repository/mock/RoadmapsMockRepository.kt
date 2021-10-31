@@ -25,6 +25,7 @@ class RoadmapsMockRepository : RoadmapsRepository {
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 11","Категория 12","Категория 13"),
                 "Описание поста. Описание поста. Описание поста. Описание поста Наверное",
+                1,
                 RoadmapNode(
                     "Начать",
                     "Встать с кровати",
@@ -117,6 +118,9 @@ class RoadmapsMockRepository : RoadmapsRepository {
         return data as LiveData<List<T>>
     }
 
+    override fun <T : Roadmap> getAllRoadmaps(topicId: Int): LiveData<List<T>> {
+        return data as LiveData<List<T>>
+    }
     override suspend fun <T : Roadmap> addRoadmap(roadmap: T) {
         roadmap.id = list.size
         list = list + roadmap
@@ -128,7 +132,7 @@ class RoadmapsMockRepository : RoadmapsRepository {
             if (it.id == roadmapId)
                 return it as T
         }
-        return Roadmap(0, "", null, "", listOf(""), "", RoadmapNode("", "", listOf())) as T
+        return Roadmap(0, "", null, "", listOf(""), "", 1, RoadmapNode("", "", listOf())) as T
     }
 
     override suspend fun <T : Roadmap> deleteRoadmap(roadmap: T) {

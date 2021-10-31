@@ -2,6 +2,8 @@ package ru.boringowl.parapp.presentation.repository.mock
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
+import ru.boringowl.parapp.domain.model.posts.Topic
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
 import ru.boringowl.parapp.presentation.repository.NotesRepository
@@ -22,6 +24,7 @@ class NotesMockRepository : NotesRepository {
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 1","Категория 2","Категория 3"),
                 "Описание поста. Описание поста. Описание поста. Описание поста",
+                1,
                 listOf(
                     NoteSection(
                         "Описание секции №1 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
@@ -37,6 +40,7 @@ class NotesMockRepository : NotesRepository {
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 10","Категория 20","Категория 30"),
                 "Описание поста. Описание поста. Описание поста. Описание поста",
+                1,
                 listOf(
                     NoteSection(
                         "Описание секции №1 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
@@ -57,6 +61,7 @@ class NotesMockRepository : NotesRepository {
                 SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
                 listOf("Категория 11","Категория 12","Категория 13"),
                 "Описание поста. Описание поста. Описание поста. Описание поста Наверное",
+                1,
                 listOf(
                     NoteSection(
                         "Описание секции №2 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
@@ -75,6 +80,10 @@ class NotesMockRepository : NotesRepository {
         return data as LiveData<List<T>>
     }
 
+    override fun <T : Note> getAllNotes(topicId: Int): LiveData<List<T>> {
+        return liveData { listOf<Topic>() }
+    }
+
     override suspend fun <T : Note> addNote(note: T) {
         note.id = list.size
         list = list + note
@@ -86,7 +95,8 @@ class NotesMockRepository : NotesRepository {
             if (it.id == noteId)
                 return it as T
         }
-        return Note(0, "", null,"", listOf(""), "", listOf()) as T
+        return Note(0, "", null,"", listOf(""), "",
+            1, listOf()) as T
     }
 
     override suspend fun <T : Note> deleteNote(note: T) {

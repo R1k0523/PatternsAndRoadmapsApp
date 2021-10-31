@@ -13,5 +13,6 @@ interface UserRepository {
     fun <T : User> addUser(user: T)
     fun <T : User> updateUser(user: T)
     fun <T : User> findUser(email: String?, owner: LifecycleOwner): LiveData<T>
-    fun <T : User> findUser(email: String?, password: String?, owner: LifecycleOwner): LiveData<T>
+    fun <T : User> findUser(email: String?, password: String?, owner: LifecycleOwner): LiveData<T?>
+    fun <T : User> getUsers(): LiveData<List<T?>>
 }

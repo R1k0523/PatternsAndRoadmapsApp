@@ -7,6 +7,7 @@ open class Post(
     open val publicationDateTime: String,
     open val postCategories: List<String>,
     open val postDescription: String,
+    open val topic: Int,
 ) {
     fun categories():String {
     return postCategories.joinToString(

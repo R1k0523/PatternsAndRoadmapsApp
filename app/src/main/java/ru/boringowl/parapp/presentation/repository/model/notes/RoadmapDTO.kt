@@ -20,6 +20,8 @@ data class RoadmapDTO(
     override val postDescription: String,
     @ColumnInfo(name="root")
     override val root: RoadmapNode,
+    @ColumnInfo(name="topic")
+    override val topic: Int,
     @PrimaryKey(autoGenerate = true)
     override var id: Int? = null,
 ) : Roadmap (
@@ -29,6 +31,7 @@ data class RoadmapDTO(
     publicationDateTime,
     postCategories,
     postDescription,
+    topic,
     root,
 ) {
     constructor(roadmap: Roadmap): this (
@@ -38,6 +41,7 @@ data class RoadmapDTO(
         roadmap.postCategories,
         roadmap.postDescription,
         roadmap.root,
+        roadmap.topic,
         roadmap.id,
     )
 }

@@ -1,7 +1,5 @@
 package ru.boringowl.parapp.presentation.view.posts
 
-import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -12,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.AddNoteFragmentBinding
@@ -27,6 +26,7 @@ import java.util.*
 
 class AddNoteFragment : Fragment() {
 
+    private val args: AddNoteFragmentArgs by navArgs()
     private lateinit var viewModel: AddNoteViewModel
     private lateinit var binding: AddNoteFragmentBinding
     override fun onCreateView(
@@ -46,6 +46,7 @@ class AddNoteFragment : Fragment() {
                         postCategories = binding.category.text.split(" "),
                         sections = (binding.recyclerViewSection.adapter as AddSectionListAdapter).data,
                         docs = (binding.recyclerViewFiles.adapter as DocsListAdapter).dataToString(),
+                        topic = args.topicId,
                     )
                 )
                 findNavController().popBackStack()

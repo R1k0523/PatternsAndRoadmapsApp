@@ -27,9 +27,11 @@ data class UserDTO(
     override var password: String? = "",
     @ColumnInfo(name = "blog")
     override var blog: String? = "",
+    @ColumnInfo(name = "role")
+    override var role: Roles = Roles.USER,
     @PrimaryKey(autoGenerate = true)
-    var id: Int? = null,
-) : User(bio, login, company, email, url, avatarUrl, name, location, password) {
+    override var id: Int? = null,
+) : User(bio, login, company, email, url, avatarUrl, name, location, password, blog, role, id) {
     constructor(user: User): this() {
         bio = user.bio
         login = user.login
@@ -41,6 +43,7 @@ data class UserDTO(
         location = user.location
         password = user.password
         blog = user.blog
-
+        role = user.role
+        id = user.id
     }
 }

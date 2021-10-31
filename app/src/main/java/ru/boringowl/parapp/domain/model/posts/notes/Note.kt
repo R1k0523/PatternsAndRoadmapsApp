@@ -9,6 +9,7 @@ open class Note(
     override val publicationDateTime: String,
     override val postCategories: List<String>,
     override val postDescription: String,
+    override val topic: Int,
     open val sections: List<NoteSection>,
     open val docs: List<String>? = null,
 ) : Post(
@@ -18,6 +19,7 @@ open class Note(
     publicationDateTime,
     postCategories,
     postDescription,
+    topic,
 ) {
     fun getKeyWords(): String {
         val regex = Regex("[A-Z][A-z]+")

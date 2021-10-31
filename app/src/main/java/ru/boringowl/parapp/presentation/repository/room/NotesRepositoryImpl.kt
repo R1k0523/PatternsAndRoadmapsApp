@@ -22,6 +22,10 @@ class NotesRepositoryImpl : NotesRepository {
         return allPatterns as LiveData<List<T>>
     }
 
+    override fun <T : Note> getAllNotes(topicId: Int): LiveData<List<T>> {
+        return notesDAO.getAllNotes(topicId) as LiveData<List<T>>
+    }
+
     override suspend fun <T : Note> addNote(note: T) {
         notesDAO.addNote(NoteDTO(note))
     }

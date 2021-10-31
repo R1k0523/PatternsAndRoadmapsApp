@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/notesListFragment"
+        android:id="@+id/topicsFragment"
         android:enabled="true"
         android:icon="@drawable/ic_round_sticky_note_2_24"
         android:title="@string/postsPageName"/>

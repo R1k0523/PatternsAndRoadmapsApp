@@ -3,6 +3,7 @@ package ru.boringowl.parapp.presentation.view.profile
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,10 @@ import ru.boringowl.parapp.databinding.WebFragmentBinding
 import android.webkit.CookieManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import okhttp3.internal.wait
 import ru.boringowl.parapp.BuildConfig
 import ru.boringowl.parapp.presentation.viewmodel.profile.WebViewModel
 
@@ -38,15 +41,15 @@ class WebFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         CookieManager.getInstance().removeAllCookies(null)
         Log.d("kekes", authUrl)
+        binding.progressBar.isVisible = true
         val viewModel = ViewModelProvider(this).get(WebViewModel::class.java)
         binding.web.clearCache(true)
-        binding.web.loadUrl(authUrl)
         binding.web.settings.javaScriptEnabled = true
         binding.web.webViewClient = object : WebViewClient() {
             override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
-                if (viewModel.getAndSaveTokenFromCode(url, requireActivity(), binding.root))
-                    findNavController().navigateUp()
+                binding.progressBar.isVisible = viewModel
+                    .getAndSaveTokenFromCode(url, requireActivity(), binding.root)
             }
         }
         binding.web.loadUrl(authUrl)

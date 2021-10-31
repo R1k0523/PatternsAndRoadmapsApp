@@ -22,6 +22,8 @@ data class NoteDTO(
     override val sections: List<NoteSection>,
     @ColumnInfo(name="docs")
     override val docs: List<String>?,
+    @ColumnInfo(name="topic")
+    override val topic: Int,
     @PrimaryKey(autoGenerate = true)
     override var id: Int? = null,
 ) : Note(
@@ -31,6 +33,7 @@ data class NoteDTO(
     publicationDateTime,
     postCategories,
     postDescription,
+    topic,
     sections,
     docs,
 ) {
@@ -43,5 +46,7 @@ data class NoteDTO(
         note.postDescription,
         note.sections,
         note.docs,
+        note.topic,
+        note.id,
     )
 }

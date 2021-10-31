@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.graphics.BitmapFactory
 import android.net.Uri
+import androidx.navigation.fragment.navArgs
 
 import ru.boringowl.parapp.presentation.utils.FileUtils
 import ru.boringowl.parapp.presentation.utils.ImageUtils
@@ -23,6 +24,7 @@ import ru.boringowl.parapp.presentation.utils.ImageUtils
 
 class AddRoadmapFragment : Fragment() {
 
+    private val args: AddRoadmapFragmentArgs by navArgs()
     private lateinit var viewModel: AddRoadmapViewModel
     private lateinit var binding: AddRoadmapFragmentBinding
     override fun onCreateView(
@@ -40,7 +42,8 @@ class AddRoadmapFragment : Fragment() {
                         postDescription = binding.description.text.toString(),
                         publicationDateTime = currentDateTime,
                         postCategories = binding.category.text.split(" "),
-                        root = RoadmapNode("No Roadmap", "No description", listOf())
+                        root = RoadmapNode("No Roadmap", "No description", listOf()),
+                        topic = args.topicId,
                     )
                 )
                 findNavController().popBackStack()

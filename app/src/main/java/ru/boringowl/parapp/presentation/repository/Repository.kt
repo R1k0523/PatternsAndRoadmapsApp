@@ -16,6 +16,7 @@ class Repository {
         val newsRepository: NewsRepository by inject(NewsRepository::class.java)
         val vacancyRepository: VacancyRepository by inject(VacancyRepository::class.java)
         val usersRepository: UserRepository by inject(UserRepository::class.java)
+        val topicRepository: TopicRepository by inject(TopicRepository::class.java)
         private val _currentUser = MutableLiveData<User?>(null)
         val currentUser: LiveData<User?>
             get() = _currentUser

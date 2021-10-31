@@ -9,6 +9,7 @@ import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
 import ru.boringowl.parapp.domain.model.posts.roadmaps.RoadmapNode
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
 import ru.boringowl.parapp.domain.model.patterns.Pattern
+import ru.boringowl.parapp.domain.model.user.User
 import java.lang.reflect.Type
 import java.util.*
 
@@ -57,6 +58,14 @@ object DataTypeConverter {
         return gson.toJson(node)
     }
 
+    @TypeConverter
+    fun stringToRole(title: String): User.Roles {
+        return User.Roles.USER.getRole(title)
+    }
+    @TypeConverter
+    fun roleToString(role: User.Roles): String {
+        return role.title
+    }
     @TypeConverter
     fun stringToList(listOfStrings: String): List<String> {
         val listType: Type = object : TypeToken<List<String?>?>() {}.type

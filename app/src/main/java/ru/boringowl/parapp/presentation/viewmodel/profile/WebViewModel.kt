@@ -26,8 +26,10 @@ class WebViewModel : ViewModel() {
             val accessCode = url.substring(url.indexOf(accessCodeFragment) + accessCodeFragment.length)
             authApi.getToken(accessCode).enqueue(object : Callback<AccessToken> {
                 override fun onResponse(call: Call<AccessToken>, response: Response<AccessToken>) {
-                    prefs.provideToken("token "+ response.body()!!.accessToken)
-                    GHAuth().checkUserInfo(activity, view)
+                    if (response.isSuccessful) {
+                        prefs.provideToken("token " + response.body()!!.accessToken)
+                        GHAuth().checkUserInfo(activity, view, true)
+                    }
                 }
 
                 override fun onFailure(call: Call<AccessToken>, t: Throwable) {}

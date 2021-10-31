@@ -21,4 +21,8 @@ interface NotesDAO {
 
     @Query("SELECT * FROM notes WHERE id = :noteId LIMIT 1")
     fun getNote(noteId: Int): NoteDTO
+
+
+    @Query("SELECT * FROM notes WHERE topic = :topicId")
+    fun getAllNotes(topicId: Int): LiveData<List<NoteDTO>>
 }

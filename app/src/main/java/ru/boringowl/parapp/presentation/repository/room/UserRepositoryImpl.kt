@@ -30,9 +30,13 @@ class UserRepositoryImpl : UserRepository {
         return answer as LiveData<T>
     }
 
-    override fun <T : User> findUser(email: String?, password: String?, owner: LifecycleOwner): LiveData<T> {
+    override fun <T : User> findUser(email: String?, password: String?, owner: LifecycleOwner): LiveData<T?> {
         val answer: MutableLiveData<UserDTO> = MutableLiveData<UserDTO>()
         userDAO.getUserByEmailAndPassword(email, password)!!.observe(owner, answer::setValue)
-        return answer as LiveData<T>
+        return answer as LiveData<T?>
+    }
+
+    override fun <T : User> getUsers(): LiveData<List<T?>>  {
+        return userDAO.allPeople() as LiveData<List<T?>>
     }
 }

@@ -10,9 +10,18 @@ open class User(
     open var name: String? = "",
     open var location: String? = "",
     open var password: String? = "",
-    open var blog: String? = ""
+    open var blog: String? = "",
+    open var role: Roles = Roles.USER,
+    open var id: Int? = null,
 ) {
-    override fun toString(): String {
-        return login+" "+email+" "+name
+    enum class Roles(val title: String) {
+        ADMIN("admin"), MODERATOR("mod"), USER("user");
+        fun getRole(title: String): Roles {
+            return when(title) {
+                "admin" -> ADMIN
+                "mod" -> MODERATOR
+                else -> USER
+            }
+        }
     }
 }
