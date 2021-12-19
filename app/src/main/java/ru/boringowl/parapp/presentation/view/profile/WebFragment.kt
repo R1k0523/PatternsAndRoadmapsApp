@@ -22,10 +22,6 @@ import ru.boringowl.parapp.presentation.viewmodel.profile.WebViewModel
 
 
 class WebFragment : Fragment() {
-    private var authUrl: String = "${BuildConfig.BASE_LOGIN_URL}authorize" +
-            "?client_id=${BuildConfig.CLIENT_ID}&" +
-            "redirect_uri=${BuildConfig.CLIENT_REDIRECT}&" +
-            "scope=${BuildConfig.GH_SCOPE}"
     private lateinit var binding: WebFragmentBinding
 
     override fun onCreateView(
@@ -40,7 +36,10 @@ class WebFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CookieManager.getInstance().removeAllCookies(null)
-        Log.d("kekes", authUrl)
+        val authUrl: String = "${BuildConfig.BASE_LOGIN_URL}authorize" +
+                "?client_id=${BuildConfig.CLIENT_ID}&" +
+                "redirect_uri=${BuildConfig.CLIENT_REDIRECT}&" +
+                "scope=${BuildConfig.GH_SCOPE}"
         binding.progressBar.isVisible = true
         val viewModel = ViewModelProvider(this).get(WebViewModel::class.java)
         binding.web.clearCache(true)
@@ -49,7 +48,7 @@ class WebFragment : Fragment() {
             override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
                 super.onPageStarted(view, url, favicon)
                 binding.progressBar.isVisible = viewModel
-                    .getAndSaveTokenFromCode(url, requireActivity(), binding.root)
+                    .getAndSaveTokenFromCode(url, viewLifecycleOwner, binding.root)
             }
         }
         binding.web.loadUrl(authUrl)

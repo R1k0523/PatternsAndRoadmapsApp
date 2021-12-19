@@ -5,20 +5,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ru.boringowl.parapp.domain.model.posts.Post
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.presentation.repository.Repository
 import ru.boringowl.parapp.presentation.repository.network.vacancies.response.Vacancy
+import java.util.*
 
-class NoteViewModel(noteId: Int) : ViewModel() {
-    private val _note = MutableLiveData<Note>()
-    val note: LiveData<Note>
+class NoteViewModel(noteId: UUID) : ViewModel() {
+    private val _note = Repository.postsRepository.getNote(noteId)
+    val note: LiveData<Note?>
         get() = _note
     private val _vacancies = MutableLiveData<List<Vacancy>>()
     val vacancies: LiveData<List<Vacancy>>
         get() = _vacancies
 
-    init {
-        _note.value = Repository.notesRep.getNote(noteId)
+
+    fun getVacancies() {
         val text = _note.value!!.getKeyWords()
         viewModelScope.launch {
             try {
@@ -29,6 +31,5 @@ class NoteViewModel(noteId: Int) : ViewModel() {
                 _vacancies.value = listOf()
             }
         }
-
     }
 }

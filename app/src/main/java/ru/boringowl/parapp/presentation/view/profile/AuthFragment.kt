@@ -58,7 +58,6 @@ class AuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
-        viewModel.checkAll(viewLifecycleOwner)
         binding.vkAuth.setOnClickListener {
             findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToWebFragment())
         }
@@ -70,10 +69,15 @@ class AuthFragment : Fragment() {
             val login = binding.login.text.toString()
             val password = binding.password.text.toString()
             if (login.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.auth(login, password, requireActivity()).observe(viewLifecycleOwner) {
+                viewModel.auth(login, password).observe(viewLifecycleOwner) {
                     if (it != null) {
                         viewModel.setUser(it)
-                        Toast.makeText(context, "Авторизация успешно пройдена", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            context,
+                            "Авторизация успешно пройдена",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToProfileFragment())
                     } else {
                         Toast.makeText(context, "Ошибка в данных", Toast.LENGTH_SHORT).show()
                     }

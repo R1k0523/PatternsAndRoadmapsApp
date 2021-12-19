@@ -4,25 +4,29 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ru.boringowl.parapp.domain.model.posts.Topic
+import ru.boringowl.parapp.domain.model.user.User
+import java.util.*
 
 @Entity(tableName = "topics")
 data class TopicDTO(
-    @PrimaryKey(autoGenerate = true)
-    override val id: Int?,
+    @ColumnInfo(name="topic_id")
+    override var topicId: UUID? = null,
     @ColumnInfo(name="title")
-    override val title: String,
+    override var title: String?,
     @ColumnInfo(name="creator")
-    override val creator: String,
+    override var creator: User?,
     @ColumnInfo(name="moderators")
-    override val moderators: List<String>
+    override var moderators: List<User>?
 ) : Topic(
-    id,
+    topicId,
     title,
     creator,
     moderators
 ) {
+    @PrimaryKey(autoGenerate = true)
+    var localId: Int? = null
     constructor(topic: Topic) : this(
-        topic.id,
+        topic.topicId,
         topic.title,
         topic.creator,
         topic.moderators

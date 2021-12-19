@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
 import ru.boringowl.parapp.domain.model.patterns.Pattern
+import java.util.*
 
 
 @Entity(tableName = "patterns")
@@ -22,23 +23,24 @@ data class PatternDTO(
     @ColumnInfo(name = "use_case")
     override val useCase: String,
     @ColumnInfo(name = "feature")
-    override val feature: List<PatternFeature>,
+    override val features: List<PatternFeature>,
     @ColumnInfo(name = "type")
     override val type: PatternType,
     @ColumnInfo(name = "difficulty")
     override val difficulty: Int,
+    @ColumnInfo(name = "pattern_id")
+    override var patternId: UUID? = null,
     @PrimaryKey(autoGenerate = true)
-    override var id: Int? = null,
-
+    override var localId: Int? = null
     ) : Pattern(
-    id,
+    patternId,
     title,
     description,
     problem,
     solution,
     solutionInCode,
     useCase,
-    feature,
+    features,
     type,
     difficulty,
 ) {
@@ -50,9 +52,11 @@ data class PatternDTO(
         pattern.solution,
         pattern.solutionInCode,
         pattern.useCase,
-        pattern.feature,
+        pattern.features,
         pattern.type,
         pattern.difficulty,
+        pattern.patternId,
+        pattern.localId
     )
 
 }

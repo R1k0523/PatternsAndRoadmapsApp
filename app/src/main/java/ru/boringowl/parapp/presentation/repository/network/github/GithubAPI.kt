@@ -7,9 +7,6 @@ import ru.boringowl.parapp.presentation.repository.network.github.response.Acces
 import ru.boringowl.parapp.presentation.repository.network.github.response.UserResponse
 
 interface GithubAPI {
-
-
     @GET("user")
     fun getUser(@Header("Authorization") token: String): Call<UserResponse>
-
 }

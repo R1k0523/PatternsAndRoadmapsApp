@@ -5,7 +5,7 @@ import java.util.*
 
 class Utils {
     companion object {
-        private val sdf = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH)
+        private val sdf = SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.ENGLISH)
         fun currentDate(): String = sdf.format(Date())
 
         fun yesterdayDate(): String = sdf.format(getDaysAgo(7))

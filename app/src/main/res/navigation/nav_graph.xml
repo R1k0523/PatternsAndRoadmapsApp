@@ -12,7 +12,7 @@
         tools:layout="@layout/posts_list_fragment" >
         <argument
             android:name="topicId"
-            app:argType="integer"
+            app:argType="string"
             android:defaultValue="0" />
         <action
             android:id="@+id/action_notesListFragment_to_addNoteFragment"
@@ -36,7 +36,7 @@
         tools:layout="@layout/add_note_fragment">
         <argument
             android:name="topicId"
-            app:argType="integer"
+            app:argType="string"
             android:defaultValue="0" />
     </fragment>
     <fragment
@@ -46,7 +46,7 @@
         tools:layout="@layout/add_roadmap_fragment">
         <argument
             android:name="topicId"
-            app:argType="integer"
+            app:argType="string"
             android:defaultValue="0" />
     </fragment>
     <fragment
@@ -66,7 +66,7 @@
         android:label="PatternFragment">
         <argument
             android:name="patternId"
-            app:argType="integer"
+            app:argType="string"
             android:defaultValue="0" />
         <deepLink app:uri="https://parapp.jun/pattern/{patternId}" />
         <deepLink app:uri="app://parapp.jun/pattern/{patternId}" />
@@ -77,7 +77,7 @@
         android:label="NoteFragment">
         <argument
             android:name="noteId"
-            app:argType="integer"
+            app:argType="string"
             android:defaultValue="0" />
         <deepLink app:uri="app://parapp.jun/notes/{noteId}" />
         <deepLink app:uri="https://parapp.jun/notes/{noteId}" />
@@ -94,7 +94,7 @@
         <argument
             android:name="roadmapId"
             android:defaultValue="0"
-            app:argType="integer" />
+            app:argType="string" />
         <deepLink app:uri="app://parapp.jun/roadmaps/{roadmapId}" />
         <deepLink app:uri="https://parapp.jun/roadmaps/{roadmapId}" />
         <action

@@ -12,7 +12,6 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.NoteFragmentBinding
@@ -39,6 +38,7 @@ class NoteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.note.observe(viewLifecycleOwner, {
             if (it != null) {
+                viewModel.getVacancies()
                 binding.note = it
                 if (it.docs == null) {
                     binding.files.visibility = View.GONE
@@ -46,6 +46,7 @@ class NoteFragment : Fragment() {
                     if (it.docs!!.isEmpty())
                         binding.files.visibility = View.GONE
                 }
+                binding.categories.removeAllViews()
                 it.postCategories.forEach { text ->
                     val textview = TextView(context).also {tv ->
                         tv.text = text
@@ -74,8 +75,6 @@ class NoteFragment : Fragment() {
                         e.printStackTrace()
                     }
                 }
-            } else {
-                findNavController().navigate(NoteFragmentDirections.actionNoteFragmentToNotesListFragment())
             }
 
         })
@@ -103,7 +102,7 @@ class NoteFragment : Fragment() {
                 sendIntent.action = Intent.ACTION_SEND
                 sendIntent.putExtra(
                     Intent.EXTRA_TEXT,
-                    "https://parapp.jun/notes/${viewModel.note.value!!.id}"
+                    "https://parapp.jun/notes/${viewModel.note.value!!.postId}"
                 )
                 sendIntent.type = "text/plain"
                 val shareIntent: Intent = Intent.createChooser(sendIntent, null)

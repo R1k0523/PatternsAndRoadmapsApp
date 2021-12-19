@@ -42,7 +42,7 @@ class PatternsListAdapter(var data : List<Pattern>) :
         holder.binding.difficultyImage.setImageResource(difficultyRes)
         holder.binding.root.setOnClickListener {
             val action = PatternsFragmentDirections
-                .actionPatternsFragmentToPatternFragment(pattern.id!!)
+                .actionPatternsFragmentToPatternFragment(pattern.patternId!!.toString())
             it.findNavController().navigate(action)
         }
     }

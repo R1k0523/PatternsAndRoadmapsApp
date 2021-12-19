@@ -43,18 +43,18 @@ class SectionListAdapter(var data : List<NoteSection>) :
     class SectionViewHolder(val binding: SectionListItemBinding) : RecyclerView.ViewHolder(binding.root)
 }
 @BindingAdapter("app:sections", "app:context")
-fun setRecyclerSections(recyclerView: RecyclerView, sections: List<NoteSection>, context: Context) {
+fun setRecyclerSections(recyclerView: RecyclerView, sections: List<NoteSection>?, context: Context) {
     recyclerView.also {
         it.layoutManager= LinearLayoutManager(context)
         it.setHasFixedSize(true)
-        it.adapter =  SectionListAdapter(sections)
+        it.adapter = sections?.let { it1 -> SectionListAdapter(it1) }
     }
 }
 @BindingAdapter("app:link_items", "app:context")
-fun setRecyclerItems(recyclerView: RecyclerView, linkItems: List<String>, context: Context) {
+fun setRecyclerItems(recyclerView: RecyclerView, linkItems: List<String>?, context: Context) {
     recyclerView.also {
         it.layoutManager= LinearLayoutManager(context)
         it.setHasFixedSize(true)
-        it.adapter =  LinkListAdapter(linkItems)
+        it.adapter = linkItems?.let { it1 -> LinkListAdapter(it1) }
     }
 }

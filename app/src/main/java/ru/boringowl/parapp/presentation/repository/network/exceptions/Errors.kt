@@ -23,8 +23,5 @@ class UnAuthorizedException : IOException() {
     override val message: String
         get() = "API ключ отсутствкет"
 }
-class UnknownException : Exception() {
-
-    override val message: String
-        get() = "Неизвестная ошибка"
+class UnknownException(override val message: String = "Неизвестная ошибка") : Exception() {
 }

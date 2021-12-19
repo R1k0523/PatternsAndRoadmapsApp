@@ -10,12 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.boringowl.parapp.databinding.PostListItemBinding
 import ru.boringowl.parapp.domain.model.posts.Post
 import ru.boringowl.parapp.domain.model.posts.notes.Note
-import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
 import ru.boringowl.parapp.presentation.view.posts.PostsListFragmentDirections
 import android.widget.TextView
 import ru.boringowl.parapp.R
 import android.widget.RelativeLayout
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.view.View
 import ru.boringowl.parapp.presentation.utils.ImageUtils
@@ -42,12 +40,11 @@ class PostsListAdapter(var data: List<Post>) :
         val post = data[position]
         holder.binding.post = post
         holder.binding.root.setOnClickListener {
-            val action = when (post) {
-                is Note -> PostsListFragmentDirections
-                        .actionNotesListFragmentToNoteFragment(post.id!!)
-                is Roadmap -> PostsListFragmentDirections
-                        .actionNotesListFragmentToRoadmapFragment(post.id!!)
-                else -> null
+            val action = when (post.isNote) {
+                true -> PostsListFragmentDirections
+                        .actionNotesListFragmentToNoteFragment(post.postId!!.toString())
+                false -> PostsListFragmentDirections
+                        .actionNotesListFragmentToRoadmapFragment(post.postId!!.toString())
             }
             action?.let { act -> it.findNavController().navigate(act) }
         }
@@ -79,13 +76,13 @@ class PostsListAdapter(var data: List<Post>) :
                 e.printStackTrace()
             }
         }
-        val postType = if (post is Note) "notes" else "roadmaps"
+        val postType = if (post.isNote) "notes" else "roadmaps"
         holder.binding.shareImage.setOnClickListener {
             val sendIntent = Intent()
             sendIntent.action = Intent.ACTION_SEND
             sendIntent.putExtra(
                 Intent.EXTRA_TEXT,
-                "https://parapp.jun/$postType/${post.id}"
+                "https://parapp.jun/$postType/${post.postId}"
             )
             sendIntent.type = "text/plain"
             val shareIntent: Intent = Intent.createChooser(sendIntent, null)

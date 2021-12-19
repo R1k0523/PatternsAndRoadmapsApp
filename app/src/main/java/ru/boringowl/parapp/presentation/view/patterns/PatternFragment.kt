@@ -32,19 +32,21 @@ class PatternFragment : Fragment() {
     ): View {
         binding = PatternFragmentBinding.inflate(layoutInflater, container, false)
         viewModel.pattern.observe(viewLifecycleOwner, {
-            binding.pattern = it
-            val patternRes = when(it.type) {
-                Pattern.PatternType.STRUCTURAL -> R.drawable.ic_round_table_rows_24
-                Pattern.PatternType.CREATIONAL -> R.drawable.ic_round_add_box_24
-                else -> R.drawable.ic_round_swap_calls_24
+            if (it != null) {
+                binding.pattern = it
+                val patternRes = when (it.type) {
+                    Pattern.PatternType.STRUCTURAL -> R.drawable.ic_round_table_rows_24
+                    Pattern.PatternType.CREATIONAL -> R.drawable.ic_round_add_box_24
+                    else -> R.drawable.ic_round_swap_calls_24
+                }
+                binding.patternTypeImage.setImageResource(patternRes)
+                val difficultyRes = when (it.difficulty) {
+                    0 -> R.drawable.ic_round_sentiment_satisfied_alt_24
+                    2 -> R.drawable.ic_round_sentiment_dissatisfied_24
+                    else -> R.drawable.ic_round_sentiment_neutral_24
+                }
+                binding.difficultyImage.setImageResource(difficultyRes)
             }
-            binding.patternTypeImage.setImageResource(patternRes)
-            val difficultyRes = when(it.difficulty) {
-                0 -> R.drawable.ic_round_sentiment_satisfied_alt_24
-                2 -> R.drawable.ic_round_sentiment_dissatisfied_24
-                else -> R.drawable.ic_round_sentiment_neutral_24
-            }
-            binding.difficultyImage.setImageResource(difficultyRes)
         })
         return binding.root
     }
@@ -53,7 +55,8 @@ class PatternFragment : Fragment() {
 
 }
 @BindingAdapter("app:features", "app:context")
-fun setRecycler(recyclerView: RecyclerView, features: List<PatternFeature>, context: Context) {
+fun setRecycler(recyclerView: RecyclerView, features: List<PatternFeature>?, context: Context) {
+    if (features != null)
     recyclerView.also {
         it.layoutManager= LinearLayoutManager(context)
         it.setHasFixedSize(true)

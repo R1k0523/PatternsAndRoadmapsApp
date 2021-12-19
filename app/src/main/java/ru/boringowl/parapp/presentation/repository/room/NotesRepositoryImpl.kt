@@ -7,6 +7,7 @@ import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.presentation.repository.NotesRepository
 import ru.boringowl.parapp.presentation.repository.model.notes.NoteDTO
 import ru.boringowl.parapp.presentation.repository.room.dao.NotesDAO
+import java.util.*
 
 class NotesRepositoryImpl : NotesRepository {
     private var notesDAO: NotesDAO
@@ -22,16 +23,16 @@ class NotesRepositoryImpl : NotesRepository {
         return allPatterns as LiveData<List<T>>
     }
 
-    override fun <T : Note> getAllNotes(topicId: Int): LiveData<List<T>> {
-        return notesDAO.getAllNotes(topicId) as LiveData<List<T>>
+    override fun <T : Note> getAllNotes(topicId: UUID): LiveData<List<T>> {
+        return notesDAO.getAllNotes(topicId.toString()) as LiveData<List<T>>
     }
 
     override suspend fun <T : Note> addNote(note: T) {
         notesDAO.addNote(NoteDTO(note))
     }
 
-    override fun <T : Note> getNote(noteId: Int): T {
-        return notesDAO.getNote(noteId) as T
+    override fun <T : Note> getNote(noteId: UUID): T {
+        return notesDAO.getNote(noteId.toString()) as T
     }
 
     override suspend fun <T : Note> deleteNote(note: T) {

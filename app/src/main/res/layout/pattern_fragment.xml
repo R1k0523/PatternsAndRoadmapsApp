@@ -196,7 +196,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="16dp"
                     app:context="@{context}"
-                    app:features="@{pattern.feature}"
+                    app:features="@{pattern.features}"
                     tools:listitem="@layout/pattern_feature_list_item" />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

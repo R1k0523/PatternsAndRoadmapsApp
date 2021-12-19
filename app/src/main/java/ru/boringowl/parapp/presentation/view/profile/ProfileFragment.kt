@@ -25,6 +25,7 @@ import ru.boringowl.parapp.presentation.viewmodel.profile.ProfileViewModel
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.AuthFragmentBinding
 import ru.boringowl.parapp.databinding.ProfileFragmentBinding
+import ru.boringowl.parapp.presentation.repository.Repository
 
 class ProfileFragment : Fragment() {
 
@@ -42,10 +43,10 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Repository.getUser()
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
         viewModel.user.observe(viewLifecycleOwner) {
             if (it != null) {
-                Log.d("kekes123", "123123${it.avatarUrl}")
                 binding.user = it
                 if (it.avatarUrl != null)
                     if (it.avatarUrl!!.isNotEmpty()) {
@@ -56,7 +57,7 @@ class ProfileFragment : Fragment() {
                         binding.userImage.isVisible = false
                 if (!it.login.isNullOrEmpty()) {
                     binding.web.clearCache(true)
-                    binding.web.setInitialScale(200)
+                    binding.web.setInitialScale(300)
                     binding.web.isSelected = false
                     binding.web.loadUrl(getUrl(it.login!!))
                 }

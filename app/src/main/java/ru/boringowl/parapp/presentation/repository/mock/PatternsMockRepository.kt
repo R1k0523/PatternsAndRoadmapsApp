@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import ru.boringowl.parapp.presentation.repository.PatternsRepository
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
 import ru.boringowl.parapp.domain.model.patterns.Pattern
+import java.util.*
 
 class PatternsMockRepository : PatternsRepository {
     var data: MutableLiveData<List<Pattern>>
@@ -13,7 +14,7 @@ class PatternsMockRepository : PatternsRepository {
 
     init {
         val pattern1 = Pattern(
-            id = null,
+            patternId = null,
             title = "Абстрактная фабрика",
             description = "Позволяет создавать семейства связанных объектов, не привязываясь к конкретным классам создаваемых объектов.",
             problem = "Представьте, что вы пишете симулятор мебельного магазина. Ваш код содержит:\n" +
@@ -110,7 +111,7 @@ class PatternsMockRepository : PatternsRepository {
             useCase = "Когда бизнес-логика программы должна работать с разными видами связанных друг с другом продуктов, не завися от конкретных классов продуктов.\n" +
                     "\n" +
                     " Когда в программе уже используется Фабричный метод, но очередные изменения предполагают введение новых типов продуктов.",
-            feature = listOf(
+            features = listOf(
                 PatternFeature(
                     title = "Гарантирует сочетаемость создаваемых продуктов.",
                     isAdvantage = true,
@@ -137,7 +138,7 @@ class PatternsMockRepository : PatternsRepository {
 
         )
         val pattern2 = Pattern(
-            id = null,
+            patternId = null,
             title = "Адаптер",
             description = "Адаптер — это структурный паттерн проектирования, который позволяет объектам с несовместимыми интерфейсами работать вместе.",
             problem = "Представьте, что вы делаете приложение для торговли на бирже. Ваше приложение скачивает биржевые котировки из нескольких источников в XML, а затем рисует красивые графики.\n" +
@@ -204,7 +205,7 @@ class PatternsMockRepository : PatternsRepository {
             useCase = " Когда вы хотите использовать сторонний класс, но его интерфейс не соответствует остальному коду приложения.\n" +
                     "\n" +
                     " Когда вам нужно использовать несколько существующих подклассов, но в них не хватает какой-то общей функциональности, причём расширить суперкласс вы не можете.",
-            feature = listOf(
+            features = listOf(
                 PatternFeature(
                     title = "Отделяет и скрывает от клиента подробности преобразования различных интерфейсов.",
                     isAdvantage = true,
@@ -228,18 +229,18 @@ class PatternsMockRepository : PatternsRepository {
     }
 
     override suspend fun <T : Pattern> addPattern(pattern: T) {
-        pattern.id = list.size
+        pattern.patternId = UUID.randomUUID()
         list = list + pattern
         data.value = list
     }
 
-    override fun <T : Pattern> getPattern(patternId: Int): T {
+    override fun <T : Pattern> getPattern(patternId: UUID): LiveData<T?> {
         list.forEach {
-            if (it.id == patternId)
-                return it as T
+            if (it.patternId == patternId)
+                return MutableLiveData(it) as LiveData<T?>
         }
-        return Pattern(0, "", "", "", "", "", "",
-            listOf(), Pattern.PatternType.UNKNOWN, 0) as T
+        return MutableLiveData(Pattern(UUID.randomUUID(), "", "", "", "", "", "",
+            listOf(), Pattern.PatternType.UNKNOWN, 0)) as LiveData<T?>
     }
 
     override suspend fun <T : Pattern> deletePattern(pattern: T) {

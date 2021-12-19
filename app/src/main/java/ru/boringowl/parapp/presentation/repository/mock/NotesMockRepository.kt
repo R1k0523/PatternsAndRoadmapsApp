@@ -6,6 +6,7 @@ import androidx.lifecycle.liveData
 import ru.boringowl.parapp.domain.model.posts.Topic
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
+import ru.boringowl.parapp.domain.model.user.User
 import ru.boringowl.parapp.presentation.repository.NotesRepository
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,10 +22,12 @@ class NotesMockRepository : NotesRepository {
                 null,
                 "Название",
                 null,
-                SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
+                SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.ENGLISH).format(Date()),
                 listOf("Категория 1","Категория 2","Категория 3"),
                 "Описание поста. Описание поста. Описание поста. Описание поста",
-                1,
+                Topic(null, "", User(), arrayListOf()),
+                null,
+                true,
                 listOf(
                     NoteSection(
                         "Описание секции №1 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
@@ -37,10 +40,12 @@ class NotesMockRepository : NotesRepository {
                 null,
                 "Название 2",
                 null,
-                SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
+                SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.ENGLISH).format(Date()),
                 listOf("Категория 10","Категория 20","Категория 30"),
                 "Описание поста. Описание поста. Описание поста. Описание поста",
-                1,
+                Topic(null, "", User(), arrayListOf()),
+                null,
+                true,
                 listOf(
                     NoteSection(
                         "Описание секции №1 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
@@ -58,10 +63,12 @@ class NotesMockRepository : NotesRepository {
                 null,
                 "Название 3",
                 null,
-                SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
+                SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.ENGLISH).format(Date()),
                 listOf("Категория 11","Категория 12","Категория 13"),
                 "Описание поста. Описание поста. Описание поста. Описание поста Наверное",
-                1,
+                Topic(null, "", User(), arrayListOf()),
+                null,
+                true,
                 listOf(
                     NoteSection(
                         "Описание секции №2 Ну тут будет какой то текст, который говорит о том, что будет в recyclerView ниже",
@@ -80,23 +87,23 @@ class NotesMockRepository : NotesRepository {
         return data as LiveData<List<T>>
     }
 
-    override fun <T : Note> getAllNotes(topicId: Int): LiveData<List<T>> {
+    override fun <T : Note> getAllNotes(topicId: UUID): LiveData<List<T>> {
         return liveData { listOf<Topic>() }
     }
 
     override suspend fun <T : Note> addNote(note: T) {
-        note.id = list.size
+        note.postId = UUID.randomUUID()
         list = list + note
         data.value = list
     }
 
-    override fun <T : Note> getNote(noteId: Int): T {
+    override fun <T : Note> getNote(noteId: UUID): T {
         list.forEach {
-            if (it.id == noteId)
+            if (it.postId == noteId)
                 return it as T
         }
-        return Note(0, "", null,"", listOf(""), "",
-            1, listOf()) as T
+        return Note(UUID.randomUUID(), "", null,"", listOf(""), "",
+            Topic(null, "", User(), arrayListOf()), null, true, listOf()) as T
     }
 
     override suspend fun <T : Note> deleteNote(note: T) {

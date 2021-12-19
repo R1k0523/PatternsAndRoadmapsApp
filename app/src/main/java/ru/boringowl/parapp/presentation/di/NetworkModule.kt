@@ -12,6 +12,7 @@ import ru.boringowl.parapp.presentation.repository.network.github.GithubAPI
 import ru.boringowl.parapp.presentation.repository.network.github.GithubAuthAPI
 import ru.boringowl.parapp.presentation.repository.network.itnews.NewsAPI
 import ru.boringowl.parapp.presentation.repository.network.itnews.NewsService
+import ru.boringowl.parapp.presentation.repository.network.parapp.*
 import ru.boringowl.parapp.presentation.repository.network.vacancies.HeadHunterAPI
 import ru.boringowl.parapp.presentation.repository.network.vacancies.VacancyService
 import ru.boringowl.parapp.presentation.utils.PrefsUtils
@@ -35,6 +36,14 @@ val networkModule = module {
 
     single(named("retro_gh_auth")) { retrofit(get(), BuildConfig.BASE_LOGIN_URL) }
     single { apiGithubAuth(get(named("retro_gh_auth"))) }
+
+    single(named("retro_parapp")) { retrofit(get(), BuildConfig.MAIN_LINK) }
+    single { apiParapp(get(named("retro_parapp"))) }
+    single { authService(get()) }
+    single { fileService(get()) }
+    single { patternsService(get()) }
+    single { postsService(get()) }
+    single { topicService(get()) }
 }
 
 fun okhttpClient() : OkHttpClient {
@@ -48,6 +57,12 @@ fun retrofit(okHttpClient: OkHttpClient, url: String) : Retrofit = Retrofit.Buil
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
+fun apiParapp(retrofit: Retrofit) : ParappDataAPI = retrofit.create(ParappDataAPI::class.java)
+fun authService(api: ParappDataAPI) : AuthService  = AuthService(api)
+fun fileService(api: ParappDataAPI) : FileService = FileService(api)
+fun patternsService(api: ParappDataAPI) : PatternsService  = PatternsService(api)
+fun postsService(api: ParappDataAPI) : PostsService = PostsService(api)
+fun topicService(api: ParappDataAPI) : TopicService = TopicService(api)
 
 fun apiNews(retrofit: Retrofit) : NewsAPI = retrofit.create(NewsAPI::class.java)
 fun apiVacancy(retrofit: Retrofit) : HeadHunterAPI = retrofit.create(HeadHunterAPI::class.java)

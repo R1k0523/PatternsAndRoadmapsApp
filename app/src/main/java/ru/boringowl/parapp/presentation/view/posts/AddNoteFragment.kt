@@ -12,8 +12,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.*
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.AddNoteFragmentBinding
+import ru.boringowl.parapp.domain.model.posts.Topic
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.presentation.utils.FileUtils
 import ru.boringowl.parapp.presentation.utils.ImageUtils
@@ -35,9 +37,9 @@ class AddNoteFragment : Fragment() {
     ): View {
         binding = AddNoteFragmentBinding.inflate(layoutInflater, container, false)
         binding.saveButton.setOnClickListener {
-            val currentDateTime = SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date())
+            val currentDateTime = SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.ENGLISH).format(Date())
             if (binding.title.text.isNotEmpty() && binding.description.text.isNotEmpty() && binding.category.text.isNotEmpty()) {
-                viewModel.save(
+                val job = viewModel.save(
                     Note(
                         title = binding.title.text.toString(),
                         image = viewModel.image.value,
@@ -46,10 +48,15 @@ class AddNoteFragment : Fragment() {
                         postCategories = binding.category.text.split(" "),
                         sections = (binding.recyclerViewSection.adapter as AddSectionListAdapter).data,
                         docs = (binding.recyclerViewFiles.adapter as DocsListAdapter).dataToString(),
-                        topic = args.topicId,
+                        topic = Topic(UUID.fromString(args.topicId)),
                     )
                 )
-                findNavController().popBackStack()
+                runBlocking {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        job.join()
+                        findNavController().popBackStack()
+                    }
+                }
             } else {
                 Toast.makeText(context, "Вы ввели не все данные", Toast.LENGTH_SHORT).show()
             }

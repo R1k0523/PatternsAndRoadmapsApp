@@ -1,5 +1,6 @@
 package ru.boringowl.parapp.presentation.repository.network
 
+import android.util.Log
 import retrofit2.HttpException
 import retrofit2.Response
 import ru.boringowl.parapp.presentation.repository.network.exceptions.*
@@ -36,6 +37,6 @@ abstract class BaseService {
     private fun mapToNetworkError(t: Throwable): Exception = when(t) {
             is SocketTimeoutException -> SocketTimeoutException("Connection Timed Out")
             is UnknownHostException -> NoInternetException()
-            else -> UnknownException()
+            else -> UnknownException(t.localizedMessage)
         }
 }

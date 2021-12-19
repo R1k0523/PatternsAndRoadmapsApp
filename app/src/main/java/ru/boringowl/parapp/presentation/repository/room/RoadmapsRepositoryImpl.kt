@@ -8,10 +8,13 @@ import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
 import ru.boringowl.parapp.presentation.repository.room.dao.RoadmapsDAO
 import ru.boringowl.parapp.presentation.repository.RoadmapsRepository
 import ru.boringowl.parapp.presentation.repository.model.notes.RoadmapDTO
+import ru.boringowl.parapp.presentation.utils.PrefsUtils
+import java.util.*
 
 class RoadmapsRepositoryImpl : RoadmapsRepository {
     private var roadmapsDAO: RoadmapsDAO
     private var allRoadmaps: LiveData<List<RoadmapDTO>>
+    private val prefs by inject(PrefsUtils::class.java)
 
     init {
         val db: MyDatabase by inject(MyDatabase::class.java)
@@ -23,7 +26,7 @@ class RoadmapsRepositoryImpl : RoadmapsRepository {
         return allRoadmaps as LiveData<List<T>>
     }
 
-    override fun <T : Roadmap> getAllRoadmaps(topicId: Int): LiveData<List<T>> {
+    override fun <T : Roadmap> getAllRoadmaps(topicId: UUID): LiveData<List<T>> {
         return roadmapsDAO.getAllRoadmaps(topicId) as LiveData<List<T>>
     }
 
@@ -31,7 +34,7 @@ class RoadmapsRepositoryImpl : RoadmapsRepository {
         roadmapsDAO.addRoadmap(RoadmapDTO(roadmap))
     }
 
-    override fun <T : Roadmap> getRoadmap(roadmapId: Int): T {
+    override fun <T : Roadmap> getRoadmap(roadmapId: UUID): T {
         return roadmapsDAO.getRoadmap(roadmapId) as T
     }
 

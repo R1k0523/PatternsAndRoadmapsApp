@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.*
 import ru.boringowl.parapp.R
 import ru.boringowl.parapp.databinding.PostsListFragmentBinding
 import ru.boringowl.parapp.domain.model.user.User
@@ -41,6 +43,7 @@ class PostsListFragment : Fragment() {
         return binding.root
     }
 
+    @DelicateCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.isFABOpen.observe(viewLifecycleOwner, {
@@ -79,10 +82,11 @@ class PostsListFragment : Fragment() {
             findNavController().navigate(PostsListFragmentDirections.actionNotesListFragmentToAddRoadmapFragment(args.topicId))
         }
 
+
         if (Repository.currentUser.value != null) {
             if (Repository.currentUser.value!!.role == User.Roles.MODERATOR ||
                 Repository.currentUser.value!!.role == User.Roles.ADMIN ||
-                Repository.currentUser.value!!.email == viewModel.topic.creator) {
+                Repository.currentUser.value!!.email == viewModel.topic.value?.creator?.email) {
             ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
                 override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder
                 ): Boolean {
@@ -97,14 +101,20 @@ class PostsListFragment : Fragment() {
                 }
             }).attachToRecyclerView(binding.recyclerView)
             } else {
-                binding.fabRoadmap.isVisible = false
-                binding.floatingActionButton.isVisible = false
-                binding.fabNote.isVisible = false
+                binding.fabRoadmap.isVisible = true
+                binding.floatingActionButton.isVisible = true
+                binding.fabNote.isVisible = true
             }
         } else {
             binding.fabRoadmap.isVisible = false
             binding.floatingActionButton.isVisible = false
             binding.fabNote.isVisible = false
+        }
+
+        GlobalScope.launch(Dispatchers.Main) {
+            delay(2000L)
+            if (viewModel.posts.value == null)
+                Toast.makeText(context, "Интернет отсутствует!", Toast.LENGTH_LONG).show()
         }
     }
 

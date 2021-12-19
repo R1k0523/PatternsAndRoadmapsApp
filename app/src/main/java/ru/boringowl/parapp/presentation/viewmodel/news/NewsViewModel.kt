@@ -17,7 +17,7 @@ class NewsViewModel : ViewModel() {
 
 
     private fun getNewsListStream(): Flow<PagingData<Post>> {
-        return Pager(PagingConfig(20)) {
+        return Pager(PagingConfig(10)) {
             NewsPagingSource(Repository.newsRepository)
         }.flow
     }

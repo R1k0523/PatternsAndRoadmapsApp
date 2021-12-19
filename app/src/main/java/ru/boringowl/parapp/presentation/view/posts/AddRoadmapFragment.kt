@@ -17,6 +17,8 @@ import java.util.*
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.navigation.fragment.navArgs
+import kotlinx.coroutines.*
+import ru.boringowl.parapp.domain.model.posts.Topic
 
 import ru.boringowl.parapp.presentation.utils.FileUtils
 import ru.boringowl.parapp.presentation.utils.ImageUtils
@@ -33,9 +35,9 @@ class AddRoadmapFragment : Fragment() {
     ): View {
         binding = AddRoadmapFragmentBinding.inflate(layoutInflater, container, false)
         binding.saveButton.setOnClickListener {
-            val currentDateTime = SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date())
+            val currentDateTime = SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.ENGLISH).format(Date())
             if (binding.title.text.isNotEmpty() && binding.description.text.isNotEmpty() && binding.category.text.isNotEmpty()) {
-                viewModel.save(
+                val job = viewModel.save(
                     Roadmap(
                         title = binding.title.text.toString(),
                         image = viewModel.image.value,
@@ -43,10 +45,16 @@ class AddRoadmapFragment : Fragment() {
                         publicationDateTime = currentDateTime,
                         postCategories = binding.category.text.split(" "),
                         root = RoadmapNode("No Roadmap", "No description", listOf()),
-                        topic = args.topicId,
+                        topic = Topic(UUID.fromString(args.topicId)),
                     )
                 )
-                findNavController().popBackStack()
+                runBlocking {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        job.join()
+                        findNavController().popBackStack()
+                    }
+                }
+
             } else {
                 Toast.makeText(context, "Вы ввели не все данные", Toast.LENGTH_SHORT).show()
             }

@@ -14,10 +14,8 @@ import ru.boringowl.parapp.databinding.TopicsFragmentBinding
 import ru.boringowl.parapp.domain.model.posts.Topic
 import ru.boringowl.parapp.domain.model.user.User
 import ru.boringowl.parapp.presentation.repository.Repository
-import ru.boringowl.parapp.presentation.view.posts.adapters.PostsListAdapter
 import ru.boringowl.parapp.presentation.view.posts.adapters.TopicsListAdapter
 import ru.boringowl.parapp.presentation.viewmodel.posts.TopicsViewModel
-import java.util.*
 import kotlin.random.Random.Default.nextInt
 
 class TopicsFragment : Fragment() {
@@ -65,9 +63,9 @@ class TopicsFragment : Fragment() {
             binding.floatingActionButton3.setOnClickListener {
                 viewModel.addTopicInfo(
                     Topic(
-                        id = null,
+                        topicId = null,
                         title = "Топик №${nextInt(0, 500)}",
-                        creator = Repository.currentUser.value!!.email!!,
+                        creator = Repository.currentUser.value!!,
                         moderators = listOf()
                     )
                 )

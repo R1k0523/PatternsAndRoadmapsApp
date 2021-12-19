@@ -3,8 +3,11 @@ package ru.boringowl.parapp.presentation.repository.model.notes
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import ru.boringowl.parapp.domain.model.posts.Topic
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
+import ru.boringowl.parapp.domain.model.user.User
+import java.util.*
 
 @Entity(tableName = "notes")
 data class NoteDTO(
@@ -23,21 +26,29 @@ data class NoteDTO(
     @ColumnInfo(name="docs")
     override val docs: List<String>?,
     @ColumnInfo(name="topic")
-    override val topic: Int,
-    @PrimaryKey(autoGenerate = true)
-    override var id: Int? = null,
+    override var topic: Topic,
+    @ColumnInfo(name="creator")
+    override var creator: User? = null,
+    @ColumnInfo(name="is_note")
+    override var isNote: Boolean = true,
+    @ColumnInfo(name="post_id")
+    override var postId: UUID? = null
 ) : Note(
-    id,
+    postId,
     title,
     image,
     publicationDateTime,
     postCategories,
     postDescription,
     topic,
+    creator,
+    isNote,
     sections,
     docs,
 ) {
 
+    @PrimaryKey(autoGenerate = true)
+    var localId: Int? = null
     constructor(note: Note) : this (
         note.title,
         note.image,
@@ -47,6 +58,8 @@ data class NoteDTO(
         note.sections,
         note.docs,
         note.topic,
-        note.id,
+        note.creator,
+        note.isNote,
+        note.postId,
     )
 }

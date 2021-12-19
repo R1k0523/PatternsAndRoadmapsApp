@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ru.boringowl.parapp.domain.model.user.User
+import java.util.*
 
 @Entity(tableName = "users_table")
 data class UserDTO(
@@ -29,9 +30,12 @@ data class UserDTO(
     override var blog: String? = "",
     @ColumnInfo(name = "role")
     override var role: Roles = Roles.USER,
+    @ColumnInfo(name = "user_id")
+    override var userId: UUID? = null,
     @PrimaryKey(autoGenerate = true)
-    override var id: Int? = null,
-) : User(bio, login, company, email, url, avatarUrl, name, location, password, blog, role, id) {
+    var localId: Int? = null,
+) : User(bio, login, company, email, url, avatarUrl, name, location, password, blog, role, userId) {
+
     constructor(user: User): this() {
         bio = user.bio
         login = user.login
@@ -44,6 +48,6 @@ data class UserDTO(
         password = user.password
         blog = user.blog
         role = user.role
-        id = user.id
+        userId = user.userId
     }
 }

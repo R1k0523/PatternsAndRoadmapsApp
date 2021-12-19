@@ -6,6 +6,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.boringowl.parapp.databinding.ActivityMainBinding
+import ru.boringowl.parapp.presentation.repository.Repository
 import ru.boringowl.parapp.presentation.repository.network.github.GHAuth
 
 
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        GHAuth().checkUserInfo(this, binding.root)
+        Repository.getUser()
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         NavigationUI.setupWithNavController(findViewById<BottomNavigationView>(R.id.bottomNav), navHost.navController)
     }

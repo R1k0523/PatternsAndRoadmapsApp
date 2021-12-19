@@ -64,6 +64,7 @@ class RoadmapFragment : Fragment() {
                 val adapter = RoadmapTreeAdapter(it.root)
                 adapter.drawTree()
                 binding.recycler.adapter = adapter
+                binding.categories.removeAllViews()
                 it.postCategories.forEach { text ->
                     val textview = TextView(context).also { tv ->
                         tv.text = text
@@ -93,8 +94,6 @@ class RoadmapFragment : Fragment() {
                         e.printStackTrace()
                     }
                 }
-            } else {
-                findNavController().navigate(RoadmapFragmentDirections.actionRoadmapFragmentToNotesListFragment())
             }
 
         })
@@ -104,7 +103,7 @@ class RoadmapFragment : Fragment() {
                 sendIntent.action = Intent.ACTION_SEND
                 sendIntent.putExtra(
                     Intent.EXTRA_TEXT,
-                    "https://parapp.jun/roadmap/${viewModel.roadmap.value!!.id}"
+                    "https://parapp.jun/roadmap/${viewModel.roadmap.value!!.postId}"
                 )
                 sendIntent.type = "text/plain"
                 val shareIntent: Intent = Intent.createChooser(sendIntent, null)

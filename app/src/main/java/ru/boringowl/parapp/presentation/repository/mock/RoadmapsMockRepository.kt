@@ -2,11 +2,10 @@ package ru.boringowl.parapp.presentation.repository.mock
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.boringowl.parapp.presentation.repository.PatternsRepository
-import ru.boringowl.parapp.domain.model.patterns.PatternFeature
-import ru.boringowl.parapp.domain.model.patterns.Pattern
+import ru.boringowl.parapp.domain.model.posts.Topic
 import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
 import ru.boringowl.parapp.domain.model.posts.roadmaps.RoadmapNode
+import ru.boringowl.parapp.domain.model.user.User
 import ru.boringowl.parapp.presentation.repository.RoadmapsRepository
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,10 +21,12 @@ class RoadmapsMockRepository : RoadmapsRepository {
                 null,
                 "Дорожка 3",
                 null,
-                SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.ENGLISH).format(Date()),
+                SimpleDateFormat("HH:mm dd.MM.yyyy", Locale.ENGLISH).format(Date()),
                 listOf("Категория 11","Категория 12","Категория 13"),
                 "Описание поста. Описание поста. Описание поста. Описание поста Наверное",
-                1,
+                Topic(null, "", User(), arrayListOf()),
+                null,
+                false,
                 RoadmapNode(
                     "Начать",
                     "Встать с кровати",
@@ -99,7 +100,7 @@ class RoadmapsMockRepository : RoadmapsRepository {
                             true
                         ),
                         RoadmapNode(
-                            "Накрытья одеялом",
+                            "Накрытьcя одеялом",
                             "И еще поспать",
                             listOf()
                         ),
@@ -118,21 +119,22 @@ class RoadmapsMockRepository : RoadmapsRepository {
         return data as LiveData<List<T>>
     }
 
-    override fun <T : Roadmap> getAllRoadmaps(topicId: Int): LiveData<List<T>> {
+    override fun <T : Roadmap> getAllRoadmaps(topicId: UUID): LiveData<List<T>> {
         return data as LiveData<List<T>>
     }
     override suspend fun <T : Roadmap> addRoadmap(roadmap: T) {
-        roadmap.id = list.size
+        roadmap.postId = UUID.randomUUID()
         list = list + roadmap
         data.value = list
     }
 
-    override fun <T : Roadmap> getRoadmap(roadmapId: Int): T {
+    override fun <T : Roadmap> getRoadmap(roadmapId: UUID): T {
         list.forEach {
-            if (it.id == roadmapId)
+            if (it.postId == roadmapId)
                 return it as T
         }
-        return Roadmap(0, "", null, "", listOf(""), "", 1, RoadmapNode("", "", listOf())) as T
+        return Roadmap(UUID.randomUUID(), "", null, "", listOf(""), "",
+            Topic(null, "", User(), arrayListOf()), null, false, RoadmapNode("", "", listOf())) as T
     }
 
     override suspend fun <T : Roadmap> deleteRoadmap(roadmap: T) {

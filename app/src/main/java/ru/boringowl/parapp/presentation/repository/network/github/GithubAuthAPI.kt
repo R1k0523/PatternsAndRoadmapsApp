@@ -7,7 +7,6 @@ import ru.boringowl.parapp.presentation.repository.network.github.response.Acces
 import ru.boringowl.parapp.presentation.repository.network.github.response.UserResponse
 
 interface GithubAuthAPI {
-
     @Headers("Accept: application/json")
     @POST("access_token")
     fun getToken(@Query("code") code: String,
@@ -15,6 +14,4 @@ interface GithubAuthAPI {
                  @Query("client_secret") clientSecret: String = CLIENT_SECRET,
                  @Query("redirect_uri") redirectUri: String = CLIENT_REDIRECT,
     ): Call<AccessToken>
-
-
 }

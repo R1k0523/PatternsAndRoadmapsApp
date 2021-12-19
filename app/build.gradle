@@ -40,6 +40,8 @@ android {
         it.buildConfigField "String", "CLIENT_REDIRECT", "\"https://parapp.jun/auth\""
         it.buildConfigField "String", "CLIENT_SECRET", "\"e6d354a2af13ef123e79b7812e727595db5abecb\""
         it.buildConfigField "String", "GH_SCOPE", "\"read:user\""
+
+        it.buildConfigField "String", "MAIN_LINK", "\"\""
     }
 
     compileOptions {
@@ -91,6 +93,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     implementation 'androidx.paging:paging-runtime-ktx:3.0.1'
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.13.0"
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'

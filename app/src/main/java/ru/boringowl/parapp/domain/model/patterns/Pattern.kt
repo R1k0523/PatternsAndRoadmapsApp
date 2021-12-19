@@ -1,17 +1,19 @@
 package ru.boringowl.parapp.domain.model.patterns
 
+import java.util.*
+
 open class Pattern(
-    open var id: Int?,
+    open var patternId: UUID?,
     open val title: String,
     open val description: String,
     open val problem: String,
     open val solution: String,
     open val solutionInCode: String, //псевдокод решения
     open val useCase: String,
-    open val feature: List<PatternFeature>,
+    open val features: List<PatternFeature>,
     open val type: PatternType,
     open val difficulty: Int,
-
+    open val localId: Int? = null,
     ) {
     enum class PatternType(val title: String) {
         CREATIONAL("Порождающий"), STRUCTURAL("Структурный"), BEHAVIORAL("Поведенческий"), UNKNOWN("Неизвестный")

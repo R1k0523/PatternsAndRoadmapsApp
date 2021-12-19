@@ -9,6 +9,7 @@ import ru.boringowl.parapp.domain.model.posts.notes.NoteSection
 import ru.boringowl.parapp.domain.model.posts.roadmaps.RoadmapNode
 import ru.boringowl.parapp.domain.model.patterns.PatternFeature
 import ru.boringowl.parapp.domain.model.patterns.Pattern
+import ru.boringowl.parapp.domain.model.posts.Topic
 import ru.boringowl.parapp.domain.model.user.User
 import java.lang.reflect.Type
 import java.util.*
@@ -57,7 +58,37 @@ object DataTypeConverter {
     fun nodeTreeToString(node: RoadmapNode): String {
         return gson.toJson(node)
     }
+    @TypeConverter
+    fun stringToUser(user: String): User {
+        return gson.fromJson(user, User::class.java)
+    }
 
+    @TypeConverter
+    fun userToString(user: User): String {
+        return gson.toJson(user)
+    }
+    @TypeConverter
+    fun stringToTopic(topic: String): Topic {
+        return gson.fromJson(topic, Topic::class.java)
+    }
+
+    @TypeConverter
+    fun topicToString(topic: Topic): String {
+        return gson.toJson(topic)
+    }
+
+    @TypeConverter
+    fun stringToUserList(data: String?): List<User> {
+        if (data == null) {
+            return Collections.emptyList()
+        }
+        val listType: Type = object : TypeToken<List<User?>?>() {}.type
+        return gson.fromJson(data, listType)
+    }
+    @TypeConverter
+    fun userListToString(someObjects: List<User?>?): String {
+        return gson.toJson(someObjects)
+    }
     @TypeConverter
     fun stringToRole(title: String): User.Roles {
         return User.Roles.USER.getRole(title)
@@ -74,5 +105,13 @@ object DataTypeConverter {
     @TypeConverter
     fun listToString(listOfStrings: List<String>): String {
         return gson.toJson(listOfStrings)
+    }
+    @TypeConverter
+    fun stringToUuid(id: String):UUID {
+        return UUID.fromString(id)
+    }
+    @TypeConverter
+    fun uuidToString(id: UUID): String {
+        return id.toString()
     }
 }

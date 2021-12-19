@@ -1,5 +1,7 @@
 package ru.boringowl.parapp.domain.model.user
 
+import java.util.*
+
 open class User(
     open var bio: String? = "",
     open var login: String? = "",
@@ -12,7 +14,7 @@ open class User(
     open var password: String? = "",
     open var blog: String? = "",
     open var role: Roles = Roles.USER,
-    open var id: Int? = null,
+    open var userId: UUID? = null,
 ) {
     enum class Roles(val title: String) {
         ADMIN("admin"), MODERATOR("mod"), USER("user");

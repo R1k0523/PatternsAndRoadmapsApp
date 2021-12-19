@@ -1,23 +1,27 @@
 package ru.boringowl.parapp.presentation.viewmodel.posts
 
 import androidx.lifecycle.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.boringowl.parapp.domain.model.posts.Post
 import ru.boringowl.parapp.domain.model.posts.Topic
 import ru.boringowl.parapp.domain.model.posts.notes.Note
 import ru.boringowl.parapp.domain.model.posts.roadmaps.Roadmap
 import ru.boringowl.parapp.presentation.repository.Repository
+import java.util.*
 
-class PostsListViewModel(val topicId: Int) : ViewModel() {
-    val topic = Repository.topicRepository.getTopic<Topic>(topicId)
-    private val _posts = MediatorLiveData<List<Post>>()
-    val posts: MutableLiveData<List<Post>>
+class PostsListViewModel(val topicId: UUID) : ViewModel() {
+    val topic: LiveData<Topic?> = Repository.topicRepository.getTopic(topicId)
+    private var _posts: LiveData<List<Post>> = MutableLiveData()
+    val posts: LiveData<List<Post>>
         get() = _posts
     private val _isFABOpen = MutableLiveData<Boolean>()
     val isFABOpen: LiveData<Boolean>
         get() = _isFABOpen
 
     init {
+        _posts = Repository.postsRepository.getAllPosts(topicId)
         _isFABOpen.value = false
     }
 
@@ -29,40 +33,29 @@ class PostsListViewModel(val topicId: Int) : ViewModel() {
     }
 
     fun getPostsList(): LiveData<List<Post>> {
-        val notes: LiveData<List<Note>> = Repository.notesRep!!.getAllNotes(topicId)
-        val roadmaps: LiveData<List<Roadmap>> = Repository.roadmapsRep!!.getAllRoadmaps(topicId)
-        _posts.removeSource(notes)
-        _posts.addSource(notes) {
-            posts.value = (posts.value?.filterNot { post -> post is Note } ?: listOf()) + it
-        }
-        _posts.removeSource(roadmaps)
-        _posts.addSource(roadmaps) {
-            posts.value = (posts.value?.filterNot { post -> post is Roadmap } ?: listOf()) + it
-        }
         return posts
     }
 
     fun deletePost(post: Post) {
-        if (post is Roadmap) {
-            viewModelScope.launch {
-                Repository.roadmapsRep.deleteRoadmap(post)
-            }
-
-        } else if (post is Note){
-            viewModelScope.launch {
-                Repository.notesRep.deleteNote(post)
-            }
+        viewModelScope.launch {
+            Repository.postsRepository.deletePost(post)
         }
     }
 
     fun addNote(note: Note) {
         viewModelScope.launch {
-            Repository.notesRep.addNote(note)
+            note.creator = Repository.currentUser.value
+            note.topic = Topic(topicId, null, null, null)
+            Repository.postsRepository.addNote(note)
+            _posts = Repository.postsRepository.getAllPosts(topicId)
         }
     }
     fun addRoadmap(roadmap: Roadmap) {
         viewModelScope.launch {
-            Repository.roadmapsRep.addRoadmap(roadmap)
+            roadmap.creator = Repository.currentUser.value
+            roadmap.topic = Topic(topicId, null, null, null)
+            Repository.postsRepository.addRoadmap(roadmap)
+            _posts = Repository.postsRepository.getAllPosts(topicId)
         }
     }
 

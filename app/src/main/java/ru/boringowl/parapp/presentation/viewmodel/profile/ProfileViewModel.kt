@@ -11,7 +11,7 @@ import ru.boringowl.parapp.presentation.utils.PrefsUtils
 class ProfileViewModel : ViewModel() {
     fun logOut() {
         val prefs by inject(PrefsUtils::class.java)
-        prefs.deleteToken()
+        prefs.deleteTokens()
         Repository.setUser(null)
     }
 
